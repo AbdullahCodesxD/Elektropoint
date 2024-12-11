@@ -7,7 +7,7 @@ import CustomersSearchbar from "./CustomersSearchbar";
 export default function Customers() {
   const arr = Array.from({ length: 9 }).fill(undefined);
   return (
-    <div className="p-7 rounded-lg bg-[#EBEBEB]">
+    <div className="pb-[150px] md:pb-7 p-7 rounded-lg bg-[#EBEBEB]">
       <div className="flex items-center justify-between gap-1 flex-wrap">
         <h3 className="font-semibold text-2xl">Customers</h3>
         <Button type="primary" extraClasses="max-w-fit py-1 px-5 font-normal">

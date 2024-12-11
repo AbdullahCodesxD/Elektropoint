@@ -14,7 +14,7 @@ export default function OrdersDetailsOrder() {
         <p className="text-[15px] text-dark/70">Doorstep Pickup</p>
       </div>
 
-      <div className="flex items-center justify-between gap-5 mt-2 p-2 border-2 rounded-md border-dark/10">
+      <div className="flex flex-col p-3 items-end md:flex-row md:items-center justify-between gap-5 mt-2 md:p-2 border-2 rounded-md border-dark/10">
         <div className="flex items-center justify-center gap-3">
           <img
             src="/product.png"

@@ -27,7 +27,7 @@ export default function OrdersDetailsHeader() {
         </p>
       </div>
 
-      <div className="flex items-center justify-between  mt-1 gap-3">
+      <div className="flex flex-col-reverse items-end mt-5 md:flex-row md:items-center justify-between  md:mt-1 gap-3">
         <p className="text-dark/70 text-[14px]">
           Monday at 2:00pm from Online Store
         </p>

@@ -19,7 +19,7 @@ export default function TextEditor({ editor = {} }) {
     <>
       <div className="editor-container">
         {/* Toolbar */}
-        <div className="editor-toolbar">
+        <div className="editor-toolbar flex-wrap">
           {/* Bold */}
           <button
             type="button"

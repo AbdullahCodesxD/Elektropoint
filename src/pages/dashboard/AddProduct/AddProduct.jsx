@@ -22,7 +22,7 @@ export default function AddProduct() {
     navigate(-1);
   }
   return (
-    <div className="bg-[#eaeaea] rounded-lg p-5 ">
+    <div className="bg-[#eaeaea] rounded-lg p-5">
       {product && (
         <div className="mb-3 flex items-center gap-3">
           <Button handler={goBack}>

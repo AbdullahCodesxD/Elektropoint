@@ -15,7 +15,9 @@ export default function CollectionsComponent({
 
       <p className="text-medium text-[16px]">{noOfProducts}</p>
 
-      <p className="text-medium text-[16px] capitalize">{conditions}</p>
+      <p className="text-medium text-[14px] md:text-base capitalize ">
+        {conditions}
+      </p>
     </div>
   );
 }

@@ -33,7 +33,7 @@ function OrdersDetailsPaidComponent({ items }) {
     <div className="p-2 border-t flex items-center justify-between gap-5">
       {items.map((item, i) => (
         <p
-          className={`text-[15px] ${i === 0 && "font-semibold"}`}
+          className={`text-[15px] ${i === 0 && "font-semibold"} `}
           key={i + item}
         >
           {item}

@@ -7,11 +7,11 @@ import OrdersDetailsPaid from "./OrdersDetailsPaid";
 
 export default function OrdersDetails() {
   return (
-    <div className="p-5 bg-[#EBEBEB] rounded-lg">
+    <div className="pb-[150px] md:pb-5 p-5 bg-[#EBEBEB] rounded-lg">
       <OrdersDetailsHeader />
 
       <div
-        className="grid gap-5 mt-3"
+        className="flex flex-col md:grid gap-5 mt-3"
         style={{
           gridTemplateColumns: "auto  340px",
         }}
