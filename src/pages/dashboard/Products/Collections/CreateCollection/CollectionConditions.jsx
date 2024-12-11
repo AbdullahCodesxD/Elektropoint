@@ -1,0 +1,67 @@
+export default function CollectionConditions() {
+  return (
+    <div className="p-5 rounded-lg bg-white">
+      <h4 className="text-lg">Conditions</h4>
+
+      <div className="flex items-center gap-5 flex-wrap mt-3">
+        <p>Products must match : </p>
+
+        <div className="flex items-center gap-2 ">
+          <input
+            className="h-[10px] aspect-square appearance-none border-1 border-white rounded-full cursor-pointer shadow-[0_0_0_2px_white,0_0_0_4px_black] checked:bg-main"
+            type="radio"
+            name="condition"
+            id="all-conditions"
+          />
+          <label
+            className="cursor-pointer text-dark/80"
+            htmlFor="all-conditions"
+          >
+            {" "}
+            All conditions
+          </label>
+        </div>
+
+        <div className="flex items-center gap-2 ">
+          <input
+            className="h-[10px] aspect-square appearance-none border-1 border-white rounded-full cursor-pointer shadow-[0_0_0_2px_white,0_0_0_4px_black] checked:bg-main"
+            type="radio"
+            name="condition"
+            id="any-condition"
+          />
+          <label
+            className="cursor-pointer text-dark/80"
+            htmlFor="any-condition"
+          >
+            {" "}
+            Any condition
+          </label>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-3 mt-3">
+        <select className="w-[33%] max-w-[250px] outline-none border border-dark/70 rounded-md px-3 py-2 cursor-pointer">
+          <option value="">Vendor 1</option>
+          <option value="">Vendor 2</option>
+          <option value="">Vendor 3</option>
+          <option value="">Vendor 4</option>
+          <option value="">Vendor 5</option>
+        </select>
+        <select className="w-[33%] max-w-[250px] outline-none border border-dark/70 rounded-md px-3 py-2 cursor-pointer">
+          <option value="">Is equal to 1</option>
+          <option value="">Is equal to 2</option>
+          <option value="">Is equal to 3</option>
+          <option value="">Is equal to 4</option>
+          <option value="">Is equal to 5</option>
+        </select>
+        <select className="w-[33%] max-w-[250px] outline-none border border-dark/70 rounded-md px-3 py-2 cursor-pointer">
+          <option value="">Schalter 1</option>
+          <option value="">Schalter 2</option>
+          <option value="">Schalter 3</option>
+          <option value="">Schalter 4</option>
+          <option value="">Schalter 5</option>
+        </select>
+      </div>
+    </div>
+  );
+}

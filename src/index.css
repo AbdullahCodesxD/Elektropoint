@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  @apply font-poppins;
+}
+body {
+  @apply bg-[#EAEAEA] bg-opacity-40;
+}
+@media (max-width: 768px) {
+  .navbarLinks {
+    height: calc(100vh - 100px);
+  }
+}
+
+@media (min-width: 768px) {
+  .custom {
+    width: calc(100% - 350px);
+  }
+  .slider {
+    /* height: calc(100% - 124px); */
+    height: 100%;
+    width: 100%;
+  }
+  .navbarLinks {
+    height: calc(100vh - 70px);
+  }
+}
+
+.navLinks::-webkit-scrollbar {
+  width: 5px;
+}
+.order::-webkit-scrollbar {
+  height: 5px;
+}
+
+.navLinks::-webkit-scrollbar-track,
+.order::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+.navLinks::-webkit-scrollbar-thumb,
+.order::-webkit-scrollbar-thumb {
+  @apply bg-blue cursor-pointer;
+}
+
+@media (min-width: 768px) {
+  .dashboard--Navigation {
+    height: calc(100vh - 90px);
+    min-height: 450px;
+  }
+}
