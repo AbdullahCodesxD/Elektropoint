@@ -17,7 +17,7 @@ export default function Customers() {
 
       <CustomersFilter />
 
-      <div className="mt-3 rounded-lg overflow-hidden bg-white">
+      <div className="mt-3 rounded-lg overflow-x-auto order overflow-y-hidden bg-white">
         <CustomersSearchbar />
         <CustomersComponentHeader />
 

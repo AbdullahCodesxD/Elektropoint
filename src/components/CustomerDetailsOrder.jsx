@@ -19,7 +19,7 @@ export default function CustomerDetailsOrder() {
         </div>
 
         {/* ///////////// */}
-        <div className="flex items-center justify-between gap-5 mt-2 p-2 border-2 rounded-md border-dark/10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-5 mt-2 p-2 border-2 rounded-md border-dark/10">
           <div className="flex items-center justify-center gap-3">
             <img
               src="/product.png"

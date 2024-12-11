@@ -6,11 +6,11 @@ import OrdersDetailsCustomer from "./OrdersDetailsCustomer";
 
 export default function CustomerDetails() {
   return (
-    <div className="p-5 bg-[#EBEBEB] rounded-lg">
+    <div className="pb-[140px] md:pb-5 p-5 bg-[#EBEBEB] rounded-lg">
       <CustomerDetailsHeader />
 
       <div
-        className="grid gap-5 mt-3"
+        className="flex flex-col md:grid gap-5 mt-3"
         style={{
           gridTemplateColumns: "auto  340px",
         }}
