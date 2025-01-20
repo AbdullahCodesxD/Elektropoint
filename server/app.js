@@ -9,6 +9,7 @@ const errorController = require("./controllers/errorController");
 const productRouter = require("./routes/productRouter");
 const searchRouter = require("./routes/searchRouter");
 const collectionRouter = require("./routes/collectionRouter");
+const customerRouter = require("./routes/customerRouter");
 
 dotenv.config({
   path: "./config.env",
@@ -21,7 +22,7 @@ app.use(cors());
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/search", searchRouter);
 app.use("/api/v1/collection", collectionRouter);
-
+app.use("/api/v1/customer", customerRouter);
 app.use(errorController);
 module.exports = app;
 
