@@ -24,3 +24,31 @@ app.use("/api/v1/collection", collectionRouter);
 
 app.use(errorController);
 module.exports = app;
+
+// Product
+// 1- Create
+// 2- Delete
+// 3-Update
+// 4- View
+// 5- Assign Categories
+// 5- Change status like draft or active
+
+// Collection
+// 1- Create
+// 2- Update
+// 3- Delete
+// 4- Assign Products
+// 5- Change status
+
+// Order
+// 1- Customers Created
+// 2- Linked with customer Profile
+// 3- link with Product
+// 4- Delete
+// 5- Update
+
+// Customer
+// 1- Create
+// 2- Update
+// 3- Delete
+// 4- View Order History

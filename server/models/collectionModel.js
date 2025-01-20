@@ -16,6 +16,11 @@ const collectionSchema = mongoose.Schema({
     ],
   },
 
+  status: {
+    type: String,
+    default: "active",
+    enum: ["active", "draft"],
+  },
   media: {
     type: [String],
   },
