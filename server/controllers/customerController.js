@@ -91,7 +91,7 @@ exports.deleteCustomer = catchAsync(async function (req, res, next) {
   if (!customer)
     return next(new AppError("No customer found with this id", 404));
 
-  const deletedCustomer = await Customer.findOneAndDelete({
+  await Customer.findOneAndDelete({
     _id: id,
   });
 
