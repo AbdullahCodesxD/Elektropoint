@@ -1,17 +1,76 @@
 const slugify = require("slugify");
+const multer = require("multer");
 
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const Product = require("../models/productModel");
 const Collection = require("../models/collectionModel");
 
+// Define storage settings
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, `${__dirname}/../uploads/products`);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      file.fieldname +
+        "-" +
+        uniqueSuffix +
+        "." +
+        file.originalname.split(".").pop()
+    );
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  // Allowed mime types for images
+  const allowedMimeTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/webp",
+  ];
+
+  if (allowedMimeTypes.includes(file.mimetype)) {
+    cb(null, true); // Accept the file
+  } else {
+    cb(new Error("Only image files are allowed!"), false); // Reject the file
+  }
+};
+
+// Create multer instance
+const upload = multer({
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+});
+
+exports.uploadProductImages = upload.array("images", 5);
+
 // Create New Product
 exports.createNewProduct = catchAsync(async function (req, res, next) {
-  const { title, description, tags, media, status, category } = req.body;
+  const {
+    title,
+    description,
+    tags,
+    status,
+    category,
+    inventory,
+    metaTitle,
+    metaDescription,
+    productType,
+    vendor,
+  } = req.body;
   if (!title || !description || !category)
     return next(
       new AppError("Please provide a title,category and description", 400)
     );
+
+  const media = req?.files?.map((file) => file.filename);
 
   const collection = await Collection.findOne({
     $or: [
@@ -31,11 +90,19 @@ exports.createNewProduct = catchAsync(async function (req, res, next) {
     return next(new AppError("Product with this title already exists.", 400));
 
   const product = await Product.create({
-    title: title.trim(),
-    description: description.trim(),
-    slug: slugify(title.trim().toLowerCase()),
+    title: title?.trim(),
+    description: description?.trim(),
+    slug: slugify(title?.trim()?.toLowerCase()),
     tags,
     category: collection._id,
+    inventory: inventory?.trim()?.toLowerCase(),
+    status,
+    metaTitle,
+    metaDescription,
+    productType,
+    vendor,
+
+    media,
   });
 
   res.status(201).json({

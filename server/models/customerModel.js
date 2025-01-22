@@ -11,6 +11,8 @@ const customerSchema = new mongoose.Schema({
     required: [true, "Customer email is required"],
     unique: [true, "A customer with this email already exists."],
   },
+  address: String,
+  comment: String,
   // orders:{
   //   type:[mongoose.Schema.ObjectId],
   //   ref:"Order"

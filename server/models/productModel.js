@@ -28,13 +28,20 @@ const productSchema = mongoose.Schema({
     required: [true, "Product slug is required"],
   },
 
-  tags: {
-    type: [String],
-  },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Collection",
     required: true,
+  },
+  inventory: String,
+
+  metaTitle: String,
+  metaDescription: String,
+  productType: String,
+  vendor: String,
+
+  tags: {
+    type: [String],
   },
 });
 

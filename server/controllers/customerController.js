@@ -27,7 +27,7 @@ exports.getCustomer = catchAsync(async function (req, res, next) {
 });
 
 exports.createCustomer = catchAsync(async function (req, res, next) {
-  const { name, email } = req.body;
+  const { name, email, comment, address } = req.body;
 
   if (!name.trim() || !email.trim())
     return next(new AppError("Name and email are required", 400));
@@ -41,6 +41,8 @@ exports.createCustomer = catchAsync(async function (req, res, next) {
   const newCustomer = await Customer.create({
     name: name.trim(),
     email: email.toLowerCase().trim(),
+    comment,
+    address: address.toLowerCase().trim(),
   });
 
   res.status(201).json({
