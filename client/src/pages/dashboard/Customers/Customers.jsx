@@ -1,11 +1,17 @@
+import { useEffect } from "react";
 import Button from "../../../components/Button";
 import CustomersComponent from "../../../components/CustomersComponent";
 import CustomersComponentHeader from "../../../components/CustomersComponentHeader";
 import CustomersFilter from "./CustomersFilter";
 import CustomersSearchbar from "./CustomersSearchbar";
+import { getCustomers } from "../../../utils/customerApi";
+import { useSelector } from "react-redux";
 
 export default function Customers() {
-  const arr = Array.from({ length: 9 }).fill(undefined);
+  const customers = useSelector((state) => state.customers);
+  useEffect(function () {
+    getCustomers();
+  }, []);
   return (
     <div className="pb-[150px] md:pb-7 p-7 rounded-lg bg-[#EBEBEB]">
       <div className="flex items-center justify-between gap-1 flex-wrap">
@@ -21,7 +27,7 @@ export default function Customers() {
         <CustomersSearchbar />
         <CustomersComponentHeader />
 
-        {arr.map((_, i) => (
+        {customers.map((_, i) => (
           <CustomersComponent key={i} />
         ))}
       </div>
