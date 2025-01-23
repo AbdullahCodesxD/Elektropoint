@@ -9,6 +9,7 @@ import SearchEngineListing from "./SearchEngineListing";
 import { useNavigate, useParams } from "react-router";
 import { BackSvg } from "../../../components/Svgs";
 import Button from "../../../components/Button";
+import { useState } from "react";
 
 export default function AddProduct() {
   const { product } = useParams();
@@ -16,6 +17,18 @@ export default function AddProduct() {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
   });
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [media, setMedia] = useState([]);
+
+  const [status, setStatus] = useState("active");
+  const [vendor, setVendor] = useState("");
+  const [collection, setCollection] = useState("");
+  const [tags, setTags] = useState([]);
+
+  const [metaTitle, setMetaTitle] = useState("");
+  const [metaDescription, setMetaDescription] = useState("");
 
   function goBack(e) {
     e.preventDefault();
@@ -43,9 +56,13 @@ export default function AddProduct() {
         }}
       >
         <div className="flex flex-col gap-3">
-          <form className="w-full p-[20px] bg-white rounded-lg shadow-md ">
+          <form
+            encType="multipart/form-data"
+            className="w-full p-[20px] bg-white rounded-lg shadow-md "
+          >
             <label
               htmlFor="title"
+              onChange={(e) => setTitle(e.target.value)}
               className="mt-1 pl-0.5 -mb-2 text-base font-medium"
             >
               Title
@@ -57,7 +74,7 @@ export default function AddProduct() {
             />
             <div className="my-4">
               <label
-                htmlFor="description"
+                htmlFor="product-description"
                 className="mt-1 pl-0.5 -mb-2 text-base font-medium"
               >
                 Decription
@@ -65,15 +82,29 @@ export default function AddProduct() {
               <TextEditor editor={editor} />
             </div>
 
-            <AddMedia />
+            <AddMedia setMedia={setMedia} media={media} />
           </form>
 
           <ProductVariants />
 
-          <SearchEngineListing />
+          <SearchEngineListing
+            setMetaTitle={setMetaTitle}
+            metaTitle={metaTitle}
+            setMetaDescription={setMetaDescription}
+            metaDescription={metaDescription}
+          />
         </div>
 
-        <AddProductRightSide />
+        <AddProductRightSide
+          status={status}
+          setStatus={setStatus}
+          vendor={vendor}
+          setVendor={setVendor}
+          collection={collection}
+          setCollection={setCollection}
+          tags={tags}
+          setTags={setTags}
+        />
       </div>
     </div>
   );

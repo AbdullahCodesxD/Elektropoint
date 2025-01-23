@@ -2,8 +2,7 @@ import { useState } from "react";
 import { CrossSvg, PlusSvg } from "../../../components/Svgs";
 import Button from "../../../components/Button";
 
-export default function AddMedia() {
-  const [images, setImages] = useState([]);
+export default function AddMedia({ setMedia: setImages, media: images }) {
   const [urls, setUrls] = useState([]);
 
   function handleImageChange(e) {

@@ -1,110 +1,52 @@
+import { useEffect, useState } from "react";
 import OrdersComponent from "../../../components/OrdersComponent";
 import OrdersComponentHeader from "../../../components/OrdersComponentHeader";
+import { getOrders } from "../../../utils/ordersApi";
 import OrdersHeader from "./OrdersHeader";
+import { useSelector } from "react-redux";
 
 export default function Orders() {
-  const arr = [
-    {
-      orderNo: "#123456",
-      date: "Monday at 2:00pm",
-      customer: "Asad",
-      channel: "Online store",
-      total: "$0.00",
-      status: "unfulfilled",
-      items: "1 item",
-      method: "Doorstep pickup",
+  const orders = useSelector((state) => state.orders);
+  const [selected, setSelected] = useState([]);
+  const noOfOrders = orders.length;
+
+  useEffect(function () {
+    getOrders();
+  }, []);
+
+  useEffect(
+    function () {
+      const isOrderSelected = Array.from({ length: noOfOrders }).map((_) => {
+        return { selected: false };
+      });
+      setSelected(isOrderSelected);
     },
-    {
-      orderNo: "#123457",
-      date: "Tuesday at 3:15pm",
-      customer: "Ali",
-      channel: "Mobile app",
-      total: "$25.50",
-      status: "fulfilled",
-      items: "2 items",
-      method: "Delivery",
-    },
-    {
-      orderNo: "#123458",
-      date: "Wednesday at 10:30am",
-      customer: "Sara",
-      channel: "Online store",
-      total: "$15.00",
-      status: "pending",
-      items: "1 item",
-      method: "Doorstep pickup",
-    },
-    {
-      orderNo: "#123459",
-      date: "Thursday at 5:45pm",
-      customer: "Ahmed",
-      channel: "Mobile app",
-      total: "$48.99",
-      status: "fulfilled",
-      items: "3 items",
-      method: "Delivery",
-    },
-    {
-      orderNo: "#123460",
-      date: "Friday at 1:20pm",
-      customer: "Zainab",
-      channel: "Retail store",
-      total: "$89.00",
-      status: "unfulfilled",
-      items: "5 items",
-      method: "In-store pickup",
-    },
-    {
-      orderNo: "#123461",
-      date: "Saturday at 11:00am",
-      customer: "Bilal",
-      channel: "Online store",
-      total: "$20.00",
-      status: "fulfilled",
-      items: "2 items",
-      method: "Delivery",
-    },
-    {
-      orderNo: "#123462",
-      date: "Sunday at 6:00pm",
-      customer: "Maha",
-      channel: "Mobile app",
-      total: "$12.75",
-      status: "pending",
-      items: "1 item",
-      method: "Delivery",
-    },
-    {
-      orderNo: "#123463",
-      date: "Monday at 9:15am",
-      customer: "Hassan",
-      channel: "Retail store",
-      total: "$150.00",
-      status: "fulfilled",
-      items: "7 items",
-      method: "In-store pickup",
-    },
-    {
-      orderNo: "#123464",
-      date: "Tuesday at 4:30pm",
-      customer: "Nida",
-      channel: "Online store",
-      total: "$35.00",
-      status: "unfulfilled",
-      items: "2 items",
-      method: "Doorstep pickup",
-    },
-    {
-      orderNo: "#123465",
-      date: "Wednesday at 8:00pm",
-      customer: "Farhan",
-      channel: "Mobile app",
-      total: "$50.00",
-      status: "fulfilled",
-      items: "4 items",
-      method: "Delivery",
-    },
-  ];
+    [noOfOrders]
+  );
+
+  function selectAll(e) {
+    if (e.target.checked) {
+      setSelected(
+        selected.map((_) => {
+          return { selected: true };
+        })
+      );
+    } else {
+      setSelected(
+        selected.map((_) => {
+          return { selected: false };
+        })
+      );
+    }
+  }
+
+  function toggleSelected(i) {
+    setSelected((prevSelected) =>
+      prevSelected.map((item, index) =>
+        index === i ? { selected: !item.selected } : item
+      )
+    );
+  }
 
   return (
     <div className="pb-[150px] md:pb-7 p-7 rounded-lg bg-[#EBEBEB]">
@@ -113,9 +55,14 @@ export default function Orders() {
       <div className="mt-3 bg-white rounded-lg ">
         <OrdersHeader />
         <div className="overflow-x-auto order">
-          <OrdersComponentHeader />
-          {arr.map((data) => (
-            <OrdersComponent data={data} key={data} />
+          <OrdersComponentHeader selected={selected} selectAll={selectAll} />
+          {orders.map((data, i) => (
+            <OrdersComponent
+              isSelected={selected[i]?.selected}
+              toggleSelected={() => toggleSelected(i)}
+              data={data}
+              key={data._id}
+            />
           ))}
         </div>
       </div>
