@@ -1,4 +1,9 @@
-export default function ProductsComponentHeader() {
+export default function ProductsComponentHeader({ selectAll, selected }) {
+  const isAllSelected =
+    selected.length > 0
+      ? selected.map((select) => select.selected)?.indexOf(false)
+      : 0;
+
   return (
     <div
       className="p-3 grid min-w-[1000px] justify-between border-t  border-dark"
@@ -10,6 +15,8 @@ export default function ProductsComponentHeader() {
         <input
           id="checkbox"
           type="checkbox"
+          checked={isAllSelected === -1}
+          onChange={selectAll}
           className="h-5 w-5 appearance-none border-2 border-main rounded-md cursor-pointer checked:appearance-auto checked:accent-main checked:bg-main"
         />
 

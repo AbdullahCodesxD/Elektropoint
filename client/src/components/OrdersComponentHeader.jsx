@@ -17,7 +17,7 @@ export default function OrdersComponentHeader({ selectAll, selected }) {
           type="checkbox"
           checked={isAllSelected === -1}
           className="h-5 w-5 appearance-none border-2 border-main rounded-md cursor-pointer checked:appearance-auto checked:accent-main checked:bg-main"
-          onClick={selectAll}
+          onChange={selectAll}
         />
 
         <label className="text-[15px]" htmlFor="checkbox">

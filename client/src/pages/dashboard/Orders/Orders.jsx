@@ -6,7 +6,20 @@ import OrdersHeader from "./OrdersHeader";
 import { useSelector } from "react-redux";
 
 export default function Orders() {
-  const orders = useSelector((state) => state.orders);
+  const ordersUnfiltered = useSelector((state) => state.orders);
+
+  const [filter, setFilter] = useState("all");
+  const orders =
+    filter === "all"
+      ? ordersUnfiltered
+      : filter === "unFulFilled"
+      ? ordersUnfiltered.filter(
+          (order) => order.fullFilmentStatus.toLowerCase() === "unfullfilled"
+        )
+      : ordersUnfiltered.filter(
+          (order) => order.paymentStatus.toLowerCase() === "unpaid"
+        );
+
   const [selected, setSelected] = useState([]);
   const noOfOrders = orders.length;
 
@@ -53,7 +66,7 @@ export default function Orders() {
       <h3 className="font-semibold text-2xl">Orders</h3>
 
       <div className="mt-3 bg-white rounded-lg ">
-        <OrdersHeader />
+        <OrdersHeader filter={filter} setFilter={setFilter} />
         <div className="overflow-x-auto order">
           <OrdersComponentHeader selected={selected} selectAll={selectAll} />
           {orders.map((data, i) => (
