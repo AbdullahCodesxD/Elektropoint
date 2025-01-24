@@ -1,22 +1,28 @@
 import Button from "./Button";
 import { PaidSvg } from "./Svgs";
 
-export default function OrdersDetailsPaid() {
+export default function OrdersDetailsPaid({
+  paymentStatus,
+  deliveryMethod,
+  noOfItems,
+  price = 0,
+}) {
   const arrOfDetails = [
-    ["Subtotal", "1 item", "$0.00"],
+    ["Subtotal", `${noOfItems} ${noOfItems > 1 ? "items" : "item"}`, "$0.00"],
     [
       "Shipping",
-      "Doorstep Pickup (5 Kg : 1 tem 0.5 kg : Package 1.5  ",
+      // "Doorstep Pickup (5 Kg : 1 tem 0.5 kg : Package 1.5  ",
+      `${deliveryMethod}`,
       "$0.00",
     ],
-    ["Total", "$0.00"],
+    ["Total", `$${price.toFixed(2).padEnd(2, 0)}`],
     ["Paid", "$0.00"],
   ];
   return (
     <div className="bg-white p-3 rounded-lg">
-      <Button type="orderDetailsOrder">
+      <Button type="orderDetailsOrder" extraClasses="capitalize">
         <PaidSvg height={15} />
-        Paid
+        {paymentStatus}
       </Button>
 
       <div className="rounded-lg overflow-hidden border mt-5 border-t-0 border-dark/10">
@@ -33,7 +39,7 @@ function OrdersDetailsPaidComponent({ items }) {
     <div className="p-2 border-t flex items-center justify-between gap-5">
       {items.map((item, i) => (
         <p
-          className={`text-[15px] ${i === 0 && "font-semibold"} `}
+          className={`text-[15px] ${i === 0 && "font-semibold"} capitalize `}
           key={i + item}
         >
           {item}

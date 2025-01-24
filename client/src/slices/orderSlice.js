@@ -1,20 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+const initialState = {
+  orders: [],
+  currentOrder: {},
+};
 const orderSlice = createSlice({
   name: "order",
-  initialState: [],
+  initialState: initialState,
   reducers: {
     addAllOrders: (state, action) => {
-      return action.payload;
+      state.orders = action.payload;
     },
     addOrder: (state, action) => {
-      return [...state, action.payload];
+      state.orders = [...state.orders, action.payload];
     },
     removeOrder: (state, action) => {
-      return state.filter((order) => order.id !== action.payload);
+      state.orders = state.orders.filter(
+        (order) => order.id !== action.payload
+      );
+    },
+
+    setCurrentOrder: (state, action) => {
+      state.currentOrder = action.payload;
+    },
+    removeCurrentOrder: (state, action) => {
+      state.currentOrder = {};
     },
   },
 });
 
-export const { addAllOrders, addOrder, removeOrder } = orderSlice.actions;
+export const {
+  addAllOrders,
+  addOrder,
+  removeOrder,
+  setCurrentOrder,
+  removeCurrentOrder,
+} = orderSlice.actions;
 export default orderSlice.reducer;

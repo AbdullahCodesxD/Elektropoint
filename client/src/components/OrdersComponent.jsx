@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function OrdersComponent({ data, isSelected, toggleSelected }) {
+export default function OrdersComponent({
+  data,
+  isSelected,
+  toggleSelected,
+  id,
+}) {
   const [isChecked, setIsChecked] = useState(isSelected);
 
   useEffect(() => {
@@ -26,7 +31,7 @@ export default function OrdersComponent({ data, isSelected, toggleSelected }) {
 
   return (
     <Link
-      to="/dashboard/orders/order/order"
+      to={`/dashboard/orders/order/${id}`}
       className="p-3 grid min-w-[1250px] justify-between border-t border-dark/60"
       style={{
         gridTemplateColumns: "100px 200px 150px 100px 150px 150px 150px 150px",

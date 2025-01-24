@@ -6,7 +6,7 @@ import OrdersHeader from "./OrdersHeader";
 import { useSelector } from "react-redux";
 
 export default function Orders() {
-  const ordersUnfiltered = useSelector((state) => state.orders);
+  const ordersUnfiltered = useSelector((state) => state.orders?.orders);
 
   const [filter, setFilter] = useState("all");
   const orders =
@@ -73,6 +73,7 @@ export default function Orders() {
             <OrdersComponent
               isSelected={selected[i]?.selected}
               toggleSelected={() => toggleSelected(i)}
+              id={data._id}
               data={data}
               key={data._id}
             />
