@@ -13,6 +13,10 @@ const customerSchema = new mongoose.Schema({
   },
   address: String,
   comment: String,
+  emailSubscription: {
+    type: Boolean,
+    default: false,
+  },
   // orders:{
   //   type:[mongoose.Schema.ObjectId],
   //   ref:"Order"

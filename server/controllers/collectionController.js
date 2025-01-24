@@ -5,6 +5,7 @@ const AppError = require("../utils/appError");
 
 const Collection = require("../models/collectionModel");
 const Product = require("../models/productModel");
+const { collection } = require("../models/customerModel");
 // Create New Collection
 exports.createCollection = catchAsync(async function (req, res, next) {
   const { title, description } = req.body;
@@ -50,7 +51,19 @@ exports.deleteCollection = catchAsync(async function (req, res, next) {
 
 // Gell all collections
 exports.getAllCollections = catchAsync(async function (req, res, next) {
-  const collections = await Collection.find();
+  const collectionsResponse = await Collection.find();
+  const collectionsCount = await Promise.all(
+    collectionsResponse.map((collection) => {
+      return Product.countDocuments({ category: collection._id });
+    })
+  );
+
+  const collections = collectionsResponse.map((collection, i) => {
+    return {
+      ...collection._doc,
+      noOfProducts: collectionsCount[i],
+    };
+  });
 
   const noOfCollections = collections.length;
 

@@ -113,7 +113,10 @@ exports.createNewProduct = catchAsync(async function (req, res, next) {
 
 // Get all products
 exports.getAllProducts = catchAsync(async (req, res, next) => {
-  const products = await Product.find();
+  const products = await Product.find().populate({
+    path: "category",
+    select: "title",
+  });
   const noOfProducts = products.length;
 
   res.status(200).json({

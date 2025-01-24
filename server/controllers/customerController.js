@@ -1,9 +1,23 @@
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const Customer = require("../models/customerModel");
+const Order = require("../models/orderModel");
 
 exports.getAllCustomers = catchAsync(async function (req, res, next) {
-  const customers = await Customer.find();
+  const customersWithoutOrders = await Customer.find();
+  const customers = await Promise.all(
+    customersWithoutOrders.map(async (customer) => {
+      const orders = await Order.find({ customer: customer._id });
+      const amountSpent = orders
+        ?.map((order) => order.price)
+        ?.reduce((a, b) => a + b, 0);
+      return {
+        ...customer._doc,
+        noOfOrders: orders.length,
+        amountSpent,
+      };
+    })
+  );
 
   res.status(200).json({
     message: "success",
@@ -42,7 +56,7 @@ exports.createCustomer = catchAsync(async function (req, res, next) {
     name: name.trim(),
     email: email.toLowerCase().trim(),
     comment,
-    address: address.toLowerCase().trim(),
+    address: address?.toLowerCase()?.trim(),
   });
 
   res.status(201).json({

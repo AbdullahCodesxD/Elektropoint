@@ -30,13 +30,26 @@ exports.getAllOrders = catchAsync(async function (req, res, next) {
 });
 
 exports.createOrder = catchAsync(async function (req, res, next) {
-  const { customer, product } = req.body;
+  const {
+    customer,
+    product,
+    fullFilmentStatus,
+    paymentStatus,
+    noOfItems,
+    price,
+    deliveryMethod,
+  } = req.body;
   if (!customer)
     return next(new AppError("Customer is required to create an order", 400));
 
   const order = await Order.create({
     customer,
     product,
+    fullFilmentStatus,
+    paymentStatus,
+    noOfItems,
+    price,
+    deliveryMethod,
   });
 
   res.status(201).json({

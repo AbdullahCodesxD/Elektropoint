@@ -25,6 +25,7 @@ app.use("/api/v1/search", searchRouter);
 app.use("/api/v1/collection", collectionRouter);
 app.use("/api/v1/customer", customerRouter);
 app.use("/api/v1/orders", orderRouter);
+app.use(express.static("uploads"));
 app.use(errorController);
 module.exports = app;
 
