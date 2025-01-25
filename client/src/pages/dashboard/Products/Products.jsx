@@ -8,7 +8,7 @@ import { getProducts } from "../../../utils/productsApi";
 import ProductsHeader from "./ProductsHeader";
 
 export default function Products() {
-  const productsUnfiltered = useSelector((state) => state.products);
+  const productsUnfiltered = useSelector((state) => state.products.products);
 
   const [filter, setFilter] = useState("all");
   const products =

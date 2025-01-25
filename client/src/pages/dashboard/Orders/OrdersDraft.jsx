@@ -18,6 +18,7 @@ export default function OrdersDraft() {
 
         <Button
           type="primary"
+          to="new"
           extraClasses="max-w-fit px-8 mt-3 py-2 text-[14px] font-medium"
         >
           Create draft order

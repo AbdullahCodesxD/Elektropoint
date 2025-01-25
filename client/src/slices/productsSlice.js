@@ -1,17 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
+import StarterKit from "@tiptap/starter-kit";
 
+const initialState = {
+  products: [],
+};
 const productSlice = createSlice({
   name: "products",
-  initialState: [],
+  initialState,
   reducers: {
     addProducts: function (state, action) {
-      return [...action.payload];
+      state.products = action.payload;
     },
     addProduct: function (state, action) {
-      return [...state, action.payload];
+      state.products = [...state.products, action.payload];
     },
     deleteProduct: function (state, action) {
-      return state.filter((product) => product.id !== action.payload);
+      state.products = state.products.filter(
+        (product) => product.id !== action.payload
+      );
     },
   },
 });

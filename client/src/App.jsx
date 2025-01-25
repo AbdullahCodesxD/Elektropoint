@@ -30,6 +30,7 @@ import Collections from "./pages/dashboard/Products/Collections/Collections";
 import CreateCollection from "./pages/dashboard/Products/Collections/CreateCollection/CreateCollection";
 import Discount from "./pages/dashboard/Discount/Discount";
 import CreateCustomer from "./pages/dashboard/CreateCustomer/CreateCustomer";
+import NewOrder from "./pages/dashboard/Orders/NewOrder";
 
 const router = createBrowserRouter([
   {
@@ -91,7 +92,10 @@ const router = createBrowserRouter([
             path: "/dashboard/orders/draft",
             element: <OrdersDraft />,
           },
-
+          {
+            path: "/dashboard/orders/draft/new",
+            element: <NewOrder />,
+          },
           // Products
           {
             path: "/dashboard/products",
