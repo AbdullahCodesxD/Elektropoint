@@ -34,9 +34,19 @@ exports.getCustomer = catchAsync(async function (req, res, next) {
     return next(new AppError("No customer found with this id", 404));
   }
 
+  const order = await Order.find({ customer: id }).populate("product").sort({
+    date: -1,
+  });
+
+  const noOfOrders = order?.length;
+  const latestOrder = order[0] || null;
+  const totalAmountSpent = order
+    ?.map((order) => order.price)
+    ?.reduce((acc, val) => acc + val, 0);
+
   res.status(200).json({
     message: "success",
-    data: customer,
+    data: { ...customer._doc, latestOrder, noOfOrders, totalAmountSpent },
   });
 });
 

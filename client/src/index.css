@@ -51,3 +51,11 @@ body {
     min-height: 450px;
   }
 }
+.editor-content ol {
+  list-style: decimal;
+  padding-left: 15px;
+}
+.editor-content ul {
+  list-style: disc;
+  padding-left: 15px;
+}

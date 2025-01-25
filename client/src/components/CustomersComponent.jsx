@@ -5,6 +5,7 @@ export default function CustomersComponent({
   data,
   isSelected,
   toggleSelected,
+  customerId,
 }) {
   const [isChecked, setIsChecked] = useState(isSelected);
 
@@ -19,7 +20,7 @@ export default function CustomersComponent({
 
   return (
     <Link
-      to="/dashboard/customers/customer/customer"
+      to={`/dashboard/customers/customer/${customerId}`}
       className="p-3 grid min-w-[1000px] justify-between border-t border-dark/60"
       style={{
         gridTemplateColumns: "200px 150px 150px 120px 120px ",

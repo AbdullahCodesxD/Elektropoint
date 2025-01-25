@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 export default function Customers() {
   const [search, setSearch] = useState("");
-  const customersUnfiltered = useSelector((state) => state.customers);
+  const customersUnfiltered = useSelector((state) => state.customers.customers);
   const customers = customersUnfiltered.filter((customer) =>
     customer.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -61,7 +61,11 @@ export default function Customers() {
     <div className="pb-[150px] md:pb-7 p-7 rounded-lg bg-[#EBEBEB]">
       <div className="flex items-center justify-between gap-1 flex-wrap">
         <h3 className="font-semibold text-2xl">Customers</h3>
-        <Button type="primary" extraClasses="max-w-fit py-1 px-5 font-normal">
+        <Button
+          to="new"
+          type="primary"
+          extraClasses="max-w-fit py-1 px-5 font-normal"
+        >
           Add Customer
         </Button>
       </div>
@@ -77,6 +81,7 @@ export default function Customers() {
         )}
         {customers.map((customer, i) => (
           <CustomersComponent
+            customerId={customer._id}
             isSelected={selected[i]?.selected}
             toggleSelected={() => toggleSelected(i)}
             key={customer._id}

@@ -17,10 +17,11 @@ const customerSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  // orders:{
-  //   type:[mongoose.Schema.ObjectId],
-  //   ref:"Order"
-  // }
+
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 const Customer = mongoose.model("Customer", customerSchema);

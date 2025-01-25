@@ -11,14 +11,21 @@ exports.getAllOrders = catchAsync(async function (req, res, next) {
 
   const noOfPages = Math.ceil((await Order.estimatedDocumentCount()) / limit);
 
-  const orders = await Order.find()
+  const ordersWithoutNoOfItems = await Order.find()
     .populate("customer")
     .populate({
       path: "product",
-      select: "title",
+      select: "title media",
     })
     .skip((pageNo - 1) * limit)
     .limit(limit);
+
+  const orders = ordersWithoutNoOfItems.map((order) => {
+    return {
+      ...order.toObject(),
+      noOfItems: order.product.length,
+    };
+  });
 
   res.status(200).json({
     message: "success",
@@ -28,7 +35,22 @@ exports.getAllOrders = catchAsync(async function (req, res, next) {
     currentPage: pageNo,
   });
 });
+exports.getOrder = catchAsync(async function (req, res, next) {
+  const id = req.params.id;
+  if (!id) return next(new AppError("Valid order id is required", 400));
+  const order = await Order.findOne({ _id: id })?.populate("customer product");
+  if (!order) return next(new AppError("No order found with this is", 404));
 
+  const orderWithNoOfItems = {
+    ...order.toObject(),
+    noOfItems: order.product.length,
+  };
+
+  res.status(200).json({
+    message: "success",
+    data: orderWithNoOfItems,
+  });
+});
 exports.createOrder = catchAsync(async function (req, res, next) {
   const {
     customer,

@@ -22,7 +22,7 @@ const orderSchema = mongoose.Schema({
     required: [true, "Order must belong to a customer"],
   },
   product: {
-    type: mongoose.Schema.ObjectId,
+    type: [mongoose.Schema.ObjectId],
     ref: "Product",
   },
   fullFilmentStatus: {
@@ -34,10 +34,6 @@ const orderSchema = mongoose.Schema({
     type: String,
     default: "unpaid",
     enum: ["unpaid", "paid"],
-  },
-  noOfItems: {
-    type: String,
-    default: "0",
   },
   price: {
     type: Number,

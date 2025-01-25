@@ -29,6 +29,7 @@ import AddProduct from "./pages/dashboard/AddProduct/AddProduct";
 import Collections from "./pages/dashboard/Products/Collections/Collections";
 import CreateCollection from "./pages/dashboard/Products/Collections/CreateCollection/CreateCollection";
 import Discount from "./pages/dashboard/Discount/Discount";
+import CreateCustomer from "./pages/dashboard/CreateCustomer/CreateCustomer";
 
 const router = createBrowserRouter([
   {
@@ -117,6 +118,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/customers",
             element: <Customers />,
+          },
+          {
+            path: "/dashboard/customers/new",
+            element: <CreateCustomer />,
           },
           {
             path: "/dashboard/customers/customer/:customer",
