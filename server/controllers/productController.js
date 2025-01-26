@@ -56,32 +56,37 @@ exports.createNewProduct = catchAsync(async function (req, res, next) {
   const {
     title,
     description,
-    tags,
+    tags = "",
     status,
-    category,
-    inventory,
-    metaTitle,
-    metaDescription,
-    productType,
-    vendor,
+    category = "",
+    inventory = "",
+    metaTitle = "",
+    metaDescription = "",
+    productType = "",
+    vendor = "",
   } = req.body;
-  if (!title || !description || !category)
+  if (!title || !description || (!category && !vendor))
     return next(
-      new AppError("Please provide a title,category and description", 400)
+      new AppError(
+        "Please provide a title, description and category or vendor",
+        400
+      )
     );
 
   const media = req?.files?.map((file) => file.filename);
 
-  const collection = await Collection.findOne({
-    $or: [
-      { title: { $regex: new RegExp(`^${category.trim()}$`, "i") } },
-      { slug: { $regex: new RegExp(`^${category.trim()}$`, "i") } },
-    ],
-  });
+  let collection;
+  if (category) {
+    collection = await Collection.findOne({
+      $or: [
+        { title: { $regex: new RegExp(`^${category.trim()}$`, "i") } },
+        { slug: { $regex: new RegExp(`^${category.trim()}$`, "i") } },
+      ],
+    });
 
-  if (!collection)
-    return next(new AppError("Please provide a valid category", 400));
-
+    if (!collection)
+      return next(new AppError("Please provide a valid category", 400));
+  }
   const checkIfProductExists = Product.find({
     title: title.trim(),
   });
@@ -94,13 +99,13 @@ exports.createNewProduct = catchAsync(async function (req, res, next) {
     description: description?.trim(),
     slug: slugify(title?.trim()?.toLowerCase()),
     tags,
-    category: collection._id,
+    category: collection?._id,
     inventory: inventory?.trim()?.toLowerCase(),
-    status,
+    status: status?.trim()?.toLowerCase(),
     metaTitle,
     metaDescription,
-    productType,
-    vendor,
+    productType: productType?.trim()?.toLowerCase(),
+    vendor: vendor?.trim()?.toLowerCase(),
 
     media,
   });

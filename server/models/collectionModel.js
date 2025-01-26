@@ -15,7 +15,9 @@ const collectionSchema = mongoose.Schema({
       "Collection description must at least be 20 characters long.",
     ],
   },
-
+  conditionVendors: {
+    type: [String],
+  },
   status: {
     type: String,
     default: "active",

@@ -31,7 +31,7 @@ const productSchema = mongoose.Schema({
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Collection",
-    required: true,
+    // required: true,
   },
   inventory: String,
 

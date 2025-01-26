@@ -8,7 +8,7 @@ const Product = require("../models/productModel");
 const { collection } = require("../models/customerModel");
 // Create New Collection
 exports.createCollection = catchAsync(async function (req, res, next) {
-  const { title, description } = req.body;
+  const { title, description, conditionVendors } = req.body;
 
   if (!title || !description)
     return next(new AppError("Title and description are required", 400));
@@ -21,11 +21,16 @@ exports.createCollection = catchAsync(async function (req, res, next) {
     return next(
       new AppError("Collection name with this title already exists", 400)
     );
-
+  const conditionVendorsLowerCasedAndTrimmed = conditionVendors?.map(
+    (vendor) => {
+      return vendor.trim().toLowerCase();
+    }
+  );
   const newCollection = await Collection.create({
     title: title.trim(),
     description: description.trim(),
     slug: slugify(title.trim().toLowerCase()),
+    conditionVendors: conditionVendorsLowerCasedAndTrimmed,
   });
 
   res.status(201).json({
@@ -54,6 +59,11 @@ exports.getAllCollections = catchAsync(async function (req, res, next) {
   const collectionsResponse = await Collection.find();
   const collectionsCount = await Promise.all(
     collectionsResponse.map((collection) => {
+      if (collection.conditionVendors.length > 0) {
+        return Product.countDocuments({
+          vendor: { $in: collection.conditionVendors },
+        });
+      }
       return Product.countDocuments({ category: collection._id });
     })
   );

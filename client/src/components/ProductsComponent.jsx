@@ -64,7 +64,7 @@ export default function ProductsComponent({
       <p className="text-[15px] text-center">99 stock in 1 variant</p>
       <p className="text-[15px] text-center">2</p>
       <p className="text-[15px] text-center capitalize">
-        {product.category.title}
+        {product?.category?.title || `Vendor : ${product?.vendor}`}
       </p>
       <p className="text-[15px] text-center">Vendor </p>
     </Link>

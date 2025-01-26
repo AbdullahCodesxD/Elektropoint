@@ -64,7 +64,13 @@ export default function Collections() {
             key={collection._id}
             title={collection.title}
             noOfProducts={collection.noOfProducts}
-            conditions="Product vendor is equal to schalter"
+            conditions={
+              collection?.conditionVendors?.length > 0
+                ? `Product vendor is equal to ${collection?.conditionVendors?.join(
+                    ", "
+                  )}.`
+                : "No condition"
+            }
           />
         ))}
       </div>
