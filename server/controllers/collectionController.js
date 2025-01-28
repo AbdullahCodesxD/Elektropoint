@@ -1,3 +1,4 @@
+const multer = require("multer");
 const slugify = require("slugify");
 
 const catchAsync = require("../utils/catchAsync");
@@ -5,11 +6,57 @@ const AppError = require("../utils/appError");
 
 const Collection = require("../models/collectionModel");
 const Product = require("../models/productModel");
-const { collection } = require("../models/customerModel");
+
+// Define storage settings
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, `${__dirname}/../uploads/categories`);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      file.fieldname +
+        "-" +
+        uniqueSuffix +
+        "." +
+        file.originalname.split(".").pop()
+    );
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  console.log("ayatha", file);
+  // Allowed mime types for images
+  const allowedMimeTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/webp",
+  ];
+
+  if (allowedMimeTypes.includes(file.mimetype)) {
+    cb(null, true); // Accept the file
+  } else {
+    cb(new Error("Only image files are allowed!"), false); // Reject the file
+  }
+};
+
+// Create multer instance
+const upload = multer({
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 3 * 1024 * 1024,
+  },
+});
+
+exports.uploadCollectionImages = upload.array("images", 3);
+
 // Create New Collection
 exports.createCollection = catchAsync(async function (req, res, next) {
   const { title, description, conditionVendors } = req.body;
-
+  console.log(req.body, "gg");
   if (!title || !description)
     return next(new AppError("Title and description are required", 400));
 
@@ -21,16 +68,19 @@ exports.createCollection = catchAsync(async function (req, res, next) {
     return next(
       new AppError("Collection name with this title already exists", 400)
     );
-  const conditionVendorsLowerCasedAndTrimmed = conditionVendors?.map(
-    (vendor) => {
+
+  const media = req?.files?.map((file) => file.filename);
+  const conditionVendorsLowerCasedAndTrimmed = conditionVendors
+    ?.map((vendor) => {
       return vendor.trim().toLowerCase();
-    }
-  );
+    })
+    ?.filter((vendor) => vendor);
   const newCollection = await Collection.create({
     title: title.trim(),
     description: description.trim(),
     slug: slugify(title.trim().toLowerCase()),
     conditionVendors: conditionVendorsLowerCasedAndTrimmed,
+    media,
   });
 
   res.status(201).json({

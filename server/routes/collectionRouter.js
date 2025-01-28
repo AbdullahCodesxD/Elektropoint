@@ -3,7 +3,20 @@ const router = express.Router();
 
 const collectionController = require("../controllers/collectionController");
 
-router.post("/", collectionController.createCollection);
+router.post(
+  "/",
+  collectionController.uploadCollectionImages,
+  collectionController.createCollection
+);
+router.post(
+  "/upload",
+  collectionController.uploadCollectionImages,
+  (req, res) => {
+    console.log("Files:", req.files); // Debug: should show an array of files
+    console.log("Body:", req.body); // Debug: should show other form data
+    res.json({ files: req.files });
+  }
+);
 
 router.get("/", collectionController.getAllCollections);
 router.get("/:slug", collectionController.getCollectionBySlug);

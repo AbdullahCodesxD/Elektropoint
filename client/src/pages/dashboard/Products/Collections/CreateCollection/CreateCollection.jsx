@@ -8,8 +8,14 @@ import TextEditor from "../../../../../components/TextEditor";
 import CollectionConditions from "./CollectionConditions";
 import CollectionProducts from "./CollectionProducts";
 import CollectionAddImages from "./CollectionAddImages";
+import { useState } from "react";
+import { postCollection } from "../../../../../utils/collectionApi";
 
 export default function CreateCollection() {
+  const [title, setTitle] = useState("");
+  const [images, setImages] = useState([]);
+  const [vendors, setVendors] = useState([]);
+
   const navigate = useNavigate();
   const editor = useEditor({
     extensions: [StarterKit, Underline],
@@ -18,8 +24,28 @@ export default function CreateCollection() {
   function goBack() {
     navigate(-1);
   }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    const description = editor?.getHTML() || "";
+    if (images.length === 0) return alert("Please add at least one image");
+    formData.append("title", title);
+    formData.append("description", description);
+    if (vendors.length === 1) {
+      vendors?.map((vendor) => formData.append("conditionVendors", vendor));
+      formData.append("conditionVendors", "");
+      console.log(formData.get("conditionVendors"));
+    } else {
+      vendors?.map((vendor) => formData.append("conditionVendors", vendor));
+    }
+    images.forEach((img) => formData.append("images", img));
+    postCollection(formData);
+  }
   return (
-    <div className="bg-[#eaeaea] rounded-lg p-5 ">
+    <div className="bg-[#eaeaea] rounded-lg p-5 relative">
       <div className="flex items-center gap-3 mb-3">
         <Button handler={goBack}>
           <BackSvg height={15} />
@@ -27,14 +53,16 @@ export default function CreateCollection() {
         <h3 className="text-2xl font-semibold">Collections</h3>
       </div>
 
-      <div
+      <form
+        onSubmit={handleSubmit}
         className="flex flex-col pb-[140px] md:pb-0 md:grid gap-3"
         style={{
           gridTemplateColumns: "1fr 290px",
         }}
+        encType="multipart/form-data"
       >
-        <div className="flex flex-col gap-3">
-          <form className="w-full p-[20px] bg-white rounded-lg shadow-md ">
+        <div className="flex flex-col gap-3 w-full">
+          <div className="w-full p-[20px] bg-white rounded-lg shadow-md ">
             <label
               htmlFor="title"
               className="mt-1 pl-0.5 -mb-2 text-base font-medium"
@@ -44,6 +72,8 @@ export default function CreateCollection() {
             <input
               id="title"
               type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               className="w-full px-3 py-2.5 rounded-lg outline-none border border-dark/60"
             />
             <div className="my-4">
@@ -55,15 +85,20 @@ export default function CreateCollection() {
               </label>
               <TextEditor editor={editor} />
             </div>
-          </form>
-
-          <CollectionConditions />
-
+          </div>
+          <CollectionConditions vendors={vendors} setVendors={setVendors} />
           <CollectionProducts />
         </div>
 
-        <CollectionAddImages />
-      </div>
+        <CollectionAddImages images={images} setImages={setImages} />
+
+        <Button
+          type="primary"
+          extraClasses="max-w-fit px-5 text-[14px] fixed bottom-5 right-5 transition-all hover:opacity-70"
+        >
+          Create Collection
+        </Button>
+      </form>
     </div>
   );
 }

@@ -5,14 +5,19 @@ import axios from "axios";
 const API = axios.create({
   baseURL: API_URL,
   timeout: 15000,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  // headers: {
+  //   "Content-Type": "application/json",
+  // },
 });
 
 export const postToApi = async (url, data) => {
   try {
-    const response = await API.post(url, data);
+    const config = {};
+    if (data instanceof FormData) {
+      config.headers = { "Content-Type": "multipart/form-data" };
+    }
+    const response = await API.post(url, data, config);
+
     return response.data;
   } catch (error) {
     console.error(error);

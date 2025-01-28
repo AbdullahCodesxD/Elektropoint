@@ -130,6 +130,15 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
     noOfProducts,
   });
 });
+
+exports.getAllVendors = catchAsync(async (req, res, next) => {
+  const vendors = await Product.find().select("vendor").distinct("vendor");
+  res.status(200).json({
+    message: "success",
+    data: vendors,
+    noOfVendors: vendors.length,
+  });
+});
 // Get Product by Slug
 exports.getProductBySlug = catchAsync(async (req, res, next) => {
   const slug = req.params.slug.trim();

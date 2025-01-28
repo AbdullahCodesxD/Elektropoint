@@ -8,6 +8,7 @@ router.post(
   productController.createNewProduct
 );
 router.get("/", productController.getAllProducts);
+router.get("/product/vendors", productController.getAllVendors);
 
 router.get("/:slug", productController.getProductBySlug);
 router.get(

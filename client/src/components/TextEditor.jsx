@@ -1,19 +1,20 @@
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Underline from "@tiptap/extension-underline";
-import { useState } from "react";
+import { EditorContent } from "@tiptap/react";
+// import { useEditor, EditorContent } from "@tiptap/react";
+// import StarterKit from "@tiptap/starter-kit";
+// import Underline from "@tiptap/extension-underline";
+// import { useState } from "react";
 
 export default function TextEditor({ editor = {} }) {
   if (!editor) {
     return null;
   }
   // Function to get content from the editor
-  const getEditorContent = () => {
-    if (editor) {
-      const htmlContent = editor.getHTML();
-      console.log(htmlContent); // This will log the HTML content
-    }
-  };
+  // const getEditorContent = () => {
+  //   if (editor) {
+  //     const htmlContent = editor.getHTML();
+  //     console.log(htmlContent); // This will log the HTML content
+  //   }
+  // };
 
   return (
     <>

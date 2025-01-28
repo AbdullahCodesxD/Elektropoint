@@ -2,14 +2,18 @@ import { useState } from "react";
 import Button from "../../../../../components/Button";
 import { CrossSvg } from "../../../../../components/Svgs";
 
-export default function CollectionAddImages() {
-  const [images, setImages] = useState([]);
+export default function CollectionAddImages({ images, setImages }) {
+  // const [images, setImages] = useState([]);
   const [urls, setUrls] = useState([]);
 
   function handleImages(e) {
     e.preventDefault();
     const files = e.target.files;
 
+    if (files.length + urls.length > 3) {
+      alert("You can only upload up to 3 images.");
+      return;
+    }
     if (!files || files.length === 0) return;
     const fileUrls = Object.values(files).map((file) =>
       URL.createObjectURL(file)
