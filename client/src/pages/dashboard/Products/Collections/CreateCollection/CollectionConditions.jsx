@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getVendors } from "../../../../../utils/productsApi";
 
-export default function CollectionConditions({ vendors, setVendors }) {
-  const [matchCondition, setMatchCondition] = useState(false);
-
+export default function CollectionConditions({
+  vendors,
+  setVendors,
+  matchCondition,
+  setMatchCondition,
+}) {
   const allVendors = useSelector((state) => state.products.vendors);
   const notSelectedVendors = allVendors.filter(
     (vendor) => vendors.indexOf(vendor) === -1

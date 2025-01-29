@@ -18,6 +18,7 @@ export default function Button({
   type = "",
   extraClasses = "",
   style = {},
+  buttonType = "",
 }) {
   const btnTypes = {
     primary:
@@ -89,6 +90,7 @@ export default function Button({
 
   return (
     <button
+      type={buttonType}
       className={`${btnTypes[type]} ${extraClasses}`}
       onClick={handler}
       style={style}

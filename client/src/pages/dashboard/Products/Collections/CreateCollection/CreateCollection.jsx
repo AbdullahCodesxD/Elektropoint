@@ -8,10 +8,16 @@ import TextEditor from "../../../../../components/TextEditor";
 import CollectionConditions from "./CollectionConditions";
 import CollectionProducts from "./CollectionProducts";
 import CollectionAddImages from "./CollectionAddImages";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { postCollection } from "../../../../../utils/collectionApi";
+import { getProducts } from "../../../../../utils/productsApi";
+import { useSelector } from "react-redux";
 
 export default function CreateCollection() {
+  const products = useSelector((state) => state.products.products);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [matchCondition, setMatchCondition] = useState(false);
+
   const [title, setTitle] = useState("");
   const [images, setImages] = useState([]);
   const [vendors, setVendors] = useState([]);
@@ -44,6 +50,10 @@ export default function CreateCollection() {
     images.forEach((img) => formData.append("images", img));
     postCollection(formData);
   }
+
+  useEffect(function () {
+    getProducts();
+  }, []);
   return (
     <div className="bg-[#eaeaea] rounded-lg p-5 relative">
       <div className="flex items-center gap-3 mb-3">
@@ -57,7 +67,7 @@ export default function CreateCollection() {
         onSubmit={handleSubmit}
         className="flex flex-col pb-[140px] md:pb-0 md:grid gap-3"
         style={{
-          gridTemplateColumns: "1fr 290px",
+          gridTemplateColumns: "calc(100% - 300px) 290px",
         }}
         encType="multipart/form-data"
       >
@@ -86,8 +96,19 @@ export default function CreateCollection() {
               <TextEditor editor={editor} />
             </div>
           </div>
-          <CollectionConditions vendors={vendors} setVendors={setVendors} />
-          <CollectionProducts />
+          <CollectionConditions
+            matchCondition={matchCondition}
+            setMatchCondition={setMatchCondition}
+            vendors={vendors}
+            setVendors={setVendors}
+          />
+          {!matchCondition && (
+            <CollectionProducts
+              setSelectedProducts={setSelectedProducts}
+              selectedProducts={selectedProducts}
+              products={products}
+            />
+          )}
         </div>
 
         <CollectionAddImages images={images} setImages={setImages} />
