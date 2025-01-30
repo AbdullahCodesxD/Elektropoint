@@ -31,6 +31,7 @@ import CreateCollection from "./pages/dashboard/Products/Collections/CreateColle
 import Discount from "./pages/dashboard/Discount/Discount";
 import CreateCustomer from "./pages/dashboard/CreateCustomer/CreateCustomer";
 import NewOrder from "./pages/dashboard/Orders/NewOrder";
+import ProductPage from "./pages/dashboard/Product/ProductPage";
 
 const router = createBrowserRouter([
   {
@@ -103,7 +104,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/dashboard/products/product/:product",
-            element: <AddProduct />,
+            element: <ProductPage />,
           },
           {
             path: "/dashboard/products/new",

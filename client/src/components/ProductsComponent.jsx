@@ -20,7 +20,7 @@ export default function ProductsComponent({
   };
   return (
     <Link
-      to={`/dashboard/products/product/car`}
+      to={`/dashboard/products/product/${product.title}`}
       className="p-3 grid min-w-[1000px] justify-between border-t border-dark/60"
       style={{
         gridTemplateColumns: "150px 150px 150px 120px 120px 150px",
