@@ -65,6 +65,7 @@ exports.createNewProduct = catchAsync(async function (req, res, next) {
     productType = "",
     vendor = "",
   } = req.body;
+  console.log(status);
   if (!title || !description || (!category && !vendor))
     return next(
       new AppError(

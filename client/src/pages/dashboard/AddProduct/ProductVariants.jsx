@@ -16,9 +16,9 @@ export default function ProductVariants() {
         </Button>
       </div>
 
-      <div className="px-5">
+      {/* <div className="px-5">
         <ProductVariantsOptions />
-      </div>
+      </div> */}
 
       <div className="mt-3 pb-3">
         <ProductVariantsDetailsHeader />

@@ -1,4 +1,28 @@
-export default function ProductOrganization() {
+import { useEffect } from "react";
+import { getCollections } from "../../../utils/collectionApi";
+import { useSelector } from "react-redux";
+
+export default function ProductOrganization({
+  vendor,
+  setVendor,
+  collection,
+  setCollection,
+  tags,
+  setTags,
+  setProductType,
+  productType,
+}) {
+  const collections = useSelector((state) => state.collections)?.map(
+    (collection) => {
+      return {
+        _id: collection._id,
+        title: collection.title,
+      };
+    }
+  );
+  useEffect(function () {
+    getCollections();
+  }, []);
   return (
     <div className="bg-white mb-3 p-3  rounded-lg flex flex-col gap-1">
       <h4 className="text-[15px]">Product Organization</h4>
@@ -8,6 +32,8 @@ export default function ProductOrganization() {
           Product type
         </label>
         <input
+          onChange={(e) => setProductType(e.target.value)}
+          value={productType}
           type="text"
           name="type"
           id="type"
@@ -22,6 +48,8 @@ export default function ProductOrganization() {
         <input
           type="text"
           name="vendor"
+          onChange={(e) => setVendor(e.target.value)}
+          value={vendor}
           id="vendor"
           className="w-full px-3 py-2 outline-none border border-black rounded-md text-[15px]"
         />
@@ -31,12 +59,36 @@ export default function ProductOrganization() {
         <label htmlFor="collection" className="text-[14px] -mb-1">
           Collection
         </label>
-        <input
+
+        <select
+          className="w-full cursor-pointer px-3 py-2 outline-none border border-black rounded-md text-[15px]"
+          onChange={(e) => {
+            setCollection(e.target.value);
+          }}
+          value={collection}
+        >
+          <option value="" className="hidden">
+            Select
+          </option>
+          <option value={null}>None</option>
+
+          {collections.map((collection) => {
+            return (
+              <option key={collection.title} value={collection.title}>
+                {collection.title}
+              </option>
+            );
+          })}
+        </select>
+
+        {/* <input
           type="text"
           name="collection"
+          onChange={(e) => setCollection(e.target.value)}
+          value={collection}
           id="collection"
           className="w-full px-3 py-2 outline-none border border-black rounded-md text-[15px]"
-        />
+        /> */}
       </div>
 
       <div className="flex flex-col gap-1 mt-1.5">
@@ -46,6 +98,8 @@ export default function ProductOrganization() {
         <input
           type="text"
           name="tags"
+          onChange={(e) => setTags(e.target.value)}
+          value={tags}
           id="tags"
           className="w-full px-3 py-2 outline-none border border-black rounded-md text-[15px]"
         />

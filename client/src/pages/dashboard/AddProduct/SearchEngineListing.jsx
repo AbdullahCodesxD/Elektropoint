@@ -1,4 +1,9 @@
-export default function SearchEngineListing() {
+export default function SearchEngineListing({
+  setMetaTitle,
+  metaTitle,
+  setMetaDescription,
+  metaDescription,
+}) {
   return (
     <div className="py-3 px-5 bg-white rounded-lg">
       <h3 className="font-semibold text-lg">Search engine listing</h3>
@@ -14,6 +19,8 @@ export default function SearchEngineListing() {
         <input
           type="text"
           id="title"
+          onChange={(e) => setMetaTitle(e.target.value)}
+          value={metaTitle}
           minLength={3}
           maxLength={70}
           className="px-3 mt-0.5 py-2 rounded-md outline-none border border-dark w-full "
@@ -28,6 +35,8 @@ export default function SearchEngineListing() {
         <textarea
           minLength={3}
           maxLength={350}
+          onChange={(e) => setMetaDescription(e.target.value)}
+          value={metaDescription}
           id="description"
           className="h-[150px] resize-none px-3 mt-0.5 py-2 rounded-md outline-none border border-dark w-full "
         />
