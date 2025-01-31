@@ -10,7 +10,7 @@ import { useNavigate, useParams } from "react-router";
 import { BackSvg } from "../../../components/Svgs";
 import Button from "../../../components/Button";
 import { useEffect, useState } from "react";
-import { getProducts, postProduct } from "../../../utils/productsApi";
+import { getProducts, patchProductData } from "../../../utils/productsApi";
 import { useSelector } from "react-redux";
 
 export default function ProductPage() {
@@ -43,7 +43,7 @@ export default function ProductPage() {
   const [productType, setProductType] = useState("");
   const [vendor, setVendor] = useState("");
   const [collection, setCollection] = useState("");
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState("");
 
   const [metaTitle, setMetaTitle] = useState("");
   const [metaDescription, setMetaDescription] = useState("");
@@ -56,20 +56,38 @@ export default function ProductPage() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const formData = new FormData();
+    // const formData = new FormData();
 
-    media.forEach((media) => formData.append("images", media));
-    formData.append("title", title);
-    formData.append("description", editor?.getHTML());
-    formData.append("tags", tags);
-    formData.append("status", status);
-    formData.append("category", collection);
-    formData.append("metaTitle", metaTitle);
-    formData.append("metaDescription", metaDescription);
-    formData.append("productType", productType);
-    formData.append("vendor", vendor);
-    console.log(media, "media");
-    postProduct(formData);
+    // media.forEach((media) => formData.append("images", media));
+    // // formData.append("category", collection);
+
+    const data = {
+      title,
+      description: editor?.getHTML(),
+      tags,
+      status,
+      metaTitle,
+      metaDescription,
+      productType,
+      vendor,
+      category: collection,
+    };
+    const filteredData = Object.fromEntries(
+      Object.entries(data).filter(
+        ([_, value]) => value !== undefined && value !== null && value !== ""
+      )
+    );
+
+    if (filteredData.description == product.description)
+      delete filteredData.description;
+    if (filteredData.status == product.status) delete filteredData.status;
+    if (filteredData.category === product.category.title)
+      delete filteredData.category;
+
+    if (Object.keys(filteredData).length > 0) {
+      patchProductData(product._id, filteredData);
+    }
+    // window.location = `/dashboard/products/product/${data.title}`;
   }
 
   useEffect(
@@ -89,7 +107,7 @@ export default function ProductPage() {
   useEffect(() => {
     if (product) {
       setStatus(product.status);
-      if (product.category.title) {
+      if (product?.category?.title) {
         setCollection(product.category.title);
       }
     }
@@ -102,10 +120,10 @@ export default function ProductPage() {
             <BackSvg color="#000" height={15} />
           </Button>
 
-          <h4 className="capitalize font-semibold text-xl">{product.title}</h4>
+          <h4 className="capitalize font-semibold text-xl">{product?.title}</h4>
 
           <Button extraClasses="capitalize bg-main px-5 py-1 rounded-md text-[14px] font-medium">
-            {product.status}
+            {product?.status}
           </Button>
         </div>
       )}

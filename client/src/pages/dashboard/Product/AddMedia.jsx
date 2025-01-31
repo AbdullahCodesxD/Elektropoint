@@ -12,6 +12,8 @@ export default function AddMedia({
   const [currentImages, setCurrentImages] = useState([]);
   function handleImageChange(e) {
     e.preventDefault();
+    if (currentImages.length + urls.length > 3) return;
+
     const files = e.target.files;
     if (files.length === 0) return;
     const imagesArr = Object.values(files);
@@ -31,7 +33,7 @@ export default function AddMedia({
   }
   const fetchImage = function () {
     try {
-      currentMedia.forEach((image) => {
+      currentMedia?.forEach((image) => {
         fetch(`${API}/products/${image}`)
           .then((res) => res.blob())
           .then((res) =>
@@ -42,6 +44,22 @@ export default function AddMedia({
       console.error("Error fetching image:", error);
     }
   };
+
+  function handleCurrentImageChange(e, currentUrl) {
+    e.preventDefault();
+
+    const files = e.target.files;
+    if (files.length === 0) return;
+    const imagesArr = Object.values(files);
+    const urlsArr = imagesArr.map((image) => URL.createObjectURL(image));
+    setCurrentImages((currentImages) =>
+      currentImages.filter((url) => url !== currentUrl)
+    );
+    setCurrentImages((currentImages) => [...currentImages, ...urlsArr]);
+
+    setImages((images) => currentImages.filter((url) => url !== currentUrl));
+    setImages((images) => [...images, ...imagesArr]);
+  }
   useEffect(
     function () {
       fetchImage();
@@ -56,73 +74,88 @@ export default function AddMedia({
             Current Media
           </h4>
           <div className="mb-2 flex items-center gap-2 flex-wrap">
-            {currentImages.map((url) => (
-              <div
+            {currentImages.map((url, i) => (
+              <label
                 key={url}
-                className="relative p-3 rounded-lg border border-dark/10 w-fit"
+                onChange={(e) => handleCurrentImageChange(e, url)}
+                id={`productImage${i}`}
+                className="relative cursor-pointer p-3 rounded-lg border border-dark/10 w-fit"
               >
                 <img
                   className="h-[70px] aspect-square object-contain"
                   src={url}
                   alt="Oho beat change"
                 />
+                <input
+                  htmlFor={`productImage${i}`}
+                  type="file"
+                  className="hidden"
+                />
 
-                <Button
+                {/* <Button
                   handler={(e) => {
                     e.preventDefault();
-                    removeImage(url);
                   }}
                   extraClasses="bg-blue rounded-full h-[25px] aspect-square flex items-center justify-center absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 "
                 >
                   <CrossSvg height={10} width={10} color="white" />
-                </Button>
-              </div>
+                </Button> */}
+              </label>
             ))}
           </div>
         </>
       )}
 
-      <h4 className="mt-1 pl-0.5 text-base font-medium">Media</h4>
-      {urls.length > 0 && (
-        <div className="mb-2 flex items-center gap-2 flex-wrap">
-          {urls.map((url) => (
-            <div
-              key={url}
-              className="relative p-3 rounded-lg border border-dark/10 w-fit"
-            >
-              <img
-                className="h-[70px] aspect-square object-contain"
-                src={url}
-                alt="Oho beat change"
-              />
+      {currentImages.length < 3 && (
+        <>
+          <h4 className="mt-1 pl-0.5 text-base font-medium">Media</h4>
+          {urls.length > 0 && (
+            <div className="mb-2 flex items-center gap-2 flex-wrap">
+              {urls.map((url) => (
+                <div
+                  key={url}
+                  className="relative p-3 rounded-lg border border-dark/10 w-fit"
+                >
+                  <img
+                    className="h-[70px] aspect-square object-contain"
+                    src={url}
+                    alt="Oho beat change"
+                  />
 
-              <Button
-                handler={(e) => {
-                  e.preventDefault();
-                  removeImage(url);
-                }}
-                extraClasses="bg-blue rounded-full h-[25px] aspect-square flex items-center justify-center absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 "
-              >
-                <CrossSvg height={10} width={10} color="white" />
-              </Button>
+                  <Button
+                    handler={(e) => {
+                      e.preventDefault();
+                      removeImage(url);
+                    }}
+                    extraClasses="bg-blue rounded-full h-[25px] aspect-square flex items-center justify-center absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 "
+                  >
+                    <CrossSvg height={10} width={10} color="white" />
+                  </Button>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
-      <label
-        htmlFor="media"
-        className="bg-[#eaeaea] h-[75px] cursor-pointer aspect-square flex items-center justify-center rounded-lg"
-      >
-        <PlusSvg height={10} color="#000" />
-      </label>
-      <input
-        id="media"
-        onChange={handleImageChange}
-        type="file"
-        accept="image/*"
-        multiple
-        className="hidden"
-      />
+
+      {currentImages.length < 3 && (
+        <>
+          <label
+            htmlFor="media"
+            className="bg-[#eaeaea] h-[75px] cursor-pointer aspect-square flex items-center justify-center rounded-lg"
+          >
+            <PlusSvg height={10} color="#000" />
+          </label>
+          <input
+            id="media"
+            onChange={handleImageChange}
+            type="file"
+            accept="image/*"
+            multiple
+            className="hidden"
+          />
+        </>
+      )}
     </div>
   );
 }

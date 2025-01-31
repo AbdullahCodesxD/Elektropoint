@@ -199,23 +199,34 @@ exports.updateProduct = catchAsync(async (req, res, next) => {
   if (!id) return next(new AppError("Valid product id is required", 400));
   if (!req.body) return next(new AppError("Product data is required", 400));
   if (req.body.slug) return next(new AppError("You cannot update slug", 400));
-
   const product = await Product.findOne({ _id: id });
 
   if (!product) {
     return next(new AppError("Product not found", 404));
   }
-  if (req.body.category)
-    return next(new AppError("Cannot update category here", 400));
 
+  const category = req.body.category;
+  const collection = await Collection.findOne({
+    $or: [
+      { title: { $regex: new RegExp(`^${category?.trim()}$`, "i") } },
+      { slug: { $regex: new RegExp(`^${category?.trim()}$`, "i") } },
+    ],
+  })?.select("_id");
+
+  if (category && !collection)
+    return next(new AppError("No collection found with this slug", 404));
+
+  const data = req.body;
   const newProduct = await Product.findOneAndUpdate(
     {
       _id: id,
     },
     {
       $set: req.body.title
-        ? { ...req.body, slug: slugify(req.body.title.trim().toLowerCase()) }
-        : req.body,
+        ? { ...data, slug: slugify(data?.title?.trim()?.toLowerCase()) }
+        : data,
+
+      category: collection?._id,
     },
     {
       new: true,
