@@ -11,6 +11,7 @@ const searchRouter = require("./routes/searchRouter");
 const collectionRouter = require("./routes/collectionRouter");
 const customerRouter = require("./routes/customerRouter");
 const orderRouter = require("./routes/orderRouter");
+const discountRouter = require("./routes/discountRouter");
 
 dotenv.config({
   path: "./config.env",
@@ -25,6 +26,7 @@ app.use("/api/v1/search", searchRouter);
 app.use("/api/v1/collection", collectionRouter);
 app.use("/api/v1/customer", customerRouter);
 app.use("/api/v1/orders", orderRouter);
+app.use("/api/v1/discounts", discountRouter);
 app.use(express.static("uploads"));
 app.use(errorController);
 module.exports = app;

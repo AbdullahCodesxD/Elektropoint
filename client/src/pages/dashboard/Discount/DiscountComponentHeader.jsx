@@ -3,7 +3,7 @@ export default function DiscountComponentHeader() {
     <div
       className="px-5 py-3 bg-white grid gap-4 min-w-[1100px]   "
       style={{
-        gridTemplateColumns: "300px repeat(5,1fr)",
+        gridTemplateColumns: "300px repeat(3,1fr)",
       }}
     >
       <div className="flex items-center gap-3">
@@ -14,8 +14,6 @@ export default function DiscountComponentHeader() {
         <p className="text-center">Title</p>
       </div>
       <p className="text-center">Status</p>
-      <p className="text-center">Method</p>
-      <p className="text-center">Type</p>
       <p className="text-center">Combination</p>
       <p className="text-center">Used</p>
     </div>

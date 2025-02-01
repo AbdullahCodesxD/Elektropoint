@@ -37,6 +37,7 @@ export default function ProductPage() {
 
   const [title, setTitle] = useState("");
   const [media, setMedia] = useState([]);
+  const [deleteImages, setDeleteImages] = useState([]);
 
   const [status, setStatus] = useState("active");
 
@@ -60,7 +61,8 @@ export default function ProductPage() {
 
     // media.forEach((media) => formData.append("images", media));
     // // formData.append("category", collection);
-
+    console.log(deleteImages, "gwandu", media);
+    return;
     const data = {
       title,
       description: editor?.getHTML(),
@@ -165,6 +167,8 @@ export default function ProductPage() {
               currentMedia={product?.media}
               setMedia={setMedia}
               media={media}
+              setDeleteImages={setDeleteImages}
+              deleteImages={deleteImages}
             />
           </div>
 

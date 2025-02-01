@@ -6,15 +6,33 @@ const API = import.meta.env.VITE_API;
 export default function AddMedia({
   setMedia: setImages,
   media: images,
+  setDeleteImages,
+  deleteImages,
   currentMedia,
 }) {
   const [urls, setUrls] = useState([]);
   const [currentImages, setCurrentImages] = useState([]);
+
+  const fetchImage = function () {
+    try {
+      currentMedia?.forEach((image) => {
+        fetch(`${API}/products/${image}`)
+          .then((res) => res.blob())
+          .then((res) =>
+            setCurrentImages([...currentImages, URL.createObjectURL(res)])
+          );
+      });
+    } catch (error) {
+      console.error("Error fetching image:", error);
+    }
+  };
+
   function handleImageChange(e) {
     e.preventDefault();
-    if (currentImages.length + urls.length > 3) return;
 
     const files = e.target.files;
+
+    if (currentImages.length + urls.length + files.length > 3) return;
     if (files.length === 0) return;
     const imagesArr = Object.values(files);
     const urlsArr = imagesArr.map((image) => URL.createObjectURL(image));
@@ -31,34 +49,30 @@ export default function AddMedia({
       setUrls(urls.filter((_, i) => i !== index));
     }
   }
-  const fetchImage = function () {
-    try {
-      currentMedia?.forEach((image) => {
-        fetch(`${API}/products/${image}`)
-          .then((res) => res.blob())
-          .then((res) =>
-            setCurrentImages([...currentImages, URL.createObjectURL(res)])
-          );
-      });
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  };
-
-  function handleCurrentImageChange(e, currentUrl) {
+  function handleCurrentImageChange(e, currentUrl, i) {
     e.preventDefault();
-
+    // New Image
     const files = e.target.files;
     if (files.length === 0) return;
+
+    // Arr of image values
     const imagesArr = Object.values(files);
+    // Converting it to urls
     const urlsArr = imagesArr.map((image) => URL.createObjectURL(image));
+
+    // Filtering out the current url and setting the new one
     setCurrentImages((currentImages) =>
       currentImages.filter((url) => url !== currentUrl)
     );
     setCurrentImages((currentImages) => [...currentImages, ...urlsArr]);
 
-    setImages((images) => currentImages.filter((url) => url !== currentUrl));
+    // Settings image to be uploaded
     setImages((images) => [...images, ...imagesArr]);
+
+    // Here images that needs to be deleted from server
+    if (deleteImages.indexOf(currentMedia[i]) === -1) {
+      setDeleteImages((images) => [...images, currentMedia[i]]);
+    }
   }
   useEffect(
     function () {
@@ -77,7 +91,7 @@ export default function AddMedia({
             {currentImages.map((url, i) => (
               <label
                 key={url}
-                onChange={(e) => handleCurrentImageChange(e, url)}
+                onChange={(e) => handleCurrentImageChange(e, url, i)}
                 id={`productImage${i}`}
                 className="relative cursor-pointer p-3 rounded-lg border border-dark/10 w-fit"
               >

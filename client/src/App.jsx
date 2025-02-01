@@ -32,6 +32,7 @@ import Discount from "./pages/dashboard/Discount/Discount";
 import CreateCustomer from "./pages/dashboard/CreateCustomer/CreateCustomer";
 import NewOrder from "./pages/dashboard/Orders/NewOrder";
 import ProductPage from "./pages/dashboard/Product/ProductPage";
+import CreateDiscount from "./pages/dashboard/CreateDiscount/CreateDiscount";
 
 const router = createBrowserRouter([
   {
@@ -137,6 +138,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/discount",
             element: <Discount />,
+          },
+          {
+            path: "/dashboard/discount/new",
+            element: <CreateDiscount />,
           },
 
           //analytics
