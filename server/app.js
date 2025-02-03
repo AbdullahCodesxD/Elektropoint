@@ -12,7 +12,7 @@ const collectionRouter = require("./routes/collectionRouter");
 const customerRouter = require("./routes/customerRouter");
 const orderRouter = require("./routes/orderRouter");
 const discountRouter = require("./routes/discountRouter");
-
+const storeRouter = require("./routes/storeRouter");
 dotenv.config({
   path: "./config.env",
 });
@@ -27,6 +27,7 @@ app.use("/api/v1/collection", collectionRouter);
 app.use("/api/v1/customer", customerRouter);
 app.use("/api/v1/orders", orderRouter);
 app.use("/api/v1/discounts", discountRouter);
+app.use("/api/v1/stores", storeRouter);
 app.use(express.static("uploads"));
 app.use(errorController);
 module.exports = app;
