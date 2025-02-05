@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 
@@ -102,4 +103,34 @@ exports.updateCurrentUser = catchAsync(async function (req, res, next) {
       data: updatedUser,
     });
   }
+});
+
+exports.deleteCurrentUser = catchAsync(async function (req, res, next) {
+  const id = req.user._id;
+  if (!mongoose.isValidObjectId(id))
+    return next(new AppError("Valid user id is required", 400));
+
+  const user = await User.findOne({ _id: id });
+  if (!user) return next(new AppError("No user found with this id", 404));
+
+  await User.findOneAndDelete({ _id: id });
+  res.status(200).json({
+    message: "success",
+    data: "",
+  });
+});
+
+exports.deleteUser = catchAsync(async function (req, res, next) {
+  const { id } = req.params;
+  if (!mongoose.isValidObjectId(id))
+    return next(new AppError("Valid user id is required", 400));
+
+  const user = await User.findOne({ _id: id });
+  if (!user) return next(new AppError("No user found with this id", 404));
+
+  await User.findOneAndDelete({ _id: id });
+  res.status(200).json({
+    message: "success",
+    data: "",
+  });
 });

@@ -17,4 +17,13 @@ router.get("/me", authController.protect, userController.getMe);
 
 router.patch("/me", authController.protect, userController.updateCurrentUser);
 
+router.delete("/me", authController.protect, userController.deleteCurrentUser);
+
+router.delete(
+  "/:id",
+  authController.protect,
+  authController.checkRole("admin"),
+  userController.deleteUser
+);
+
 module.exports = router;
