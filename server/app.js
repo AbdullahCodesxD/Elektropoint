@@ -13,6 +13,8 @@ const customerRouter = require("./routes/customerRouter");
 const orderRouter = require("./routes/orderRouter");
 const discountRouter = require("./routes/discountRouter");
 const storeRouter = require("./routes/storeRouter");
+const shippingRouter = require("./routes/shippingAmountRouter");
+const userRouter = require("./routes/userRouter");
 dotenv.config({
   path: "./config.env",
 });
@@ -28,6 +30,8 @@ app.use("/api/v1/customer", customerRouter);
 app.use("/api/v1/orders", orderRouter);
 app.use("/api/v1/discounts", discountRouter);
 app.use("/api/v1/stores", storeRouter);
+app.use("/api/v1/shippingAmount", shippingRouter);
+app.use("/api/v1/users", userRouter);
 app.use(express.static("uploads"));
 app.use(errorController);
 module.exports = app;
