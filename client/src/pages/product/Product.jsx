@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { getProduct } from "../../utils/searchApi";
 import { useSelector } from "react-redux";
 
+const API = import.meta.env.VITE_API;
 export default function Product() {
   // const { collection, product } = useParams();
   const { product } = useParams();
@@ -21,10 +22,19 @@ export default function Product() {
     },
     [product]
   );
+  console.log(currentProduct, currentProduct.media?.at(0));
   return (
     <div>
       {/* <ProductsHeader>{collection}</ProductsHeader> */}
-      <ProductItem src="/product.png">{product}</ProductItem>
+      <ProductItem
+        src={
+          currentProduct.media?.at(0)
+            ? `${API}/products/${currentProduct.media?.at(0)}`
+            : "/product.png"
+        }
+      >
+        {currentProduct?.title || ""}
+      </ProductItem>
       <div className="lg:hidden">
         <ProductAddToCart piece={1} price={25} />
         <ProductCustomization />
@@ -45,7 +55,7 @@ export default function Product() {
             <h4 className="mb-2 text-lg">Alternate Articles</h4>
 
             <CollectionItemComponent
-              src="/product.png"
+              src={"/product.png"}
               description="Marking pen edding permanent marker for one time use only."
               pieces={1}
               to="/product/hager surge protection/amazing product"
