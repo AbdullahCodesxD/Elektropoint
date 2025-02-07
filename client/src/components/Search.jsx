@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Button from "./Button";
 import { SearchSvg } from "./Svgs";
+import { useNavigate } from "react-router";
 
 export default function Search() {
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
   function handleSubmit(e) {
     e.preventDefault();
-
+    navigate(`/search/${search}`);
     setSearch("");
   }
   return (
