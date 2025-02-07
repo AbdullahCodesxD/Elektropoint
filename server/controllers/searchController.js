@@ -17,6 +17,7 @@ exports.search = catchAsync(async function (req, res, next) {
         tags: { $regex: search, $options: "i" },
       },
     ],
+    status: "active",
   });
 
   // Fetching paginated products
@@ -28,6 +29,7 @@ exports.search = catchAsync(async function (req, res, next) {
         tags: { $regex: search, $options: "i" },
       },
     ],
+    status: "active",
   })
     .limit(noOfProducts)
     .skip((pageNo - 1) * noOfProducts);

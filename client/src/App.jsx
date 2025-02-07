@@ -59,8 +59,12 @@ const router = createBrowserRouter([
         path: "/collection/:collection",
         element: <Collection />,
       },
+      // {
+      //   path: "/product/:collection/:product",
+      //   element: <Product />,
+      // },
       {
-        path: "/product/:collection/:product",
+        path: "/product/:product",
         element: <Product />,
       },
       {

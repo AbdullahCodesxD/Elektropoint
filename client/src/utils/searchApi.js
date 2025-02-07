@@ -1,4 +1,4 @@
-import { setResults } from "../slices/searchSlice";
+import { setCurrentProduct, setResults } from "../slices/searchSlice";
 import { store } from "../store";
 import { getFromApi } from "./api";
 const dispatch = store.dispatch;
@@ -11,4 +11,8 @@ export const searchProducts = async function (search, options) {
     dispatch(setResults(res.data));
     console.log(res);
   }
+};
+export const getProduct = async function (slug) {
+  const res = await getFromApi(`/products/${slug}`);
+  dispatch(setCurrentProduct(res.data));
 };

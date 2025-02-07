@@ -26,9 +26,9 @@ export default function CollectionItemComponentRight({
       </p>
 
       <div className="border border-[#ddd] rounded-md flex items-center justify-center mt-3">
-        <spam className="capitalize w-full text-end pr-2">
+        <span className="capitalize w-full text-end pr-2">
           {pieces} {pieces > 1 ? "pieces" : "piece"}
-        </spam>
+        </span>
 
         <Button extraClasses="p-2 border-l border-[#ddd]">
           <CartSvg width={30} />

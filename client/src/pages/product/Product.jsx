@@ -6,12 +6,24 @@ import ProductCustomization from "./ProductCustomization";
 import ProductDescription from "./ProductDescription";
 import ProductDescriptionGeneralAndTechnicalData from "./ProductDescriptionGeneralAndTechnicalData";
 import CollectionItemComponent from "../../components/CollectionItemComponent";
+import { useEffect } from "react";
+import { getProduct } from "../../utils/searchApi";
+import { useSelector } from "react-redux";
 
 export default function Product() {
-  const { collection, product } = useParams();
+  // const { collection, product } = useParams();
+  const { product } = useParams();
+
+  const currentProduct = useSelector((state) => state.search.currentProduct);
+  useEffect(
+    function () {
+      getProduct(product);
+    },
+    [product]
+  );
   return (
     <div>
-      <ProductsHeader>{collection}</ProductsHeader>
+      {/* <ProductsHeader>{collection}</ProductsHeader> */}
       <ProductItem src="/product.png">{product}</ProductItem>
       <div className="lg:hidden">
         <ProductAddToCart piece={1} price={25} />
