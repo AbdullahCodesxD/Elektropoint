@@ -6,6 +6,7 @@ export default function AddStaffAccount() {
       <h4 className="font-semibold text-base mb-2.5">Add staff account</h4>
 
       <Button
+        to="new"
         type="primary"
         extraClasses="max-w-fit py-1.5 px-6 font-[400] text-[15px]"
       >

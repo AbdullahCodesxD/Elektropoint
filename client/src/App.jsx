@@ -34,6 +34,8 @@ import NewOrder from "./pages/dashboard/Orders/NewOrder";
 import ProductPage from "./pages/dashboard/Product/ProductPage";
 import CreateDiscount from "./pages/dashboard/CreateDiscount/CreateDiscount";
 import ShippingNew from "./pages/dashboard/Settings/ShippingNew/ShippingNew";
+import NewStore from "./pages/dashboard/Settings/NewStore/NewStore";
+import UsersAndPermissionsNew from "./pages/dashboard/Settings/UsersAndPermissionsNew/UsersAndPermissionsNew";
 
 const router = createBrowserRouter([
   {
@@ -160,8 +162,16 @@ const router = createBrowserRouter([
             element: <Settings />,
           },
           {
+            path: "/dashboard/settings/general/new",
+            element: <NewStore />,
+          },
+          {
             path: "/dashboard/settings/users",
             element: <UsersAndPermissions />,
+          },
+          {
+            path: "/dashboard/settings/users/new",
+            element: <UsersAndPermissionsNew />,
           },
           {
             path: "/dashboard/settings/shipping",

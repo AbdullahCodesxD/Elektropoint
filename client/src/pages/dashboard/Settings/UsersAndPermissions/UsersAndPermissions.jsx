@@ -14,7 +14,7 @@ export default function UsersAndPermissions() {
 
         <StoreOwner />
         <AddStaffAccount />
-        <Collaborator />
+        {/* <Collaborator /> */}
       </div>
     </div>
   );
