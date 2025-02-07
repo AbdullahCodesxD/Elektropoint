@@ -9,7 +9,7 @@ export default function CustomShipping() {
 
       <div className="p-3">
         <p className="text-[14px] ">
-          <Button to="#" extraClasses="text-main">
+          <Button to="new" extraClasses="text-main">
             Create a new profile
           </Button>{" "}
           to add custom rates or destination restrictions for groups of products

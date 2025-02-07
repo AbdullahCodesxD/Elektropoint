@@ -15,6 +15,7 @@ export default function Shipping() {
         </div>
         <Button
           type="primary"
+          to="new"
           extraClasses="max-w-[190px] py-1.5  font-[400] text-[15px]"
         >
           New Profile

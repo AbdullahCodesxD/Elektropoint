@@ -59,7 +59,7 @@ exports.getShippingAmountByPrice = catchAsync(async function (req, res, next) {
 });
 
 exports.createShippingAmount = catchAsync(async function (req, res, next) {
-  const { name, type, amount, dynamicAmount } = req.body;
+  const { name, type, amount, dynamicAmount, country } = req.body;
 
   if (!name) return next(new AppError("Shipping amount name is required", 400));
   if (!type) return next(new AppError("Shipping amount type is required", 400));
@@ -69,6 +69,7 @@ exports.createShippingAmount = catchAsync(async function (req, res, next) {
     delete req.body.dynamicAmount;
     const shippingAmount = await ShippingAmount.create({
       ...req.body,
+      country: country?.toLowerCase()?.trim(),
       amount: Number(amount),
     });
     res.status(200).json({

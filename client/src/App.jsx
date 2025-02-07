@@ -33,6 +33,7 @@ import CreateCustomer from "./pages/dashboard/CreateCustomer/CreateCustomer";
 import NewOrder from "./pages/dashboard/Orders/NewOrder";
 import ProductPage from "./pages/dashboard/Product/ProductPage";
 import CreateDiscount from "./pages/dashboard/CreateDiscount/CreateDiscount";
+import ShippingNew from "./pages/dashboard/Settings/ShippingNew/ShippingNew";
 
 const router = createBrowserRouter([
   {
@@ -165,6 +166,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/settings/shipping",
             element: <ShippingAndDelivery />,
+          },
+          {
+            path: "/dashboard/settings/shipping/new",
+            element: <ShippingNew />,
           },
 
           {

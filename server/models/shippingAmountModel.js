@@ -23,6 +23,14 @@ const shippingAmountSchema = mongoose.Schema({
     default: "active",
     enum: ["active", "draft"],
   },
+  country: {
+    type: String,
+    required: [true, "Country is required"],
+    enum: ["switzerland", "others"],
+    default: "switzerland",
+    trim: true,
+    lowerCase: true,
+  },
 });
 
 const ShippingAmount = mongoose.model("ShippingAmount", shippingAmountSchema);
