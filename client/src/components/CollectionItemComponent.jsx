@@ -16,9 +16,9 @@ export default function CollectionItemComponent({
         boxShadow: "0px 0px 15px rgba(0,0,0,.2)",
       }}
     >
-      <div className="p-1 bg-[#F1F1F1] min-h-full">
+      <div className="p-1 bg-[#F1F1F1] h-fit">
         <img
-          className="w-[100px] h-full object-cover "
+          className="w-[100px] h-full object-contain object-top "
           src={src}
           alt={description}
         />

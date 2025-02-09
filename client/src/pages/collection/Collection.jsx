@@ -2,14 +2,23 @@ import { useParams } from "react-router";
 import CollectionName from "./CollectionName";
 import CollectionDesktopTypes from "./CollectionDesktopTypes";
 import CollectionFilter from "./CollectionFilter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CollectionSorting from "./CollectionSorting";
 import CollectionItems from "./CollectionItems";
 import ProductsHeader from "../../components/ProductsHeader";
+import {
+  getCollection,
+  getCollectionProducts,
+} from "../../utils/clientCollectionApi";
+import { useSelector } from "react-redux";
 
 export default function Collection() {
   // Collection Name
-  const { collection } = useParams();
+  const { collection: collectionParam } = useParams();
+  const clientCollection = useSelector((state) => state.clientCollection);
+  const collection = clientCollection?.currentCollection || {};
+  const products = clientCollection?.currentCollectionProducts || [];
+  const noOfProducts = clientCollection?.noOfProducts || 0;
 
   // For Filtering
   const [filter, setFilter] = useState("");
@@ -18,9 +27,17 @@ export default function Collection() {
   const [sortBy, setSortBy] = useState("");
   const [onlyStockItems, setOnlyStockItems] = useState(false);
 
+  useEffect(
+    function () {
+      getCollection(collectionParam);
+      getCollectionProducts(collectionParam);
+    },
+    [collectionParam]
+  );
+
   return (
     <div>
-      <ProductsHeader>{collection}</ProductsHeader>
+      <ProductsHeader slug={collection.slug}>{collection.title}</ProductsHeader>
       <div
         className="md:grid gap-5"
         style={{
@@ -29,18 +46,18 @@ export default function Collection() {
       >
         <CollectionDesktopTypes />
         <div className="md:bg-white">
-          <CollectionName>{collection}</CollectionName>
-          <CollectionFilter filter={filter} setFilter={setFilter} />
+          <CollectionName>{collection.title}</CollectionName>
+          {/* <CollectionFilter filter={filter} setFilter={setFilter} /> */}
           <CollectionSorting
-            sortBy={sortBy}
-            setSortBy={setSortBy}
+            // sortBy={sortBy}
+            // setSortBy={setSortBy}
             //
-            onlyStockItems={onlyStockItems}
-            setOnlyStockItems={setOnlyStockItems}
+            // onlyStockItems={onlyStockItems}
+            // setOnlyStockItems={setOnlyStockItems}
             //
-            noOfItems="59"
+            noOfItems={noOfProducts}
           />
-          <CollectionItems />
+          <CollectionItems products={products} />
         </div>
       </div>
     </div>

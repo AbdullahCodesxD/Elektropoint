@@ -1,5 +1,6 @@
 import Button from "./Button";
 import { CartSvg, PinSvg, SvgWithPin } from "./Svgs";
+import DOMPurify from "dompurify";
 
 export default function CollectionItemComponentRight({
   children,
@@ -21,9 +22,12 @@ export default function CollectionItemComponentRight({
           </Button>
         </div>
       </div>
-      <p className="line-clamp-2 font-medium text-[#222] leading-[1.3] mt-2">
-        {description}
-      </p>
+      <p
+        className="line-clamp-5"
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(description),
+        }}
+      />
 
       <div className="border border-[#ddd] rounded-md flex items-center justify-center mt-3">
         <span className="capitalize w-full text-end pr-2">

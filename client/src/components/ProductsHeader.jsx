@@ -1,6 +1,6 @@
 import Button from "./Button";
 
-export default function ProductsHeader({ children }) {
+export default function ProductsHeader({ slug, children }) {
   const stylesActive = {
     true: "text-[#222]",
     false: "border-r border-[#595959] text-[#595959]",
@@ -17,7 +17,7 @@ export default function ProductsHeader({ children }) {
 
       <Button
         extraClasses={stylesActive["true"]}
-        to={`/collection/${children.toLowerCase()}`}
+        to={`/collection/${slug?.toLowerCase()}`}
         type="collectionHeader"
       >
         {children}

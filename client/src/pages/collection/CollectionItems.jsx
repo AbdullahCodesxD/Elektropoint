@@ -1,18 +1,22 @@
 import CollectionItemComponent from "../../components/CollectionItemComponent";
+const API = import.meta.env.VITE_API;
 
-export default function CollectionItems() {
-  const arr = Array.from({ length: 10 }, (_, i) => i + 1);
+export default function CollectionItems({ products }) {
   return (
     <div className="p-3 mt-5 flex flex-col gap-4">
-      {arr.map((i) => (
+      {products.map((product, i) => (
         <CollectionItemComponent
-          key={i}
-          src="/product.png"
-          description="Marking pen edding permanent marker for one time use only."
+          key={product._id}
+          src={
+            product.media?.at(0)
+              ? `${API}/products/${product.media?.at(0)}`
+              : "/product.png"
+          }
+          description={product.description}
           pieces={1}
-          to="/product/hager surge protection/amazing product"
+          to={`/product/${product.slug}`}
         >
-          Amazing Product
+          {product.title}
         </CollectionItemComponent>
       ))}
     </div>

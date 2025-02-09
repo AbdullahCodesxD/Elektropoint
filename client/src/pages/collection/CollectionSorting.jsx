@@ -1,18 +1,20 @@
 export default function CollectionSorting({
-  sortBy,
-  setSortBy,
+  // sortBy,
+  // setSortBy,
 
   noOfItems,
 
-  onlyStockItems,
-  setOnlyStockItems,
+  // onlyStockItems,
+  // setOnlyStockItems,
 }) {
   return (
-    <div className="p-3">
-      <h2 className="text-[24px] font-medium">{noOfItems} articles</h2>
+    <div className="px-3 pb-3 pt-1">
+      <h2 className="text-[24px] font-medium">
+        {noOfItems} {noOfItems > 1 ? "articles" : "article"}
+      </h2>
 
       <div className="flex items-end justify-between gap-3 ">
-        <div className="flex items-center gap-1">
+        {/* <div className="flex items-center gap-1">
           <input
             id="checkbox"
             type="checkbox"
@@ -26,9 +28,9 @@ export default function CollectionSorting({
           >
             Stock items only
           </label>
-        </div>
+        </div> */}
 
-        <div className="flex flex-col justify-center gap-0.5">
+        {/* <div className="flex flex-col justify-center gap-0.5">
           <label
             className="text-[#595959] text-[14px] cursor-pointer"
             htmlFor="sorting"
@@ -47,7 +49,7 @@ export default function CollectionSorting({
             <option value="price">Price</option>
             <option value="date">Date</option>
           </select>
-        </div>
+        </div> */}
       </div>
     </div>
   );

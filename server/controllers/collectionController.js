@@ -141,10 +141,16 @@ exports.getCollectionBySlug = catchAsync(async function (req, res, next) {
 
   if (!collection)
     return next(new AppError("No collection found with this slug", 404));
-
+  const noOfProducts =
+    collection.conditionVendors.length > 0
+      ? await Product.countDocuments({
+          vendor: { $in: collection.conditionVendors },
+        })
+      : await Product.countDocuments({ category: collection._id });
   res.status(200).json({
     message: "success",
     data: collection,
+    noOfProducts,
   });
 });
 

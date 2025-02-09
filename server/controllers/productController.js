@@ -183,7 +183,10 @@ exports.getProductsByCollection = catchAsync(async (req, res, next) => {
 
   if (!collection)
     return next(new AppError("No collection found with this slug", 404));
-  const products = await Product.find({ category: collection?._id }).populate({
+  const products = await Product.find({
+    category: collection?._id,
+    status: "active",
+  }).populate({
     path: "category",
     select: "title",
   });
