@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Button from "../../../../components/Button";
+import { createShippingAmount } from "../../../../utils/shippingApi";
 
 export default function NewShippingForm() {
   const [type, setType] = useState("fixed");
+  const [country, setCountry] = useState("switzerland");
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [from, setFrom] = useState("");
@@ -10,6 +12,33 @@ export default function NewShippingForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const amountData =
+      type === "dynamic"
+        ? {
+            dynamicAmount: [
+              {
+                from,
+                to,
+                amount,
+              },
+            ],
+          }
+        : {
+            amount: [
+              {
+                from,
+                to,
+                amount,
+              },
+            ],
+          };
+    const data = {
+      type,
+      name,
+      country,
+      ...amountData,
+    };
+    createShippingAmount(data);
   }
   return (
     <form onSubmit={handleSubmit} className="max-w-[700px]">
@@ -27,6 +56,23 @@ export default function NewShippingForm() {
         >
           <option value="fixed">Fixed</option>
           <option value="dynamic">Dynamic</option>
+        </select>
+      </div>
+
+      <div className="mb-1 flex flex-col gap-2">
+        <label
+          htmlFor="type"
+          className="mt-1 pl-0.5 -mb-2 text-base font-medium"
+        >
+          Country
+        </label>
+        <select
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+          className="w-full cursor-pointer max-w-[700px] px-3 py-2.5 rounded-lg outline-none border border-dark/60"
+        >
+          <option value="switzerland">Switzerland</option>
+          <option value="others">Others</option>
         </select>
       </div>
 
