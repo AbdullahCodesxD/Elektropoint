@@ -6,6 +6,8 @@ import customerSlice from "./slices/customerSlice";
 import discountSlice from "./slices/discountSlice";
 import storeSlice from "./slices/storeSlice";
 import searchSlice from "./slices/searchSlice";
+import shippingSlice from "./slices/shippingSlice";
+import userSlice from "./slices/usersSlice";
 import clientCollectionSlice from "./slices/clientCollectionSlice";
 
 export const store = configureStore({
@@ -17,6 +19,8 @@ export const store = configureStore({
     discounts: discountSlice,
     stores: storeSlice,
     search: searchSlice,
+    shipping: shippingSlice,
+    users: userSlice,
     clientCollection: clientCollectionSlice,
   },
 });

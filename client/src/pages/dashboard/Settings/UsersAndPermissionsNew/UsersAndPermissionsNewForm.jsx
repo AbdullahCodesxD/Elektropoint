@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "../../../../components/Button";
+import { createUser } from "../../../../utils/userApi";
 
 export default function UsersAndPermissionsNewForm() {
   const [name, setName] = useState("");
@@ -10,6 +11,12 @@ export default function UsersAndPermissionsNewForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    createUser({
+      name,
+      email,
+      password,
+      confirmPassword,
+    });
   }
   return (
     <form onSubmit={handleSubmit} className="max-w-[700px]">
@@ -66,6 +73,7 @@ export default function UsersAndPermissionsNewForm() {
 
           {password.length > 0 && (
             <Button
+              buttonType="button"
               handler={(e) => {
                 e.preventDefault();
                 setShow(!show);
@@ -97,6 +105,7 @@ export default function UsersAndPermissionsNewForm() {
 
           {password.length > 0 && (
             <Button
+              buttonType="button"
               handler={(e) => {
                 e.preventDefault();
                 setShow(!show);
@@ -108,7 +117,10 @@ export default function UsersAndPermissionsNewForm() {
           )}
         </div>
       </div>
-      <Button extraClasses="ml-auto block w-fit bg-main text-white px-12 py-1.5 rounded-md mt-3  transition-all hover:opacity-80">
+      <Button
+        buttonType="submit"
+        extraClasses="ml-auto block w-fit bg-main text-white px-12 py-1.5 rounded-md mt-3  transition-all hover:opacity-80"
+      >
         Create
       </Button>
     </form>
