@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "../../../../components/Button";
+import { postStore } from "../../../../utils/storeApi";
 
 export default function NewStoreForm() {
   const [name, setName] = useState("");
@@ -8,6 +9,7 @@ export default function NewStoreForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    postStore({ name, email, address });
   }
   return (
     <form onSubmit={handleSubmit} className="max-w-[700px]">
