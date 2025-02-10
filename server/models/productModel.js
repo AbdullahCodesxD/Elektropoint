@@ -28,7 +28,11 @@ const productSchema = mongoose.Schema({
     required: [true, "Product slug is required"],
   },
 
-  inventory: String,
+  inventory: Number,
+  price: {
+    type: Number,
+    default: 0,
+  },
 
   metaTitle: String,
   metaDescription: String,

@@ -1,15 +1,16 @@
-export default function ProductItemDetails({ children }) {
+export default function ProductItemDetails({ product, children }) {
   const details = {
-    Type: "EK-041T",
-    EAN: "4974052807404",
+    Vendor: product.vendor || "No certain vendor",
+    Type: product.productType || "No certain type",
+    Price: `$${product.price?.toFixed(2) || 0.0}`,
+    Available: product.inventory > 0 ? "Yes" : "No",
     Waterproof: "Yes",
     Color: "Black",
     Execution: "Felt-tip pen",
-    Brand: "Artline",
+    Brand: product.vendor || "No brand",
     Manufacturer: "Artline",
     "Supplier item number": "120041009",
     "ELDAS No.": "983249289",
-    Price: "$25.00",
   };
 
   return (
@@ -25,7 +26,7 @@ export default function ProductItemDetails({ children }) {
             key={detail}
           >
             <span className="w-full text-[#333] text-medium">{detail}</span>
-            <span className="w-full text-[#333] text-medium">
+            <span className="w-full text-[#333] text-medium capitalize">
               {details[detail]}
             </span>
           </div>

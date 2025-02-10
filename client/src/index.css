@@ -59,3 +59,51 @@ body {
   list-style: disc;
   padding-left: 15px;
 }
+
+.description {
+  @apply px-4;
+}
+
+.description h1 {
+  @apply text-3xl font-bold mt-5;
+}
+
+.description h2 {
+  @apply text-2xl font-bold mt-5;
+}
+
+.description h3 {
+  @apply text-lg font-bold mt-5;
+}
+
+.description p {
+  @apply text-base leading-relaxed;
+}
+
+.description ul {
+  @apply list-disc pl-5;
+}
+
+.description ol {
+  @apply list-decimal pl-5;
+}
+
+.description li {
+  @apply text-base leading-relaxed;
+}
+
+.description a {
+  @apply underline;
+}
+
+.description strong {
+  @apply font-bold mt-5;
+}
+
+.description em {
+  @apply italic;
+}
+
+.description blockquote {
+  @apply border-l-4 border-gray-300 pl-4 italic;
+}

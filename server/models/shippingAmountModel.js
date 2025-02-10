@@ -13,7 +13,7 @@ const shippingAmountSchema = mongoose.Schema({
     required: [true, "Shipping amount type is required"],
   },
   amount: {
-    type: Number,
+    type: [Object],
   },
   dynamicAmount: {
     type: [Object],

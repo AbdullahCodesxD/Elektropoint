@@ -8,6 +8,7 @@ const initialState = {
   limit: null,
 
   currentProduct: {},
+  isFetched: false,
 };
 
 const searchSlice = createSlice({
@@ -32,6 +33,9 @@ const searchSlice = createSlice({
     setCurrentProduct: function (state, action) {
       state.currentProduct = action.payload;
     },
+    setIsFetched: function (state, action) {
+      state.isFetched = action.payload;
+    },
   },
 });
 export const {
@@ -40,6 +44,7 @@ export const {
   setPageNo,
   setLimit,
   setCurrentProduct,
+  setIsFetched,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;

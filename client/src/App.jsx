@@ -191,14 +191,14 @@ const router = createBrowserRouter([
             element: <ShippingNew />,
           },
 
-          {
-            path: "/dashboard/settings/taxes",
-            element: <Taxes />,
-          },
-          {
-            path: "/dashboard/settings/taxes/:country",
-            element: <TaxesCountryComponent />,
-          },
+          // {
+          //   path: "/dashboard/settings/taxes",
+          //   element: <Taxes />,
+          // },
+          // {
+          //   path: "/dashboard/settings/taxes/:country",
+          //   element: <TaxesCountryComponent />,
+          // },
         ],
       },
     ],

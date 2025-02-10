@@ -111,7 +111,14 @@ exports.getAllCollections = catchAsync(async function (req, res, next) {
     collectionsResponse.map((collection) => {
       if (collection.conditionVendors.length > 0) {
         return Product.countDocuments({
-          vendor: { $in: collection.conditionVendors },
+          $or: [
+            {
+              vendor: { $in: collection.conditionVendors },
+            },
+            {
+              category: collection._id,
+            },
+          ],
         });
       }
       return Product.countDocuments({ category: collection._id });

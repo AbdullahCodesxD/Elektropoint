@@ -2,6 +2,8 @@ import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextEditor from "../../../components/TextEditor";
+// import { HTML } from "@tiptap/extension-html";
+
 import AddMedia from "./AddMedia";
 import AddProductRightSide from "./AddProductRightSide";
 import ProductVariants from "./ProductVariants";
@@ -16,7 +18,12 @@ export default function AddProduct() {
   const { product } = useParams();
   const navigate = useNavigate();
   const editor = useEditor({
-    extensions: [StarterKit, Underline],
+    extensions: [
+      StarterKit,
+      Underline,
+
+      // HTML.configure({ sanitize: false })
+    ],
   });
 
   const [title, setTitle] = useState("");
@@ -38,17 +45,6 @@ export default function AddProduct() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    console.log(
-      title,
-      editor?.getHTML(),
-      media,
-      status,
-      vendor,
-      collection,
-      tags,
-      metaTitle
-    );
 
     const formData = new FormData();
 
@@ -116,7 +112,7 @@ export default function AddProduct() {
             <AddMedia setMedia={setMedia} media={media} />
           </div>
 
-          <ProductVariants />
+          {/* <ProductVariants /> */}
 
           <SearchEngineListing
             setMetaTitle={setMetaTitle}

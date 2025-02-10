@@ -15,9 +15,8 @@ export const getProducts = async function () {
 };
 
 export const postProduct = async function (data) {
-  console.log("data,", data);
   const res = await postToApi("/products", data);
-  console.log(res, "gg response hai bhaya");
+  window.location = "/dashboard/products";
 };
 
 export const patchProductData = async function (productId, data) {

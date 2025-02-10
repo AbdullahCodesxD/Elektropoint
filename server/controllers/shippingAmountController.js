@@ -70,7 +70,11 @@ exports.createShippingAmount = catchAsync(async function (req, res, next) {
     const shippingAmount = await ShippingAmount.create({
       ...req.body,
       country: country?.toLowerCase()?.trim(),
-      amount: Number(amount),
+      amount: amount.map((amounts) => ({
+        amount: Number(amounts.amount) || 0,
+        from: Number(amounts.from) || 0,
+        to: Number(amounts.to) || 0,
+      })),
     });
     res.status(200).json({
       message: "success",

@@ -7,9 +7,24 @@ import SliderSideComponentsDesktop from "./SliderSideComponentsDesktop";
 export default function Home() {
   return (
     <div>
-      <div className="flex md:pb-5">
+      {/* <div className="flex md:pb-5">
         <DesktopLinks />
         <div className="w-full custom ">
+          <div
+            className="md:grid w-full custom-for-slider "
+            style={{
+              gridTemplateColumns: "1fr 400px",
+            }}
+          >
+            <HomePageSlider />
+            <SliderSideComponentsDesktop />
+          </div>
+          <SliderCategoriesComponent />
+        </div>
+      </div> */}
+      <div className="flex md:pb-5">
+        {/* <DesktopLinks /> */}
+        <div className="w-full">
           <div
             className="md:grid w-full custom-for-slider "
             style={{
