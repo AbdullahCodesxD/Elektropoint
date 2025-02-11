@@ -9,6 +9,7 @@ import searchSlice from "./slices/searchSlice";
 import shippingSlice from "./slices/shippingSlice";
 import userSlice from "./slices/usersSlice";
 import clientCollectionSlice from "./slices/clientCollectionSlice";
+import homePageCollectionsSlice from "./slices/homePageCollectionsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export const store = configureStore({
     shipping: shippingSlice,
     users: userSlice,
     clientCollection: clientCollectionSlice,
+    homePageCollections: homePageCollectionsSlice,
   },
 });

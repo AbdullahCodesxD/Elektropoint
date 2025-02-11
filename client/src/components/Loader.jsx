@@ -1,6 +1,11 @@
-export default function Loader({ height, width, color = "#000" }) {
+export default function Loader({
+  height,
+  width,
+  color = "#000",
+  classNameHeight = "min-h-[76vh]",
+}) {
   return (
-    <div className="min-h-[76vh]  flex items-center justify-center">
+    <div className={`${classNameHeight} flex items-center justify-center`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="animate-spin"
