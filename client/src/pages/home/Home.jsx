@@ -7,7 +7,7 @@ import SliderSideComponentsDesktop from "./SliderSideComponentsDesktop";
 export default function Home() {
   return (
     <div>
-      {/* <div className="flex md:pb-5">
+      <div className="flex md:pb-5">
         <DesktopLinks />
         <div className="w-full custom ">
           <div
@@ -21,9 +21,8 @@ export default function Home() {
           </div>
           <SliderCategoriesComponent />
         </div>
-      </div> */}
-      <div className="flex md:pb-5">
-        {/* <DesktopLinks /> */}
+      </div>
+      {/* <div className="flex md:pb-5">
         <div className="w-full">
           <div
             className="md:grid w-full custom-for-slider "
@@ -36,7 +35,7 @@ export default function Home() {
           </div>
           <SliderCategoriesComponent />
         </div>
-      </div>
+      </div> */}
 
       <h3 className="px-3 py-5 font-semibold text-[24px] bg-white">
         Product Categories

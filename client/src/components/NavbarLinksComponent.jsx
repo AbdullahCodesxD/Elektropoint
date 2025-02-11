@@ -3,7 +3,11 @@ import NavBarLinksDesktop from "./NavBarLinksDesktop";
 import NavbarLinksFooter from "./NavbarLinksFooter";
 import NavbarLinksHeader from "./NavbarLinksHeader";
 
-export default function NavbarLinksComponent({ toggleHamburger, isOpen }) {
+export default function NavbarLinksComponent({
+  collections,
+  toggleHamburger,
+  isOpen,
+}) {
   function handle(e) {
     e.preventDefault();
     const target = e.target;
@@ -22,7 +26,7 @@ export default function NavbarLinksComponent({ toggleHamburger, isOpen }) {
           <NavbarLinks />
         </div>
         <div className="hidden md:block h-full md:mb-2">
-          <NavBarLinksDesktop />
+          <NavBarLinksDesktop collections={collections} />
         </div>
         <NavbarLinksFooter />
       </div>

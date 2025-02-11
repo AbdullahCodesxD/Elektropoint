@@ -1,7 +1,7 @@
 import links from "../utils/navbarLinks";
 import Button from "./Button";
 
-export default function NavBarLinksDesktop() {
+export default function NavBarLinksDesktop({ collections }) {
   return (
     <div className="flex flex-col justify-between min-h-full ">
       <div>
@@ -9,19 +9,19 @@ export default function NavBarLinksDesktop() {
           Range
         </h2>
         <div className="flex flex-wrap">
-          {links.map((link) => (
+          {collections.map((link) => (
             <Button
-              to={`/collection/${link.toLowerCase()}`}
-              key={link}
+              to={`/collection/${link.slug}`}
+              key={link._id}
               type="desktopNavBar"
             >
-              {link}
+              {link.title}
             </Button>
           ))}
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <h2 className="w-[240px] text-main pb border-b-main border-b-4 text-2xl font-semibold">
           Pursue
         </h2>
@@ -40,7 +40,7 @@ export default function NavBarLinksDesktop() {
               )
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

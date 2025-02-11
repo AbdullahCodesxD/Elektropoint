@@ -11,6 +11,7 @@ import {
   getCollectionProducts,
 } from "../../utils/clientCollectionApi";
 import { useSelector } from "react-redux";
+import Loader from "../../components/Loader";
 
 export default function Collection() {
   // Collection Name
@@ -19,6 +20,7 @@ export default function Collection() {
   const collection = clientCollection?.currentCollection || {};
   const products = clientCollection?.currentCollectionProducts || [];
   const noOfProducts = clientCollection?.noOfProducts || 0;
+  const isFetched = clientCollection?.isFetched;
 
   // For Filtering
   const [filter, setFilter] = useState("");
@@ -35,11 +37,13 @@ export default function Collection() {
     [collectionParam]
   );
 
+  if (isFetched && !collection._id) window.location = "/";
+  if (!isFetched) return <Loader height={90} width={90} />;
   return (
     <div>
       <ProductsHeader slug={collection.slug}>{collection.title}</ProductsHeader>
       <div
-        className="md:grid gap-5"
+        className="md:grid gap-5 min-h-[70vh]"
         style={{
           gridTemplateColumns: "300px 1fr",
         }}

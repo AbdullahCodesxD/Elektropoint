@@ -8,6 +8,7 @@ router.post(
   collectionController.uploadCollectionImages,
   collectionController.createCollection
 );
+router.get("/home", collectionController.forHomePage);
 router.post(
   "/upload",
   collectionController.uploadCollectionImages,

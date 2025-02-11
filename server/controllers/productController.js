@@ -179,17 +179,29 @@ exports.getProductsByCollection = catchAsync(async (req, res, next) => {
       { title: { $regex: new RegExp(`^${collectionParam.trim()}$`, "i") } },
       { slug: { $regex: new RegExp(`^${collectionParam.trim()}$`, "i") } },
     ],
-  }).select("_id");
+  }).select("_id conditionVendors");
 
   if (!collection)
     return next(new AppError("No collection found with this slug", 404));
-  const products = await Product.find({
-    category: collection?._id,
-    status: "active",
-  }).populate({
-    path: "category",
-    select: "title",
-  });
+  let products;
+
+  if (collection.conditionVendors.length > 0) {
+    products = await Product.find({
+      vendor: { $in: collection.conditionVendors },
+      status: "active",
+    }).populate({
+      path: "category",
+      select: "title",
+    });
+  } else {
+    products = await Product.find({
+      category: collection?._id,
+      status: "active",
+    }).populate({
+      path: "category",
+      select: "title",
+    });
+  }
 
   res.status(200).json({
     message: "success",

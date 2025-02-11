@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import CollectionItemComponentRight from "./CollectionItemComponentRight";
+import { useDispatch } from "react-redux";
+import { setIsFetched } from "../slices/searchSlice";
 
 export default function CollectionItemComponent({
   children,
@@ -8,9 +10,13 @@ export default function CollectionItemComponent({
   pieces,
   to,
 }) {
+  const dispatch = useDispatch();
   return (
     <Link
       to={to}
+      onClick={() => {
+        dispatch(setIsFetched(false));
+      }}
       className="flex  gap-2.5 p-3 rounded-lg bg-white"
       style={{
         boxShadow: "0px 0px 15px rgba(0,0,0,.2)",

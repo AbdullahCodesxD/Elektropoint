@@ -13,11 +13,17 @@ export const searchProducts = async function (search, options) {
   } else {
     const res = await getFromApi(`/search?search=${search}`);
     dispatch(setResults(res.data));
-    console.log(res);
   }
 };
 export const getProduct = async function (slug) {
-  const res = await getFromApi(`/products/${slug}`);
-  dispatch(setCurrentProduct(res.data));
-  dispatch(setIsFetched(true));
+  try {
+    dispatch(setIsFetched(false));
+    const res = await getFromApi(`/products/${slug}`);
+    dispatch(setCurrentProduct(res.data));
+    dispatch(setIsFetched(true));
+  } catch (err) {
+    dispatch(setIsFetched(false));
+
+    window.location = "/";
+  }
 };

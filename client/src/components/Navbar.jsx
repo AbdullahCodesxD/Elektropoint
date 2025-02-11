@@ -1,15 +1,21 @@
 import HamburgerAndProfile from "./HamburgerAndProfile";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavbarLinksComponent from "./NavbarLinksComponent";
 import Search from "./Search";
 import Button from "./Button";
+import { getCollections } from "../utils/collectionApi";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+  const collections = useSelector((state) => state.collections);
 
   function toggleHamburger() {
     setIsHamburgerOpen(!isHamburgerOpen);
   }
+  useEffect(function () {
+    getCollections();
+  }, []);
   return (
     <nav>
       <div
@@ -40,6 +46,7 @@ export default function Navbar() {
         <Search />
       </div>
       <NavbarLinksComponent
+        collections={collections}
         isOpen={isHamburgerOpen}
         toggleHamburger={toggleHamburger}
       />

@@ -88,7 +88,51 @@ exports.createCollection = catchAsync(async function (req, res, next) {
     data: newCollection,
   });
 });
+exports.forHomePage = catchAsync(async function (req, res, next) {
+  const collections = await Collection.find({ status: "active" })
+    .sort({
+      _id: 1,
+    })
+    .limit(4)
+    .select("title conditionVendors slug");
 
+  const promisesOfProductsData = collections.map((collection) => {
+    if (collection.conditionVendors.length > 0) {
+      return Product.find({
+        vendor: { $in: collection.conditionVendors },
+      })
+        .sort({
+          _id: -1,
+        })
+        .limit(4)
+        .select("media slug title price");
+    } else {
+      return Product.find({
+        category: collection._id,
+      })
+        .sort({
+          _id: -1,
+        })
+        .limit(4)
+        .select("media slug title price");
+    }
+  });
+
+  const productsData = await Promise.all(promisesOfProductsData);
+
+  const data = collections.map((collection, i) => {
+    return {
+      title: collection.title,
+      slug: collection.slug,
+      products: productsData?.at(i),
+    };
+  });
+
+  res.status(200).json({
+    message: "success",
+    data,
+  });
+});
 // Delete a collection
 exports.deleteCollection = catchAsync(async function (req, res, next) {
   const collectionId = req.params.collection;
