@@ -12,12 +12,12 @@ export default function NavbarLinksHeader() {
           <ArrowSvg width={12} color="#99D913" />
         </span>
       </Button>
-      <Button extraClasses={notActive} type="navbarHeader">
+      {/* <Button extraClasses={notActive} type="navbarHeader">
         pursue
         <span className="ml-1 mt-2 md:block hidden">
           <ArrowSvg width={12} color="#99D913" />
         </span>
-      </Button>
+      </Button> */}
     </div>
   );
 }

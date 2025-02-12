@@ -67,18 +67,26 @@ export default function Orders() {
 
       <div className="mt-3 bg-white rounded-lg ">
         <OrdersHeader filter={filter} setFilter={setFilter} />
-        <div className="overflow-x-auto order">
-          <OrdersComponentHeader selected={selected} selectAll={selectAll} />
-          {orders.map((data, i) => (
-            <OrdersComponent
-              isSelected={selected[i]?.selected}
-              toggleSelected={() => toggleSelected(i)}
-              id={data._id}
-              data={data}
-              key={data._id}
-            />
-          ))}
-        </div>
+        {orders.length === 0 && (
+          <p className="text-center py-2 font-semibold border border-t">
+            No order found
+          </p>
+        )}
+
+        {orders.length > 0 && (
+          <div className="overflow-x-auto order">
+            <OrdersComponentHeader selected={selected} selectAll={selectAll} />
+            {orders.map((data, i) => (
+              <OrdersComponent
+                isSelected={selected[i]?.selected}
+                toggleSelected={() => toggleSelected(i)}
+                id={data._id}
+                data={data}
+                key={data._id}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

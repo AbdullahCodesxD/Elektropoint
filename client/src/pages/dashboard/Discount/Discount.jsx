@@ -23,17 +23,25 @@ export default function Discount() {
           Create discount
         </Button>
       </div>
+      {discounts.length === 0 && (
+        <p className="p-5 bg-white font-semibold text-center mt-3">
+          No discount yet
+        </p>
+      )}
+      {discounts.length > 0 && (
+        <div className="rounded-lg overflow-hidden mt-3.5">
+          <DiscountHeader />
+          <div className="overflow-x-auto order">
+            <DiscountComponentHeader />
 
-      <div className="rounded-lg overflow-hidden mt-3.5">
-        <DiscountHeader />
-        <div className="overflow-x-auto order">
-          <DiscountComponentHeader />
-
-          {discounts.map((discount) => {
-            return <DiscountComponent key={discount._id} discount={discount} />;
-          })}
+            {discounts.map((discount) => {
+              return (
+                <DiscountComponent key={discount._id} discount={discount} />
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

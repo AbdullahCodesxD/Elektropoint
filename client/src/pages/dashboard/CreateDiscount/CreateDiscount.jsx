@@ -34,9 +34,9 @@ export default function CreateDiscount() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full p-[20px] bg-white rounded-lg shadow-md "
+      className="w-full pb-[140px] md:p-[20px] bg-white rounded-lg shadow-md "
     >
-      <div className="max-w-[700px]">
+      <div className="max-w-[700px] p-3">
         <div className="mb-1 flex flex-col gap-2">
           <label
             htmlFor="title"
@@ -111,7 +111,7 @@ export default function CreateDiscount() {
           >
             Apply To
           </label>
-          <div className="mt-2 grid grid-cols-2 gap-3 med:grid-cols-3">
+          <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-3 med:grid-cols-3">
             <div className="flex items-center gap-1 transition-all hover:opacity-80">
               <input
                 className="h-[20px] accent-main aspect-square cursor-pointer"

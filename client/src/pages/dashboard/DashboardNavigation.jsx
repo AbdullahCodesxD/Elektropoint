@@ -13,7 +13,7 @@ import {
 export default function DashboardNavigation() {
   const location = useLocation().pathname.split("/")[2];
   return (
-    <div className="fixed py-2 md:py-0  bottom-0 left-0 w-full h-fit border-t-2 border-dark/30 md:border-none md:static md:h-full bg-[#EBEBEB] ">
+    <div className="fixed py-2 md:py-0 z-[2] bottom-0 left-0 w-full h-fit border-t-2 border-dark/30 md:border-none md:static md:h-full bg-[#EBEBEB] ">
       <div className="p-2 flex overflow-x-auto md:flex-col gap-2.5 dashboard--Navigation ">
         <DashboardNavigationComponent
           to="/dashboard"

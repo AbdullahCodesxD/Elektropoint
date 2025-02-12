@@ -69,17 +69,28 @@ export default function Products() {
       <div className="mt-3 bg-white rounded-lg ">
         <ProductsHeader filter={filter} setFilter={setFilter} />
 
-        <div className="overflow-x-auto order">
-          <ProductsComponentHeader selected={selected} selectAll={selectAll} />
-          {products.map((data, i) => (
-            <ProductsComponent
-              isSelected={selected[i]?.selected}
-              toggleSelected={() => toggleSelected(i)}
-              key={data._id}
-              product={data}
+        {products.length === 0 && (
+          <p className="p-3 bg-white text-center font-semibold border border-t">
+            No product found{" "}
+          </p>
+        )}
+        {products.length > 0 && (
+          <div className="overflow-x-auto order">
+            <ProductsComponentHeader
+              selected={selected}
+              selectAll={selectAll}
             />
-          ))}
-        </div>
+
+            {products.map((data, i) => (
+              <ProductsComponent
+                isSelected={selected[i]?.selected}
+                toggleSelected={() => toggleSelected(i)}
+                key={data._id}
+                product={data}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

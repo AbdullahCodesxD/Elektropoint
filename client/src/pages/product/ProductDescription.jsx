@@ -7,20 +7,7 @@ export default function ProductDescription({ children }) {
         Product Description
       </h3>
 
-      <p>{children}</p>
-
-      <h4 className="mt-4 mb-2 text-[24px] font-medium">
-        Alternative articles
-      </h4>
-
-      <CollectionItemComponent
-        src="/product.png"
-        description="Marking pen edding permanent marker for one time use only."
-        pieces={1}
-        to="/product/hager surge protection/amazing product"
-      >
-        Amazing Product
-      </CollectionItemComponent>
+      {children}
     </div>
   );
 }

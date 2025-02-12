@@ -20,9 +20,10 @@ export default function ProductsComponentHeader({ selectAll, selected }) {
           className="h-5 w-5 appearance-none border-2 border-main rounded-md cursor-pointer checked:appearance-auto checked:accent-main checked:bg-main"
         />
 
-        <select className="text-[15px] w-fit" name="" id="">
+        {/* <select className="text-[15px] w-fit" name="" id="">
           <option value="date">Product</option>
-        </select>
+        </select> */}
+        <p className="text-[15px] w-fit">Product</p>
       </div>
 
       <p className="text-[15px] text-center">Status</p>

@@ -5,7 +5,7 @@ export default function CollectionsComponentHeader({ selectAll, selected }) {
       : 0;
 
   return (
-    <div className="p-3 grid grid-cols-3 items-center gap-3 border-t-2 border-dark/40">
+    <div className="p-3 min-w-[700px] grid grid-cols-3 items-center gap-3 border-t-2 border-dark/40">
       <div className="flex items-center gap-2">
         <input
           type="checkbox"

@@ -37,7 +37,7 @@ export default function NewOrder() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full p-[20px] bg-white rounded-lg shadow-md "
+      className="w-full p-[20px] pb-[150px] lg:p-[20px] bg-white rounded-lg shadow-md "
     >
       <div className="max-w-[700px]">
         <div className="mb-1 min-w-[300px] flex flex-col gap-2">

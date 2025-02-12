@@ -96,6 +96,9 @@ export default function CreateCollection() {
               <TextEditor editor={editor} />
             </div>
           </div>
+          <div className="md:hidden">
+            <CollectionAddImages images={images} setImages={setImages} />
+          </div>
           <CollectionConditions
             matchCondition={matchCondition}
             setMatchCondition={setMatchCondition}
@@ -111,11 +114,13 @@ export default function CreateCollection() {
           )}
         </div>
 
-        <CollectionAddImages images={images} setImages={setImages} />
+        <div className="hidden md:block">
+          <CollectionAddImages images={images} setImages={setImages} />
+        </div>
 
         <Button
           type="primary"
-          extraClasses="max-w-fit px-5 text-[14px] fixed bottom-5 right-5 transition-all hover:opacity-70"
+          extraClasses="max-w-fit px-5 text-[14px] ml-auto md:fixed bottom-5 right-5 transition-all hover:opacity-70"
         >
           Create Collection
         </Button>

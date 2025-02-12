@@ -34,7 +34,7 @@ export default function ProductsComponent({
           onChange={(e) => setIsChecked((prev) => e.target.checked)}
           type="checkbox"
           checked={isChecked}
-          className="h-5 w-5 appearance-none border-2 border-main rounded-md cursor-pointer checked:appearance-auto checked:accent-main checked:bg-main"
+          className="h-5 w-5 min-w-5 min-h-5s appearance-none border-2 border-main rounded-md cursor-pointer checked:appearance-auto checked:accent-main checked:bg-main"
         />
 
         <div className="flex items-center justify-center gap-1">

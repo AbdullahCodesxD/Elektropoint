@@ -70,25 +70,32 @@ export default function Customers() {
         </Button>
       </div>
 
-      <CustomersFilter noOfCustomers={noOfCustomers} />
-
-      <div className="mt-3 rounded-lg overflow-x-auto order overflow-y-hidden bg-white">
-        <CustomersSearchbar setSearch={setSearch} />
-        <CustomersComponentHeader selected={selected} selectAll={selectAll} />
-
-        {customers.length === 0 && (
-          <p className="p-3 text-center">No customers found</p>
-        )}
-        {customers.map((customer, i) => (
-          <CustomersComponent
-            customerId={customer._id}
-            isSelected={selected[i]?.selected}
-            toggleSelected={() => toggleSelected(i)}
-            key={customer._id}
-            data={customer}
-          />
-        ))}
-      </div>
+      {customers.length === 0 && (
+        <p className="p-3 text-center bg-white mt-3">No customers found</p>
+      )}
+      {customers.length > 0 && (
+        <CustomersFilter noOfCustomers={noOfCustomers} />
+      )}
+      {customers.length > 0 && (
+        <div className="mt-3 rounded-lg  bg-white">
+          <CustomersSearchbar setSearch={setSearch} />
+          <div className="overflow-x-auto order overflow-y-hidden">
+            <CustomersComponentHeader
+              selected={selected}
+              selectAll={selectAll}
+            />
+            {customers.map((customer, i) => (
+              <CustomersComponent
+                customerId={customer._id}
+                isSelected={selected[i]?.selected}
+                toggleSelected={() => toggleSelected(i)}
+                key={customer._id}
+                data={customer}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -37,7 +37,7 @@ export default function ProductsHeader({ filter, setFilter }) {
           +
         </Button>
       </div>
-
+      {/* 
       <div className="mr-2 flex gap-2">
         <Button extraClasses="bg-main" type="orderHeader">
           <SearchSvg color="white" height={20} />
@@ -45,7 +45,7 @@ export default function ProductsHeader({ filter, setFilter }) {
         <Button extraClasses="bg-main" type="orderHeader">
           <SortSvg color="white" height={20} />
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

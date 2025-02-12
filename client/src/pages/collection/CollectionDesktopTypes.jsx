@@ -1,31 +1,40 @@
+import { useSelector } from "react-redux";
 import { ArrowSvg } from "../../components/Svgs";
+import Button from "../../components/Button";
 
 export default function CollectionDesktopTypes() {
+  const collections = useSelector((state) => state.collections);
   return (
-    <div className="bg-white hidden md:block p-3">
+    <div className="bg-white h-fit hidden md:block p-3">
       <h4 className="pb-1 border-b border-black text-lg font-medium">
-        Marketing Materials
+        Collections
       </h4>
 
       <div>
-        <CollectionDesktopTypeComponent>
-          Marketing
-        </CollectionDesktopTypeComponent>
-        <CollectionDesktopTypeComponent>
-          Materials
-        </CollectionDesktopTypeComponent>
-        <CollectionDesktopTypeComponent>Haha</CollectionDesktopTypeComponent>
+        {collections.map((collection) => (
+          <CollectionDesktopTypeComponent
+            slug={collection.slug}
+            key={collection._id}
+          >
+            {collection.title}
+          </CollectionDesktopTypeComponent>
+        ))}
       </div>
     </div>
   );
 }
 
-function CollectionDesktopTypeComponent({ children }) {
+function CollectionDesktopTypeComponent({ children, slug }) {
   return (
-    <div className="flex items-center justify-between cursor-pointer">
-      <h4 className="text-[15px] py-1.5">{children}</h4>
+    <Button
+      to={`/collection/${slug}`}
+      extraClasses="flex items-center py-1 border-b-2 boder-dark/50 border-dotted justify-between cursor-pointer transition-all hover:text-main"
+    >
+      <h4 className="text-[15px] py-1.5 capitalize ">
+        {children?.toLowerCase() || ""}
+      </h4>
 
       <ArrowSvg height={12} />
-    </div>
+    </Button>
   );
 }

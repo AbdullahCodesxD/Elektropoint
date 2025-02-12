@@ -33,7 +33,7 @@ export default function ProductCustomization({ border, product }) {
               }`}
               type="productCustomization"
               handler={() => {
-                if (!current.title) {
+                if (!current?.title) {
                   dispatch(
                     addProduct({
                       index: i,
@@ -52,13 +52,13 @@ export default function ProductCustomization({ border, product }) {
               // to="/product/select/amazing product"
               key={i}
             >
-              {current.title?.length > 0 && (
+              {current?.title?.length > 0 && (
                 <img
                   className="aspect-square object-contain h-full w-full absolute z-[2]"
                   src={`${API}/products/${current?.media?.at(0)}`}
                 />
               )}
-              {!current.title && <PlusSvg height={30} />}
+              {!current?.title && <PlusSvg height={30} />}
             </Button>
           ))}
         </div>

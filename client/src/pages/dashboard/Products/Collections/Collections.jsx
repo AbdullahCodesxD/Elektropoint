@@ -55,24 +55,29 @@ export default function Collections() {
 
       <div className="bg-white mt-3 rounded-lg overflow-hidden">
         <CollectionsHeader />
-        <CollectionsComponentHeader selected={selected} selectAll={selectAll} />
-
-        {collections.map((collection, i) => (
-          <CollectionsComponent
-            isSelected={selected[i]?.selected}
-            toggleSelected={() => toggleSelected(i)}
-            key={collection._id}
-            title={collection.title}
-            noOfProducts={collection.noOfProducts}
-            conditions={
-              collection?.conditionVendors?.length > 0
-                ? `Product vendor is equal to ${collection?.conditionVendors?.join(
-                    ", "
-                  )}.`
-                : "No condition"
-            }
+        <div className="overflow-x-auto order">
+          <CollectionsComponentHeader
+            selected={selected}
+            selectAll={selectAll}
           />
-        ))}
+
+          {collections.map((collection, i) => (
+            <CollectionsComponent
+              isSelected={selected[i]?.selected}
+              toggleSelected={() => toggleSelected(i)}
+              key={collection._id}
+              title={collection.title}
+              noOfProducts={collection.noOfProducts}
+              conditions={
+                collection?.conditionVendors?.length > 0
+                  ? `Product vendor is equal to ${collection?.conditionVendors?.join(
+                      ", "
+                    )}.`
+                  : "No condition"
+              }
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -95,6 +95,14 @@ const router = createBrowserRouter([
         children: [
           // Orders
           {
+            path: "/dashboard/",
+            element: (
+              <p className="bg-white p-5 m-3 text-center font-semibold max-w-[700px]">
+                No Data Yet
+              </p>
+            ),
+          },
+          {
             path: "/dashboard/orders",
             element: <Orders />,
           },
@@ -159,7 +167,11 @@ const router = createBrowserRouter([
           //analytics
           {
             path: "/dashboard/analytics",
-            element: <></>,
+            element: (
+              <p className="bg-white p-5 m-3 text-center font-semibold max-w-[700px]">
+                No Data Yet
+              </p>
+            ),
           },
           // Settings
           {

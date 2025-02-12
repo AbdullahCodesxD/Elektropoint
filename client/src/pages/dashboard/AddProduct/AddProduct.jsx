@@ -62,7 +62,7 @@ export default function AddProduct() {
     postProduct(formData);
   }
   return (
-    <div className="bg-[#eaeaea] rounded-lg p-5">
+    <div className="bg-[#eaeaea] rounded-lg pb-[50px] md:p-5">
       {product && (
         <div className="mb-3 flex items-center gap-3">
           <Button handler={goBack}>
@@ -137,7 +137,7 @@ export default function AddProduct() {
 
         <Button
           type="primary"
-          extraClasses="max-w-fit px-5 text-[14px] fixed bottom-5 right-5 transition-all hover:opacity-70"
+          extraClasses="max-w-fit px-5 text-[14px] ml-auto mr-5 lg:fixed bottom-5 right-5 transition-all hover:opacity-70"
         >
           Create Product
         </Button>

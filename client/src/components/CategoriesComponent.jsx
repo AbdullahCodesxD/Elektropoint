@@ -42,7 +42,7 @@ export default function CategoriesComponent({
 
         {viewAll && (
           <Button
-            to="#"
+            to={`/collection/${category.slug}`}
             style={{ boxShadow: "0px 0px 15px 1px rgba(0,0,0,.4)" }}
             type="categories"
             extraClasses="md:hidden"

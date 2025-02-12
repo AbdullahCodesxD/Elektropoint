@@ -8,7 +8,9 @@ export default function CollectionConditions({
   matchCondition,
   setMatchCondition,
 }) {
-  const allVendors = useSelector((state) => state.products.vendors);
+  const allVendors = useSelector((state) => state.products.vendors)?.filter(
+    (val) => val
+  );
   const notSelectedVendors = allVendors.filter(
     (vendor) => vendors.indexOf(vendor) === -1
   );
@@ -73,7 +75,7 @@ export default function CollectionConditions({
 
       {matchCondition && (
         <>
-          <div className="flex items-center gap-5 flex-wrap mt-3">
+          {/* <div className="flex items-center gap-5 flex-wrap mt-3">
             <p>Products must match : </p>
 
             <div className="flex items-center gap-2 ">
@@ -108,7 +110,7 @@ export default function CollectionConditions({
                 Any condition
               </label>
             </div>
-          </div>
+          </div> */}
 
           {/* <div  className="flex items-center gap-3 mt-3">
                 <select className="w-[33%] max-w-[250px] outline-none border border-dark/70 rounded-md px-3 py-2 cursor-pointer">
@@ -137,17 +139,20 @@ export default function CollectionConditions({
             length: Math.min(vendors.length + 1, allVendors.length),
           }).map((_, i) => {
             return (
-              <div key={i} className="flex items-center gap-3 mt-3">
-                <span className="w-[33%] max-w-[250px] outline-none border border-dark/70 rounded-md px-3 py-2">
+              <div
+                key={i}
+                className="flex flex-col md:flex-row items-center gap-3 mt-3 border-b border-dark md:border-none pb-2 md:pb-0 border-dotted"
+              >
+                <span className="w-full md:w-[33%] outline-none border border-dark/70 rounded-md px-3 py-2">
                   Vendor {i + 1}
                 </span>
-                <span className="w-[33%] max-w-[250px] outline-none border border-dark/70 rounded-md px-3 py-2">
+                <span className="w-full md:w-[33%]  outline-none border border-dark/70 rounded-md px-3 py-2">
                   Is equal to
                 </span>
                 <select
                   onChange={(e) => handleVendorChange(e, i)}
                   value={vendors[i]}
-                  className="w-[33%] capitalize max-w-[250px] outline-none border border-dark/70 rounded-md px-3 py-2 cursor-pointer"
+                  className="w-full md:w-[33%] capitalize outline-none border border-dark/70 rounded-md px-3 py-2 cursor-pointer"
                 >
                   <option value="">None</option>
                   {i < vendors.length && (

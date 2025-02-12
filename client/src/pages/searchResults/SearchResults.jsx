@@ -39,7 +39,7 @@ export default function SearchResults() {
           </span>
         </h4>
 
-        <div className="mt-2 grid grid-cols-3 gap-5">
+        <div className="mt-2 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {results?.map((result) => (
             <SearchResult key={result._id} data={result} />
           ))}

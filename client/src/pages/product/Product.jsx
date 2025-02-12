@@ -58,11 +58,35 @@ export default function Product() {
         {currentProduct?.title || ""}
       </ProductItem>
       <div className="lg:hidden">
-        <ProductAddToCart piece={1} price={25} />
-        <ProductCustomization />
+        <ProductAddToCart piece={1} price={currentProduct.price || 0} />
+        <ProductCustomization product={currentProduct} />
         <ProductDescription>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, quia.
+          <p
+            className="description break-words"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(currentProduct.description),
+            }}
+          />
         </ProductDescription>
+
+        <div className="bg-white p-3 rounded-md">
+          <h4 className="font-medium text-lg">Other customers also bought.</h4>
+          <div className="flex flex-col gap-3 mt-5">
+            {otherProducts.map((product) => {
+              return (
+                <CollectionItemComponent
+                  key={product._id}
+                  src={`${API}/products/${product?.media?.at(0)}`}
+                  description={product.description}
+                  pieces={1}
+                  to={`/product/${product.slug}`}
+                >
+                  {product.title}
+                </CollectionItemComponent>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       <div className="hidden lg:grid grid-cols-[1fr_420px] m-3 p-3 gap-5 ">
@@ -83,14 +107,6 @@ export default function Product() {
         <div className="bg-white p-3 rounded-md">
           <h4 className="font-medium text-lg">Other customers also bought.</h4>
           <div className="flex flex-col gap-3 mt-5">
-            {/* <CollectionItemComponent
-              src="/product.png"
-              description="Marking pen edding permanent marker for one time use only."
-              pieces={1}
-              to="/product/hager surge protection/amazing product"
-            >
-              Amazing Product
-            </CollectionItemComponent> */}
             {otherProducts.map((product) => {
               return (
                 <CollectionItemComponent
