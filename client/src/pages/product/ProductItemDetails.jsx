@@ -15,7 +15,7 @@ export default function ProductItemDetails({ product, children }) {
 
   return (
     <div className="mt-4 md:min-w-[40%]">
-      <h2 className="capitalize text-[30px] font-semibold text-black/80 line-clamp-2">
+      <h2 className="capitalize max-w-[500px] text-[30px] font-semibold text-black/80 line-clamp-2">
         {children}
       </h2>
 

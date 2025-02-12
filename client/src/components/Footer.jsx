@@ -7,8 +7,12 @@ export default function Footer() {
 
   if (location === "dashboard") return null;
   return (
-    <div className="p-5 bg-main md:flex items-center justify-between md:gap-10">
-      <div className="flex flex-col md:flex-row md:w-full items-center justify-center gap-1.5">
+    // <div className="p-5 bg-main md:flex items-center justify-between md:gap-10">
+    <div className="p-5 bg-main">
+      <p className="text-center ">
+        All copyright reserved &copy; {new Date().getFullYear()}
+      </p>
+      {/* <div className="flex flex-col md:flex-row md:w-full items-center justify-center gap-1.5">
         <Button extraClasses="text-black font-semibold md:px-3 md:border-r-2 border-black">
           Legal Notice
         </Button>
@@ -47,7 +51,7 @@ export default function Footer() {
             <YoutubeSvg color="black" height={38} width={35} />
           </Button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

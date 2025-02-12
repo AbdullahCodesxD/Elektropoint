@@ -105,7 +105,7 @@ exports.forHomePage = catchAsync(async function (req, res, next) {
           _id: -1,
         })
         .limit(4)
-        .select("media slug title price");
+        .select("media slug title price description");
     } else {
       return Product.find({
         category: collection._id,

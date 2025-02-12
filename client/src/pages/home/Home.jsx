@@ -34,7 +34,7 @@ export default function Home() {
             <HomePageSlider />
             <SliderSideComponentsDesktop />
           </div>
-          <SliderCategoriesComponent />
+          <SliderCategoriesComponent categories={collections} />
         </div>
       </div>
 

@@ -31,6 +31,7 @@ export default function CategoriesComponent({
                 key={product._id}
                 src={`${API}/products/${product?.media?.at(0)}`}
                 slug={product.slug}
+                description={product.description}
                 price={product.price}
               >
                 Schalter

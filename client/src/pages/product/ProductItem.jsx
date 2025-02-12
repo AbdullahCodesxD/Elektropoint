@@ -13,7 +13,7 @@ export default function ProductItem({ src, children, product }) {
       />
       <ProductItemDetails product={product}>{children}</ProductItemDetails>
       <div className="hidden min-h-full md:flex flex-col justify-between">
-        <ProductCustomization border={false} />
+        <ProductCustomization product={product} border={false} />
         <ProductAddToCart reverse={true} piece={1} price={product.price || 0} />
       </div>
     </div>

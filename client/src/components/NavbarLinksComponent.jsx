@@ -23,7 +23,7 @@ export default function NavbarLinksComponent({
       <NavbarLinksHeader />
       <div className="flex justify-between flex-col h-[92%] md:w-full md:h-full">
         <div className="md:hidden">
-          <NavbarLinks />
+          <NavbarLinks collections={collections} />
         </div>
         <div className="hidden md:block h-full md:mb-2">
           <NavBarLinksDesktop collections={collections} />

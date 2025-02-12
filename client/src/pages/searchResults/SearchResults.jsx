@@ -1,21 +1,28 @@
 import { useEffect } from "react";
 import { useParams } from "react-router";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchProducts } from "../../utils/searchApi";
 import SearchResult from "./SearchResult";
+import Loader from "../../components/Loader";
+import { setIsSearched } from "../../slices/searchSlice";
 
 export default function SearchResults() {
   const { search } = useParams();
   const results = useSelector((state) => state.search.results);
   const noOfResults = useSelector((state) => state.search.noOfResults);
-  const isSearched = useSelector((state) => state.search.searched);
+  const isFetched = useSelector((state) => state.search.isSearched);
+  const dispatch = useDispatch();
   useEffect(
     function () {
+      dispatch(setIsSearched(false));
+
       searchProducts(search);
     },
     [search]
   );
+
+  if (!isFetched) return <Loader height={70} width={70} />;
   return (
     <section className="bg-white p-3">
       <div className="max-w-[1400px] min-h-[70vh] block mx-auto">

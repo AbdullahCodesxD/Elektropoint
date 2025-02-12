@@ -1,6 +1,7 @@
 import {
   setCurrentProduct,
   setIsFetched,
+  setIsSearched,
   setResults,
 } from "../slices/searchSlice";
 import { store } from "../store";
@@ -14,6 +15,7 @@ export const searchProducts = async function (search, options) {
     const res = await getFromApi(`/search?search=${search}`);
     dispatch(setResults(res.data));
   }
+  dispatch(setIsSearched(true));
 };
 export const getProduct = async function (slug) {
   try {

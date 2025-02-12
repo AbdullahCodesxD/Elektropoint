@@ -9,6 +9,7 @@ const initialState = {
 
   currentProduct: {},
   isFetched: false,
+  isSearched: false,
 };
 
 const searchSlice = createSlice({
@@ -36,6 +37,9 @@ const searchSlice = createSlice({
     setIsFetched: function (state, action) {
       state.isFetched = action.payload;
     },
+    setIsSearched: function (state, action) {
+      state.isSearched = action.payload;
+    },
   },
 });
 export const {
@@ -45,6 +49,7 @@ export const {
   setLimit,
   setCurrentProduct,
   setIsFetched,
+  setIsSearched,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;

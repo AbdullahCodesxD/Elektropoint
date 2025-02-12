@@ -31,7 +31,7 @@ exports.search = catchAsync(async function (req, res, next) {
     ],
     status: "active",
   })
-    .limit(noOfProducts)
+    // .limit(noOfProducts)
     .skip((pageNo - 1) * noOfProducts);
 
   res.status(200).json({

@@ -8,7 +8,7 @@ export default function CollectionItemComponentRight({
   pieces,
 }) {
   return (
-    <div className="w-full">
+    <div className="w-full overflow-hidden">
       <div className="flex gap-3 items-end justify-between ">
         <h3 className="text-[18px] font-semibold line-clamp-2 text-[#222]">
           {children}

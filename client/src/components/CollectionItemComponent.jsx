@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import CollectionItemComponentRight from "./CollectionItemComponentRight";
 import { useDispatch } from "react-redux";
-import { setIsFetched } from "../slices/searchSlice";
+import { setIsFetched } from "../slices/clientCollectionSlice";
 
 export default function CollectionItemComponent({
   children,
