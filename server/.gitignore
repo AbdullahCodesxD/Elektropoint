@@ -1,3 +1,3 @@
-/uploads/categories/*
-/uploads/products/*
+# /uploads/categories/*
+# /uploads/products/*
 /node_modules
