@@ -2,13 +2,18 @@ import { CrossSvg, HamburgerSvg, ProfileSvg } from "./Svgs";
 import Button from "./Button";
 import Search from "./Search";
 
+import Cookies from "js-cookie";
 export default function HamburgerAndProfile({ isOpen, toggleHamburger }) {
+  const jwt = Cookies.get("jwt");
   return (
     <div className="flex md:flex-row-reverse  gap-5 items-center justify-center md:w-full md:bg-main md:h-[70px] px-5">
-      <Button to="/dashboard" extraClasses="hidden md:block">
+      <Button
+        to={`${jwt ? "/dashboard" : "/login"}`}
+        extraClasses="hidden md:block"
+      >
         <ProfileSvg width={30} height={30} color="white" />
       </Button>
-      <Button to="/dashboard" extraClasses="md:hidden">
+      <Button to={`${jwt ? "/dashboard" : "/login"}`} extraClasses="md:hidden">
         <ProfileSvg width={30} height={30} />
       </Button>
 

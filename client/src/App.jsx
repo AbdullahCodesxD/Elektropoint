@@ -37,6 +37,7 @@ import ShippingNew from "./pages/dashboard/Settings/ShippingNew/ShippingNew";
 import NewStore from "./pages/dashboard/Settings/NewStore/NewStore";
 import UsersAndPermissionsNew from "./pages/dashboard/Settings/UsersAndPermissionsNew/UsersAndPermissionsNew";
 import SearchResults from "./pages/searchResults/SearchResults";
+import Login from "./pages/login/Login";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "/search/:search",

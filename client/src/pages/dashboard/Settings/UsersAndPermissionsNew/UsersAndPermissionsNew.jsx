@@ -4,7 +4,7 @@ import UsersAndPermissionsNewForm from "./UsersAndPermissionsNewForm";
 
 export default function UsersAndPermissionsNew() {
   return (
-    <div className="p-3 bg-white rounded-md">
+    <div className="p-3 bg-white pb-[200px] md:pb-3 rounded-md">
       <div className="flex gap-3 items-center">
         <Button to="/dashboard/settings/general">
           <BackSvg height={16} />

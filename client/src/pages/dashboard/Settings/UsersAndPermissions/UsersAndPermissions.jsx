@@ -14,18 +14,20 @@ export default function UsersAndPermissions() {
     [users]
   );
   return (
-    <div className="bg-[#EBEBEB] px-5 rounded-lg py-7 mb-[140px] md:pb-7">
+    <div className="bg-[#EBEBEB] px-5  rounded-lg py-7 mb-[140px] md:pb-7">
       <div className="max-w-screen-lg">
         <h3 className="font-semibold text-2xl">Permission</h3>
 
         <p className="text-black/70 text-[14px]">
           Manage what user can see or do in your store
         </p>
-        <div className="bg-white p-4 rounded-xl w-full mb-4">
-          {users.map((user) => {
-            return <StoreOwner key={user._id} data={user} />;
-          })}
-        </div>
+        {users.length > 0 && (
+          <div className="bg-white p-4 rounded-xl w-full mb-4">
+            {users.map((user) => {
+              return <StoreOwner key={user._id} data={user} />;
+            })}
+          </div>
+        )}
         <AddStaffAccount />
         {/* <Collaborator /> */}
       </div>

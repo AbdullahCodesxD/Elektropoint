@@ -6,6 +6,7 @@ const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 
 const getJwt = (user) => {
+  console.log("user", user);
   return jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
@@ -13,9 +14,12 @@ const getJwt = (user) => {
 
 exports.login = catchAsync(async function (req, res, next) {
   const { email, password } = req.body;
+  console.log(email, password);
   if (!email || !password)
     return next(new AppError("All fields are required", 400));
-  const user = await User.findOne({ email: email.toLowerCase().trim() });
+  const user = await User.findOne({ email: email.toLowerCase().trim() }).select(
+    "password"
+  );
   if (!user || !(await User.comparePassword(password, user.password)))
     return next(new AppError("Incorrect email or password", 401));
   const jwt = getJwt(user);

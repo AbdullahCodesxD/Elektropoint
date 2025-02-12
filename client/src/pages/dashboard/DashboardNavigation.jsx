@@ -9,7 +9,8 @@ import {
   ProductSvg,
   SettingsSvg,
 } from "../../components/Svgs";
-
+import Button from "../../components/Button";
+import Cookies from "js-cookie";
 export default function DashboardNavigation() {
   const location = useLocation().pathname.split("/")[2];
   return (
@@ -123,6 +124,27 @@ export default function DashboardNavigation() {
         >
           Settings
         </DashboardNavigationComponent>
+
+        <Button
+          handler={() => {
+            Cookies.set("jwt", "");
+            window.location = "/";
+          }}
+        >
+          <DashboardNavigationComponent
+            to="/dashboard/settings/general"
+
+            // svg={
+            //   <BackSvg
+            //     height="27"
+            //     width={27}
+            //     color={location === "settings" ? "#99D913" : "#222"}
+            //   />
+            // }
+          >
+            Logout
+          </DashboardNavigationComponent>
+        </Button>
       </div>
     </div>
   );
