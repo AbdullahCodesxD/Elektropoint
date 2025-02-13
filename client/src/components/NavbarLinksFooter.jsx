@@ -1,6 +1,6 @@
 import Button from "./Button";
 
-export default function NavbarLinksFooter() {
+export default function NavbarLinksFooter({ toggleHamburger }) {
   return (
     <div className="py-2 flex items-center justify-between">
       <div className="flex items-center ">
@@ -14,7 +14,13 @@ export default function NavbarLinksFooter() {
         <Button type="navbarFooter">it</Button>
       </div>
 
-      <Button extraClasses="font-semibold">Login</Button>
+      <Button
+        handler={toggleHamburger}
+        to="/login"
+        extraClasses="font-semibold"
+      >
+        Login
+      </Button>
     </div>
   );
 }

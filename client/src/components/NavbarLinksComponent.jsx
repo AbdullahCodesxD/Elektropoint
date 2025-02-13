@@ -28,7 +28,7 @@ export default function NavbarLinksComponent({
         <div className="hidden md:block h-full md:mb-2">
           <NavBarLinksDesktop collections={collections} />
         </div>
-        <NavbarLinksFooter />
+        <NavbarLinksFooter toggleHamburger={toggleHamburger} />
       </div>
     </div>
   );
