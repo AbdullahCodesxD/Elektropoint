@@ -9,7 +9,7 @@ export default function ProductItem({ src, children, product, box = false }) {
      lg:bg-white lg:gap-5 lg:mx-3`}
     >
       <img
-        className={`max-h-[450px]  w-full lg:max-h-full ${
+        className={`max-h-[450px]   w-full lg:max-h-[520px] ${
           !box ? "w-full" : "lg:w-[450px]"
         } object-cover object-center mx-auto block border border-black/40 rounded-2xl lg:mx-0`}
         draggable={false}
@@ -25,6 +25,7 @@ export default function ProductItem({ src, children, product, box = false }) {
           <ProductAddToCart
             reverse={true}
             piece={1}
+            product={product}
             price={product.price || 0}
           />
         </div>

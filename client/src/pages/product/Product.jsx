@@ -57,7 +57,11 @@ export default function Product() {
         {currentProduct?.title || ""}
       </ProductItem>
       <div className="lg:hidden">
-        <ProductAddToCart piece={1} price={currentProduct.price || 0} />
+        <ProductAddToCart
+          product={currentProduct}
+          piece={1}
+          price={currentProduct.price || 0}
+        />
         <ProductCustomization product={currentProduct} />
         <ProductDescription>
           <p

@@ -37,7 +37,12 @@ export default function ProductItemDetails({ product, box, children }) {
         })}
       </div>
       <div className="w-fit mt-3">
-        <ProductAddToCart reverse={true} piece={1} price={product.price || 0} />
+        <ProductAddToCart
+          product={product}
+          reverse={true}
+          piece={1}
+          // price={product.price || 0}
+        />
       </div>
     </div>
   );

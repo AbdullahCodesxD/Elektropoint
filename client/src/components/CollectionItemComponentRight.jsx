@@ -13,14 +13,14 @@ export default function CollectionItemComponentRight({
         <h3 className="text-[18px] font-semibold line-clamp-2 text-[#222]">
           {children}
         </h3>
-        <div className="flex gap-2">
+        {/* <div className="flex gap-2">
           <Button type="collectionSvg">
             <SvgWithPin height={20} width={20} />
           </Button>
           <Button type="collectionSvg">
             <PinSvg height={20} width={20} />
           </Button>
-        </div>
+        </div> */}
       </div>
       <p
         className="line-clamp-5"
@@ -29,7 +29,7 @@ export default function CollectionItemComponentRight({
         }}
       />
 
-      <div className="border border-[#ddd] rounded-md flex items-center justify-center mt-3">
+      {/* <div className="border border-[#ddd] rounded-md flex items-center justify-center mt-3">
         <span className="capitalize w-full text-end pr-2">
           {pieces} {pieces > 1 ? "pieces" : "piece"}
         </span>
@@ -37,7 +37,7 @@ export default function CollectionItemComponentRight({
         <Button extraClasses="p-2 border-l border-[#ddd]">
           <CartSvg width={30} />
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }
