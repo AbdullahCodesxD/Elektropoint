@@ -15,7 +15,6 @@ export default function Home() {
   const fetched = useSelector((state) => state.homePageCollections.isFetched);
   useEffect(function () {
     if (collections.length === 0) {
-      console.log("gwandu </3");
       getHomePageCollections();
     }
   }, []);

@@ -42,7 +42,6 @@ export default function Product() {
     },
     [product]
   );
-  if (isFetched && !currentProduct._id) window.location = "/";
   if (!currentProduct._id) return <Loader height={90} width={90} />;
   return (
     <div>

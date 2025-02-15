@@ -23,7 +23,7 @@ export default function HomePageSlider() {
       {dummyData.map((data, i) => (
         <Button extraClasses="md:h-[520px]" key={i} to="#">
           <img
-            className="h-[300px] md:h-full w-full object-contain object-center"
+            className="h-[300px] md:h-full w-full object-cover object-top"
             src={`/slider${i + 1}.png`}
             alt="slider"
           />

@@ -96,7 +96,7 @@ export default function CategoriesComponent({
                 description={product.description}
                 price={product.price}
               >
-                Schalter
+                {product.title}
               </ProductComponent>
             );
           })}

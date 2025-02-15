@@ -151,7 +151,6 @@ exports.getProductBySlug = catchAsync(async (req, res, next) => {
   if (!product) {
     return next(new AppError("Product not found", 404));
   }
-
   res.status(200).json({
     message: "success",
     data: product,
