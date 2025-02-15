@@ -14,14 +14,17 @@ export default function HomePageSlider() {
     cssEase: "linear",
   };
 
-  const dummyData = new Array(6).fill(null);
+  const dummyData = new Array(4).fill(null);
   return (
-    <Slider className="slider md:min-w-full" {...settings}>
+    <Slider
+      className="slider md:min-w-full min-h-full bg-white mb-auto"
+      {...settings}
+    >
       {dummyData.map((data, i) => (
         <Button extraClasses="md:h-[520px]" key={i} to="#">
           <img
-            className="h-[300px] md:h-full w-full object-cover object-center"
-            src={i % 2 === 0 ? "/slider1.png" : "/slider1.png"}
+            className="h-[300px] md:h-full w-full object-contain object-center"
+            src={`/slider${i + 1}.png`}
             alt="slider"
           />
         </Button>

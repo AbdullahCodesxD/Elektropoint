@@ -9,9 +9,9 @@ export default function ProductAddToCart({ reverse, price, piece }) {
           reverse && "flex-row-reverse gap-3 "
         } flex-wrap gap-2  `}
       >
-        {/* <Button type="productBtn">
+        <Button type="productBtn">
           <CartSvg height={20} color="#222" /> Add To Cart
-        </Button> */}
+        </Button>
 
         <Button type="productBtn">
           {piece} {piece > 1 ? "Pieces" : "Piece"}

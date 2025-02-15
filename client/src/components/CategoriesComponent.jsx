@@ -1,12 +1,59 @@
+import Slider from "react-slick";
 import Button from "./Button";
 import ProductComponent from "./ProductComponent";
+import { ArrowSvg } from "./Svgs";
 
 const API = import.meta.env.VITE_API;
+
+const NextArrow = ({ onClick }) => (
+  <button
+    className="absolute left-1/2 bottom-0 transform  -translate-x-1/2 ml-7 bg-main text-white p-4 py-3 rounded-lg z-10 shadow-lg"
+    onClick={onClick}
+  >
+    <ArrowSvg height={20} />
+    {/* <FaChevronRight size={20} /> */}
+  </button>
+);
+const PrevArrow = ({ onClick }) => (
+  <button
+    className="absolute left-1/2 bottom-0 rotate-180 transform -translate-x-1/2 -ml-7 bg-main text-white p-4 py-3 rounded-lg z-10 shadow-lg"
+    onClick={onClick}
+  >
+    <ArrowSvg height={20} />
+  </button>
+);
+
 export default function CategoriesComponent({
   children,
   viewAll = true,
   category,
 }) {
+  const settings = {
+    dots: false,
+    arrows: true,
+    infinite: true,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    draggable: true,
+    nextArrow: <NextArrow />, // Custom Next Button
+    prevArrow: <PrevArrow />, // Custom Prev Button
+    responsive: [
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <div className="bg-white px-3 py-5 border-t border-black">
       <div className="max-w-[1500px] block mx-auto ">
@@ -24,7 +71,7 @@ export default function CategoriesComponent({
             </Button>
           )}
         </div>
-        <div className="flex flex-col md:flex-row gap-5 mt-5">
+        {/* <div className="flex flex-col md:flex-row gap-5 mt-5">
           {category.products?.map((product) => {
             return (
               <ProductComponent
@@ -38,7 +85,22 @@ export default function CategoriesComponent({
               </ProductComponent>
             );
           })}
-        </div>
+        </div> */}
+        <Slider {...settings} className="overflow-hidden pb-5">
+          {category.products?.map((product) => {
+            return (
+              <ProductComponent
+                key={product._id}
+                src={`${API}/products/${product?.media?.at(0)}`}
+                slug={product.slug}
+                description={product.description}
+                price={product.price}
+              >
+                Schalter
+              </ProductComponent>
+            );
+          })}
+        </Slider>
 
         {viewAll && (
           <Button

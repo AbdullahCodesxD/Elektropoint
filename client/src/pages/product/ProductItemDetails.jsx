@@ -1,4 +1,6 @@
-export default function ProductItemDetails({ product, children }) {
+import ProductAddToCart from "./ProductAddToCart";
+
+export default function ProductItemDetails({ product, box, children }) {
   const details = {
     Vendor: product.vendor || "No certain vendor",
     Type: product.productType || "No certain type",
@@ -14,24 +16,29 @@ export default function ProductItemDetails({ product, children }) {
   };
 
   return (
-    <div className="mt-4 md:min-w-[40%]">
-      <h2 className="capitalize max-w-[500px] text-[30px] font-semibold text-black/80 line-clamp-2">
-        {children}
-      </h2>
+    <div>
+      <div className="mt-4 md:min-w-[40%]">
+        <h2 className="capitalize max-w-[500px] text-[30px] font-semibold text-black/80 line-clamp-2">
+          {children}
+        </h2>
 
-      {Object.keys(details).map((detail) => {
-        return (
-          <div
-            className="flex gap-6 items-center  mt-3 px-1 md:min-w-full"
-            key={detail}
-          >
-            <span className="w-full text-[#333] text-medium">{detail}</span>
-            <span className="w-full text-[#333] text-medium capitalize">
-              {details[detail]}
-            </span>
-          </div>
-        );
-      })}
+        {Object.keys(details).map((detail) => {
+          return (
+            <div
+              className="flex gap-6 items-center  mt-3 px-1 md:min-w-full"
+              key={detail}
+            >
+              <span className="w-full text-[#333] text-medium">{detail}</span>
+              <span className="w-full text-[#333] text-medium capitalize">
+                {details[detail]}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      <div className="w-fit mt-3">
+        <ProductAddToCart reverse={true} piece={1} price={product.price || 0} />
+      </div>
     </div>
   );
 }

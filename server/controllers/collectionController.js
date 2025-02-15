@@ -104,7 +104,7 @@ exports.forHomePage = catchAsync(async function (req, res, next) {
         .sort({
           _id: -1,
         })
-        .limit(4)
+        .limit(10)
         .select("media slug title price description");
     } else {
       return Product.find({
