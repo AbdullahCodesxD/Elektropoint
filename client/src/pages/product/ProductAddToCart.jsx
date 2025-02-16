@@ -45,33 +45,37 @@ export default function ProductAddToCart({ padding, product, reverse, price }) {
           <CartSvg height={20} color="#222" /> Add To Cart
         </Button>
 
-        <div className="flex items-center gap-1 justify-center">
-          <Button
-            handler={(e) => {
-              e.preventDefault();
+        {!product.box && (
+          <div className="flex items-center gap-1 justify-center">
+            <Button
+              handler={(e) => {
+                e.preventDefault();
 
-              if (piece === 1) return;
-              setPiece(piece - 1);
-            }}
-            extraClasses="p-1 bg-dark/10 cursor-pointer text-[14px] rounded-full h-[25px] w-[25px] flex items-center justify-center"
-          >
-            -
-          </Button>
-          <p className="text-lg min-w-[25px] text-center">{piece}</p>
-          <Button
-            handler={(e) => {
-              e.preventDefault();
+                if (piece === 1) return;
+                setPiece(piece - 1);
+              }}
+              extraClasses="p-1 bg-dark/10 cursor-pointer text-[14px] rounded-full h-[25px] w-[25px] flex items-center justify-center"
+            >
+              -
+            </Button>
+            <p className="text-lg min-w-[25px] text-center">{piece}</p>
+            <Button
+              handler={(e) => {
+                e.preventDefault();
 
-              setPiece(piece + 1);
-            }}
-            extraClasses="p-1 bg-dark/10 cursor-pointer text-[14px] rounded-full h-[25px] w-[25px] flex items-center justify-center"
-          >
-            +
-          </Button>
-        </div>
+                setPiece(piece + 1);
+              }}
+              extraClasses="p-1 bg-dark/10 cursor-pointer text-[14px] rounded-full h-[25px] w-[25px] flex items-center justify-center"
+            >
+              +
+            </Button>
+          </div>
+        )}
 
-        {price && (
-          <p className="font-semibold text-[24px]">Price : ${price}.00</p>
+        {!product.box && product.price && (
+          <p className="font-semibold text-[24px]">
+            Total : ${Number(product.price * piece).toFixed(2)}
+          </p>
         )}
       </div>
     </div>

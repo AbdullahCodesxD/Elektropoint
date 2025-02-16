@@ -62,11 +62,14 @@ export default function Product() {
       </ProductItem>
       <div className="lg:hidden px-3">
         {currentProduct.box && (
-          <ProductAddToCart product={currentProduct} piece={1} />
+          <>
+            <ProductCustomization product={currentProduct} />
+            <div className="w-fit block ml-auto mb-5 -mt-3">
+              <ProductAddToCart product={currentProduct} piece={1} />
+            </div>
+          </>
         )}
-        {currentProduct.box && (
-          <ProductCustomization product={currentProduct} />
-        )}
+
         <ProductDescription>
           <p
             className="description break-words"
@@ -107,10 +110,6 @@ export default function Product() {
               __html: DOMPurify.sanitize(currentProduct.description),
             }}
           />
-
-          {/* <div className="px-5">
-            <h4 className="mb-2 text-lg">Alternate Articles</h4>
-          </div> */}
         </div>
         <div className="bg-white p-3 rounded-md">
           <h4 className="font-medium text-lg">Other customers also bought.</h4>

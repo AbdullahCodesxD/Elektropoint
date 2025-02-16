@@ -33,6 +33,10 @@ const productSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  box: {
+    type: Boolean,
+    default: false,
+  },
 
   metaTitle: String,
   metaDescription: String,

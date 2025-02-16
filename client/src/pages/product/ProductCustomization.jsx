@@ -1,10 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/Button";
 import { PlusSvg } from "../../components/Svgs";
-import {
-  addProduct,
-  removeOrToggleProduct,
-} from "../../slices/customizeBoxSlice";
+import { addProduct } from "../../slices/customizeBoxSlice";
 import { useState } from "react";
 import ProductSelectComponent from "../../components/ProductSelectComponent";
 import ProductSelectCategoriesComponent from "../../components/ProductSelectCategoriesComponent";
@@ -20,7 +17,7 @@ export default function ProductCustomization({ border, product }) {
   const dispatch = useDispatch();
 
   const box = useSelector((state) => state.customBox.box);
-  const boxProducts = box.filter((p) => p._id);
+  const boxProducts = [...box.filter((p) => p._id), product];
   const [currentIndex, setCurrentIndex] = useState(0);
   const collections = useSelector((state) => state.collections);
 
@@ -160,7 +157,7 @@ export default function ProductCustomization({ border, product }) {
                   {product.title}
                 </p>
                 <p className="font-semibold min-w-[30%] text-end px-2 py-1 rounded-md text-sm">
-                  ${product.price}
+                  ${product.price.toFixed(2)}
                 </p>
               </div>
             </div>
@@ -172,7 +169,10 @@ export default function ProductCustomization({ border, product }) {
                   Total
                 </p>
                 <p className="font-semibold min-w-[30%] text-end px-2 py-1 rounded-md text-sm">
-                  ${boxProducts.reduce((prev, curr) => prev + curr.price, 0)}
+                  $
+                  {boxProducts
+                    .reduce((prev, curr) => prev + curr.price, 0)
+                    .toFixed(2)}
                 </p>
               </div>
             </div>
