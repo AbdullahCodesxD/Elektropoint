@@ -47,7 +47,7 @@ export default function Button({
     productDesktop: "text-xl font-medium w-full p-2 border-b border-black",
     // Cart
     checkout:
-      "bg-main text-white text-center w-full py-2.5 px-3 font-semibold rounded-md text-[18px]",
+      "bg-main text-center w-full py-1.5 px-3 font-medium text-dark rounded-md text-base transition-all hover:opacity-50",
     cartBtns: "p-1 px-2",
 
     // Checkout

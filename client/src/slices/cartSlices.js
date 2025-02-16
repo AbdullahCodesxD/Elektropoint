@@ -12,10 +12,11 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const currentIndex = state.cart.findIndex(
-        (p) => p.id === action.payload.id
+        (p) => p.product._id === action.payload.product._id
       );
       if (currentIndex !== -1) {
-        state.cart[currentIndex].quantity += action.payload.quantity;
+        state.cart[currentIndex].product.quantity += action.payload.quantity;
+        console.log(state.cart, "------------------------------");
         state.noOfProducts += action.payload.quantity;
         state.price += action.payload.product.price * action.payload.quantity;
         return;
@@ -32,24 +33,36 @@ const cartSlice = createSlice({
       state.price -= action.payload.product.price * action.payload.quantity;
     },
     incrementProduct: (state, action) => {
-      state.cart = state.cart.map((product) => {
-        if (product.id === action.payload) {
-          return { ...product, quantity: product.quantity + 1 };
-        }
-        return product;
-      });
-      state.noOfProducts = state.cart.length;
-      state.price += action.payload.price;
+      const productIndex = state.cart.findIndex(
+        (p) => p.product._id === action.payload.product._id
+      );
+
+      if (productIndex !== -1) {
+        state.cart[productIndex].quantity += action.payload.quantity || 1;
+        state.noOfProducts += action.payload.quantity || 1;
+        state.price +=
+          state.cart[productIndex].product.price *
+          (action.payload.quantity || 1);
+      }
     },
+
     decrementProduct: (state, action) => {
-      state.cart = state.cart.map((product) => {
-        if (product.id === action.payload) {
-          return { ...product, quantity: product.quantity - 1 };
+      const productIndex = state.cart.findIndex(
+        (p) => p.product._id === action.payload.product._id
+      );
+
+      if (productIndex !== -1) {
+        if (state.cart[productIndex].quantity > 1) {
+          state.cart[productIndex].quantity -= 1; // Decrement quantity
+          state.noOfProducts -= 1;
+          state.price -= state.cart[productIndex].product.price;
+        } else {
+          // Remove product if quantity reaches 0
+          state.price -= state.cart[productIndex].product.price;
+          state.noOfProducts -= 1;
+          state.cart.splice(productIndex, 1); // Remove item from array
         }
-        return product;
-      });
-      state.noOfProducts = state.cart.length;
-      state.price -= action.payload.price;
+      }
     },
   },
 });

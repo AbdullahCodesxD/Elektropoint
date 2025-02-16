@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Button from "../../components/Button";
 import { CartSvg } from "../../components/Svgs";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../slices/cartSlices";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, incrementProduct } from "../../slices/cartSlices";
 import { useNavigate } from "react-router";
 
 export default function ProductAddToCart({ padding, product, reverse, price }) {
@@ -10,11 +10,28 @@ export default function ProductAddToCart({ padding, product, reverse, price }) {
   const dispatch = useDispatch();
   const location = useNavigate();
 
+  const cartProducts = useSelector((state) => state.cart.cart);
+
   function handleSettingsProduct(e) {
     e.preventDefault();
 
-    dispatch(addToCart({ product, quantity: piece }));
-    location("/cart");
+    const currentProductIndex = cartProducts.findIndex(
+      (p) => p.product._id === product._id
+    );
+
+    if (currentProductIndex !== -1) {
+      dispatch(
+        incrementProduct({
+          product: { _id: product._id },
+          quantity: piece,
+          price: product.price * piece,
+        })
+      );
+      // console.log("Product incremented!");
+    } else {
+      // console.log("Adding new product to cart...");
+      dispatch(addToCart({ product, quantity: piece }));
+    }
   }
 
   return (
