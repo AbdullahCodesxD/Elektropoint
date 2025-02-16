@@ -26,6 +26,6 @@ export const getProduct = async function (slug) {
   } catch (err) {
     dispatch(setIsFetched(false));
 
-    window.location = "/";
+    // window.location = "/";
   }
 };

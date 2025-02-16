@@ -8,28 +8,30 @@ import { useNavigate } from "react-router";
 export default function ProductAddToCart({ padding, product, reverse, price }) {
   const [piece, setPiece] = useState(1);
   const dispatch = useDispatch();
-  const location = useNavigate();
 
   const cartProducts = useSelector((state) => state.cart.cart);
-
+  const box = useSelector((state) => state.customBox.box);
   function handleSettingsProduct(e) {
     e.preventDefault();
 
-    const currentProductIndex = cartProducts.findIndex(
-      (p) => p.product._id === product._id
-    );
-
-    if (currentProductIndex !== -1) {
-      dispatch(
-        incrementProduct({
-          product: { _id: product._id },
-          quantity: piece,
-          price: product.price * piece,
-        })
+    const arrOfProducts = [product, ...box.filter((p) => p._id)];
+    arrOfProducts.forEach((product) => {
+      const currentProductIndex = cartProducts.findIndex(
+        (p) => p.product._id === product._id
       );
-    } else {
-      dispatch(addToCart({ product, quantity: piece }));
-    }
+      if (currentProductIndex !== -1) {
+        dispatch(
+          incrementProduct({
+            product: { _id: product._id },
+            quantity: piece,
+            price: product.price * piece,
+          })
+        );
+      } else {
+        dispatch(addToCart({ product, quantity: piece }));
+      }
+    });
+    alert("Product added to cart successfully");
   }
 
   return (

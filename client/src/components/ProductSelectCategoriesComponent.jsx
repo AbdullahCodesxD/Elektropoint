@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom";
 import { ArrowSvg } from "./Svgs";
 
 export default function ProductSelectCategoriesComponent({
   children,
   products,
   src,
+  handler,
 }) {
   return (
-    <Link
+    <div
+      onClick={handler}
       to={children}
-      className="block w-full p-5 bg-white rounded-xl"
+      className="block cursor-pointer w-full p-5 bg-white rounded-xl"
       style={{
         boxShadow: "0px 0px 4px rgba(0,0,0,.3)",
       }}
@@ -19,14 +20,12 @@ export default function ProductSelectCategoriesComponent({
       </h3>
 
       <div className="flex items-center justify-evenly gap-1 mt-1">
-        <img src={src} className="w-[95px] object-cover" />
-        <img src={src} className="w-[95px] object-cover" />
-        <img src={src} className="w-[95px] object-cover" />
+        <img src={src} className="w-full aspect-video  object-contain" />
       </div>
 
       <p className="block w-fit ml-auto mt-3">
         {products} {products > 1 ? "products" : "product"}
       </p>
-    </Link>
+    </div>
   );
 }

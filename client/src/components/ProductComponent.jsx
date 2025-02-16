@@ -33,7 +33,7 @@ export default function ProductComponent({
     <div className="p-2">
       <Link
         to={`/product/${slug}`}
-        className="p-[20px] w-full cursor-pointer"
+        className="p-[20px] w-full cursor-pointer block shadow-[0px_0px_10px_rgba(0,0,0,.25)] rounded-lg"
         onMouseDown={(e) => handleStart(e.clientX)}
         onMouseMove={(e) => handleMove(e.clientX)}
         onTouchStart={(e) => handleStart(e.touches[0].clientX)}

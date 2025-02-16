@@ -3,7 +3,7 @@ import Button from "./Button";
 export default function NavbarLinksFooter({ toggleHamburger }) {
   return (
     <div className="py-2 flex items-center justify-between">
-      <div className="flex items-center ">
+      {/* <div className="flex items-center ">
         <Button type="navbarFooter">en</Button>
         <Button
           extraClasses="border-l-2 border-r-2 border-main "
@@ -20,7 +20,7 @@ export default function NavbarLinksFooter({ toggleHamburger }) {
         extraClasses="font-semibold"
       >
         Login
-      </Button>
+      </Button> */}
     </div>
   );
 }

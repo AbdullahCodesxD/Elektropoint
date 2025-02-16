@@ -1,22 +1,27 @@
-import { Link, useParams } from "react-router-dom";
-
-export default function ProductSelectComponent({ children, price, src }) {
-  const { product, category } = useParams();
+export default function ProductSelectComponent({
+  children,
+  price,
+  src,
+  handler = () => {},
+}) {
   return (
-    <Link
-      to={`/product/${category}/${product}`}
-      className="block w-full p-5 bg-white rounded-xl"
-      style={{
-        boxShadow: "0px 0px 4px rgba(0,0,0,.3)",
-      }}
+    <div
+      onClick={handler}
+      className="block w-full cursor-pointer bg-white rounded-xl overflow-hidden border border-dark"
     >
-      <h3 className="text-dark/70 font-semibold text-[22px]">{children}</h3>
       <img
         src={src}
-        className="my-2 w-full block mx-auto object-cover rotate-180"
+        className="aspect-video object-contain object-top w-full"
       />
+      <div className="p-3 flex gap-3">
+        <h3 className="text-dark/70 font-semibold text-[16px] line-clamp-1">
+          {children}
+        </h3>
 
-      <p className="block w-fit ml-auto font-semibold text-[24px]">${price}</p>
-    </Link>
+        <p className="block w-fit ml-auto font-semibold text-[18px]">
+          ${price}
+        </p>
+      </div>
+    </div>
   );
 }

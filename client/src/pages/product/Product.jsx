@@ -13,6 +13,7 @@ import { getProduct, searchProducts } from "../../utils/searchApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentProduct } from "../../slices/searchSlice";
 import Loader from "../../components/Loader";
+import { goToInitialState } from "../../slices/customizeBoxSlice";
 
 const API = import.meta.env.VITE_API;
 export default function Product() {
@@ -36,12 +37,14 @@ export default function Product() {
     function () {
       dispatch(setCurrentProduct({}));
       getProduct(product);
+      dispatch(goToInitialState());
       if (otherProducts.length < 2) {
         searchProducts("product");
       }
     },
     [product]
   );
+  if (isFetched && !currentProduct._id) window.location = "/";
   if (!currentProduct._id) return <Loader height={90} width={90} />;
   return (
     <div>
@@ -53,16 +56,17 @@ export default function Product() {
             ? `${API}/products/${currentProduct.media?.at(0)}`
             : "/product.png"
         }
+        box={currentProduct.box}
       >
         {currentProduct?.title || ""}
       </ProductItem>
-      <div className="lg:hidden">
-        <ProductAddToCart
-          product={currentProduct}
-          piece={1}
-          price={currentProduct.price || 0}
-        />
-        <ProductCustomization product={currentProduct} />
+      <div className="lg:hidden px-3">
+        {currentProduct.box && (
+          <ProductAddToCart product={currentProduct} piece={1} />
+        )}
+        {currentProduct.box && (
+          <ProductCustomization product={currentProduct} />
+        )}
         <ProductDescription>
           <p
             className="description break-words"

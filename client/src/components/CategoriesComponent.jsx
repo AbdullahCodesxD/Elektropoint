@@ -86,7 +86,7 @@ export default function CategoriesComponent({
             );
           })}
         </div> */}
-        <Slider {...settings} className="overflow-hidden pb-5">
+        <Slider {...settings} className="overflow-hidden pb-14">
           {category.products?.map((product) => {
             return (
               <ProductComponent

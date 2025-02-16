@@ -21,6 +21,9 @@ export default function ProductItemDetails({ product, box, children }) {
         <h2 className="capitalize max-w-[500px] text-[30px] font-semibold text-black/80 line-clamp-2">
           {children}
         </h2>
+        <p className="bg-main w-fit px-4 py-1 rounded-md text-white">
+          Price : ${product.price.toFixed(2)}
+        </p>
 
         {Object.keys(details).map((detail) => {
           return (
@@ -36,14 +39,16 @@ export default function ProductItemDetails({ product, box, children }) {
           );
         })}
       </div>
-      <div className="w-fit mt-3">
-        <ProductAddToCart
-          product={product}
-          reverse={true}
-          piece={1}
-          // price={product.price || 0}
-        />
-      </div>
+      {!box && (
+        <div className="w-fit mt-3">
+          <ProductAddToCart
+            product={product}
+            reverse={true}
+            piece={1}
+            // price={product.price || 0}
+          />
+        </div>
+      )}
     </div>
   );
 }

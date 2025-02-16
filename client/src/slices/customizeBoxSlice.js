@@ -17,8 +17,12 @@ const customizeBoxSlice = createSlice({
         state.box[action.payload.index] = [];
       }
     },
+    goToInitialState: function (state) {
+      state.box = [[], [], [], [], [], [], [], [], []];
+    },
   },
 });
-export const { addProduct, removeOrToggleProduct } = customizeBoxSlice.actions;
+export const { addProduct, removeOrToggleProduct, goToInitialState } =
+  customizeBoxSlice.actions;
 
 export default customizeBoxSlice.reducer;
