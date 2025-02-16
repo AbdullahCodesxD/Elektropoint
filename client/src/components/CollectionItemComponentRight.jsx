@@ -28,7 +28,6 @@ export default function CollectionItemComponentRight({
           __html: DOMPurify.sanitize(description),
         }}
       />
-
       {/* <div className="border border-[#ddd] rounded-md flex items-center justify-center mt-3">
         <span className="capitalize w-full text-end pr-2">
           {pieces} {pieces > 1 ? "pieces" : "piece"}

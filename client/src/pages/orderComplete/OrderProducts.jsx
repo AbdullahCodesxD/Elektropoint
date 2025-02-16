@@ -1,7 +1,24 @@
+import { useSelector } from "react-redux";
+
 export default function OrderProducts() {
+  const cart = useSelector((state) => state.cart);
+  const products = cart.cart.map(
+    (product) =>
+      `${product.product.title} ($${product.product.price.toFixed(2)} * ${
+        product.quantity
+      } = $${(product.product.price.toFixed(2) * product.quantity).toFixed(2)})`
+  );
   return (
-    <div className="m-3 py-4 px-7 bg-[#eaeaea] rounded-md">
-      <div className="grid grid-cols-3 gap-5 my-3 pb-5 border-b border-black">
+    <div className="m-3 py-4 px-7 bg-[#eaeaea] h-fit rounded-md">
+      <div className="my-3 pb-5 border-b border-black">
+        <div className="pb-3">
+          {products.map((_, i) => (
+            <p key={_} className="mb-0.5 text-[15px]">
+              {_}
+            </p>
+          ))}
+        </div>
+        {/* <OrderProduct src="/product.png" noOfProducts="2" />
         <OrderProduct src="/product.png" noOfProducts="2" />
         <OrderProduct src="/product.png" noOfProducts="2" />
         <OrderProduct src="/product.png" noOfProducts="2" />
@@ -9,26 +26,25 @@ export default function OrderProducts() {
         <OrderProduct src="/product.png" noOfProducts="2" />
         <OrderProduct src="/product.png" noOfProducts="2" />
         <OrderProduct src="/product.png" noOfProducts="2" />
-        <OrderProduct src="/product.png" noOfProducts="2" />
-        <OrderProduct src="/product.png" noOfProducts="2" />
+        <OrderProduct src="/product.png" noOfProducts="2" /> */}
       </div>
 
       <p className="flex items-center justify-between mt-1">
         <span className="text-lg">Subtotal</span>
-        <span className="text-lg">$200.00</span>
+        <span className="text-lg">${cart.price.toFixed(2)}</span>
       </p>
       <p className="flex items-center justify-between mt-1">
         <span className="text-lg">Shipping</span>
-        <span className="text-lg">$200.00</span>
+        <span className="text-lg">$0.00</span>
       </p>
       <p className="flex items-center justify-between mt-1">
         <span className="text-lg">Taxes</span>
-        <span className="text-lg">$200.00</span>
+        <span className="text-lg">$0.00</span>
       </p>
 
       <p className="flex items-center justify-between pt-3 mt-3 border-t border-black">
         <span className="text-2xl font-bold">Total</span>
-        <span className="text-2xl font-bold">$223.00</span>
+        <span className="text-2xl font-bold">${cart.price.toFixed(2)}</span>
       </p>
     </div>
   );

@@ -14,6 +14,7 @@ export default function CollectionItems({ products }) {
           }
           description={product.description}
           pieces={1}
+          product={product}
           to={`/product/${product.slug}`}
         >
           {product.title}

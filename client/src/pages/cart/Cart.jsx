@@ -6,7 +6,6 @@ const API = import.meta.env.VITE_API;
 
 export default function Cart() {
   const cart = useSelector((state) => state.cart);
-  console.log(cart, "--");
   return (
     <div className="p-3 max-w-[1500px] mx-auto block min-h-[70vh]">
       <h3 className="mt-3 pb-1.5 border-b-2 border-black text-[28px] font-semibold">

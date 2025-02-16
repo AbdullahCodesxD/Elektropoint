@@ -10,12 +10,14 @@ export default function CollectionItemComponent({
   src,
   pieces,
   to,
+  product,
 }) {
   const dispatch = useDispatch();
   return (
     <Link
       to={to}
-      onClick={() => {
+      onClick={(e) => {
+        if (e.target.type === "submit") return;
         dispatch(setIsFetched(false));
       }}
       className=" p-3 rounded-lg bg-white"
@@ -37,7 +39,7 @@ export default function CollectionItemComponent({
         </CollectionItemComponentRight>
       </div>
       <div className="border-t border-[#ddd] flex items-center justify-end p-2 mt-4">
-        <ProductAddToCart paddding={false} reverse={true} />
+        <ProductAddToCart product={product} paddding={false} reverse={true} />
       </div>
     </Link>
   );

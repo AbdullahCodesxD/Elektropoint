@@ -27,9 +27,7 @@ export default function ProductAddToCart({ padding, product, reverse, price }) {
           price: product.price * piece,
         })
       );
-      // console.log("Product incremented!");
     } else {
-      // console.log("Adding new product to cart...");
       dispatch(addToCart({ product, quantity: piece }));
     }
   }

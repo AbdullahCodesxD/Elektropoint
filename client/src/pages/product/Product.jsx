@@ -82,6 +82,7 @@ export default function Product() {
                   src={`${API}/products/${product?.media?.at(0)}`}
                   description={product.description}
                   pieces={1}
+                  product={product}
                   to={`/product/${product.slug}`}
                 >
                   {product.title}
@@ -103,9 +104,9 @@ export default function Product() {
             }}
           />
 
-          <div className="px-5">
+          {/* <div className="px-5">
             <h4 className="mb-2 text-lg">Alternate Articles</h4>
-          </div>
+          </div> */}
         </div>
         <div className="bg-white p-3 rounded-md">
           <h4 className="font-medium text-lg">Other customers also bought.</h4>
@@ -117,6 +118,7 @@ export default function Product() {
                   src={`${API}/products/${product?.media?.at(0)}`}
                   description={product.description}
                   pieces={1}
+                  product={product}
                   to={`/product/${product.slug}`}
                 >
                   {product.title}

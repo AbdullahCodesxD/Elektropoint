@@ -14,12 +14,11 @@ export default function CartProduct({
   const dispatch = useDispatch();
 
   function incrementNoOfProducts() {
-    setNoOfProducts(noOfProducts + 1);
-
+    setNoOfProducts((noOfProducts) => noOfProducts + 1);
     dispatch(
       incrementProduct({
         product: { _id: id },
-        quantity: quantity,
+        // quantity: quantity,
         price: price * quantity,
       })
     );
