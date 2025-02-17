@@ -3,7 +3,6 @@ import DashboardNavigation from "./DashboardNavigation";
 import Cookies from "js-cookie";
 export default function Dashboard() {
   const jwt = Cookies.get("jwt");
-  console.log(jwt, "--");
   if (!jwt.length > 0) window.location = "/login";
   return (
     <div

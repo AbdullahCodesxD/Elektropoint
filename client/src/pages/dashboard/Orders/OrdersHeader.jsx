@@ -19,13 +19,13 @@ export default function OrdersHeader({ setFilter, filter }) {
       >
         Unfulfilled
       </Button>
-      <Button
+      {/* <Button
         extraClasses={filter === "unPaid" && "bg-main"}
         handler={() => setFilter("unPaid")}
         type="orderHeader"
       >
         Unpaid
-      </Button>
+      </Button> */}
     </div>
   );
 }

@@ -20,9 +20,10 @@ export const postProduct = async function (data) {
 };
 
 export const patchProductData = async function (productId, data) {
-  const res = await patchApi(`/products/${productId}`, data);
-
-  window.location = `/dashboard/products/product/${res.data.title}`;
+  await patchApi(`/products/${productId}`, data);
+};
+export const patchProductMedia = async function (productId, data) {
+  await patchApi(`/products/images/${productId}`, data);
 };
 export const patchProductCategory = async function (productId, data) {
   const res = await patchApi(`/products/category/${productId}`, data);

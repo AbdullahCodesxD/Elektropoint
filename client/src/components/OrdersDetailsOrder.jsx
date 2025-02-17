@@ -33,9 +33,9 @@ export default function OrdersDetailsOrder({
             <h4 className="text-[15px] font-semibold text-dark/70 capitalize">
               {productName}
             </h4>
-            <p className="text-[15px] text-dark/70 max-w-[250px] leading-[1.1] capitalize">
+            {/* <p className="text-[15px] text-dark/70 max-w-[250px] leading-[1.1] capitalize">
               {productDescription}
-            </p>
+            </p> */}
           </div>
         </div>
 

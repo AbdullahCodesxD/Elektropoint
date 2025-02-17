@@ -8,7 +8,7 @@ export default function ProductsComponentHeader({ selectAll, selected }) {
     <div
       className="p-3 grid min-w-[1000px] justify-between border-t  border-dark"
       style={{
-        gridTemplateColumns: "150px 150px 150px 120px 120px 150px",
+        gridTemplateColumns: "270px 150px 150px  120px 150px",
       }}
     >
       <div className=" flex gap-2 items-center ">
@@ -30,7 +30,7 @@ export default function ProductsComponentHeader({ selectAll, selected }) {
 
       <p className="text-[15px] text-center">Inventory</p>
 
-      <p className="text-[15px] text-center">Sales channels</p>
+      {/* <p className="text-[15px] text-center">Sales channels</p> */}
 
       <p className="text-[15px] text-center">Category</p>
 

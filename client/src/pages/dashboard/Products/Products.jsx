@@ -64,7 +64,7 @@ export default function Products() {
 
   return (
     <div className="pb-[150px] md:pb-7 p-7 rounded-lg bg-[#EBEBEB]">
-      <h3 className="font-semibold text-2xl">Orders</h3>
+      <h3 className="font-semibold text-2xl">Products</h3>
 
       <div className="mt-3 bg-white rounded-lg ">
         <ProductsHeader filter={filter} setFilter={setFilter} />

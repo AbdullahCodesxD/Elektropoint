@@ -23,7 +23,7 @@ export default function ProductsComponent({
       to={`/dashboard/products/product/${product.title}`}
       className="p-3 grid min-w-[1000px] justify-between border-t border-dark/60"
       style={{
-        gridTemplateColumns: "150px 150px 150px 120px 120px 150px",
+        gridTemplateColumns: "270px 150px 150px 120px 150px",
       }}
     >
       <div
@@ -61,8 +61,7 @@ export default function ProductsComponent({
         {product.status}
       </Button>
 
-      <p className="text-[15px] text-center">99 stock in 1 variant</p>
-      <p className="text-[15px] text-center">2</p>
+      <p className="text-[15px] text-center">{product.inventory}</p>
       <p className="text-[15px] text-center capitalize">
         {product?.category?.title || `Vendor : ${product?.vendor}`}
       </p>

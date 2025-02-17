@@ -8,8 +8,8 @@ export default function NewOrder() {
   const [customer, setCustomer] = useState("");
   const [product, setProduct] = useState("");
   const [fulfilment, setFulfilment] = useState("unfullfilled");
-  const [paymentStatus, setPaymentStatus] = useState("unpaid");
-  const [delivery, setDelivery] = useState("delivery");
+  // const [paymentStatus, setPaymentStatus] = useState("paid");
+  // const [delivery, setDelivery] = useState("delivery");
 
   const customers = useSelector((state) => state.customers.customers);
   const products = useSelector((state) => state.products.products);
@@ -25,8 +25,8 @@ export default function NewOrder() {
       customer: customerId,
       product: productId,
       fullFilmentStatus: fulfilment,
-      paymentStatus,
-      deliveryMethod: delivery,
+      paymentStatus: "paid",
+      deliveryMethod: "delivery",
     });
   }
 
@@ -101,7 +101,7 @@ export default function NewOrder() {
             <option value="unfullfilled">Un-Fulfilled</option>
           </select>
         </div>
-        <div className="mb-1 flex flex-col gap-2">
+        {/* <div className="mb-1 flex flex-col gap-2">
           <label
             htmlFor="payment"
             className="mt-1 pl-0.5 -mb-2 text-base font-medium"
@@ -116,9 +116,9 @@ export default function NewOrder() {
             <option value="paid">Paid</option>
             <option value="unpaid">Un-Paid</option>
           </select>
-        </div>
+        </div> */}
 
-        <div className="mb-1 flex flex-col gap-2">
+        {/* <div className="mb-1 flex flex-col gap-2">
           <label
             htmlFor="delivery"
             className="mt-1 pl-0.5 -mb-2 text-base font-medium"
@@ -133,7 +133,7 @@ export default function NewOrder() {
             <option value="delivery">Delivery</option>
             <option value="pickup">Pickup</option>
           </select>
-        </div>
+        </div> */}
         <Button extraClasses="ml-auto block w-fit bg-main text-white px-12 py-1.5 rounded-md mt-3  transition-all hover:opacity-80">
           Create
         </Button>

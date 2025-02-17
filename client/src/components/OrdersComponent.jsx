@@ -32,9 +32,9 @@ export default function OrdersComponent({
   return (
     <Link
       to={`/dashboard/orders/order/${id}`}
-      className="p-3 grid min-w-[1250px] justify-between border-t border-dark/60"
+      className="p-3 grid min-w-[1050px] justify-between border-t border-dark/60"
       style={{
-        gridTemplateColumns: "100px 200px 150px 100px 150px 150px 150px 150px",
+        gridTemplateColumns: "100px 200px 150px 100px 150px 150px",
       }}
     >
       <div onClick={handleCheckboxClick} className="flex gap-2 items-center">
@@ -60,11 +60,8 @@ export default function OrdersComponent({
       <p className="text-[15px]">{new Date(date).toDateString()}</p>
       <p className="text-[15px]">{customer.name}</p>
       <p className="text-[15px]">${String(price.toFixed(2))}</p>
-      <p className="text-[15px]">{paymentStatus}</p>
       <p className="text-[15px]">{fullFilmentStatus}</p>
       <p className="text-[15px]">{noOfItems}</p>
-      <p className="text-[15px]">{deliveryMethod}</p>
-      {/* <p className="text-[15px]">{method}</p> */}
     </Link>
   );
 }

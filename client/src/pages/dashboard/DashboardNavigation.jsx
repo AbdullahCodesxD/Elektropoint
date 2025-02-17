@@ -77,7 +77,7 @@ export default function DashboardNavigation() {
           Customers
         </DashboardNavigationComponent>
 
-        <DashboardNavigationComponent
+        {/* <DashboardNavigationComponent
           to="/dashboard/analytics"
           svg={
             <AnalyticsSvg
@@ -89,7 +89,7 @@ export default function DashboardNavigation() {
           active={location === "analytics"}
         >
           Analytics
-        </DashboardNavigationComponent>
+        </DashboardNavigationComponent> */}
 
         <DashboardNavigationComponent
           to="/dashboard/discount"

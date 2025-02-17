@@ -208,6 +208,38 @@ exports.getProductsByCollection = catchAsync(async (req, res, next) => {
     noOfProducts: products.length,
   });
 });
+exports.updateImages = catchAsync(async (req, res, next) => {
+  const id = req.params.id;
+  if (!id) return next(new AppError("Valid product id is required", 400));
+  const product = await Product.findOne({ _id: id });
+  const orignal = req.body.orignal;
+  if (!product) {
+    return next(new AppError("Product not found", 404));
+  }
+
+  const media = orignal
+    ? [...product.media, ...req?.files?.map((file) => file.filename)]
+    : req?.files?.map((file) => file.filename);
+  console.log(media, "------------------");
+  const newProduct = await Product.findOneAndUpdate(
+    {
+      _id: id,
+    },
+    {
+      $set: {
+        media,
+      },
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  res.status(200).json({
+    message: "success",
+    data: newProduct,
+  });
+});
 exports.updateProduct = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   if (!id) return next(new AppError("Valid product id is required", 400));

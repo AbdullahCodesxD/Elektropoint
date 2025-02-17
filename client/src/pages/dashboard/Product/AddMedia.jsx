@@ -12,14 +12,16 @@ export default function AddMedia({
 }) {
   const [urls, setUrls] = useState([]);
   const [currentImages, setCurrentImages] = useState([]);
-
   const fetchImage = function () {
     try {
       currentMedia?.forEach((image) => {
         fetch(`${API}/products/${image}`)
           .then((res) => res.blob())
           .then((res) =>
-            setCurrentImages([...currentImages, URL.createObjectURL(res)])
+            setCurrentImages((prevImages) => [
+              ...prevImages,
+              URL.createObjectURL(res),
+            ])
           );
       });
     } catch (error) {
@@ -76,6 +78,7 @@ export default function AddMedia({
   }
   useEffect(
     function () {
+      if (!currentMedia || currentImages.length > 0) return;
       fetchImage();
     },
     [currentMedia]

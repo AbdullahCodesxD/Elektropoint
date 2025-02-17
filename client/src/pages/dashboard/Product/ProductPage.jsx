@@ -10,7 +10,11 @@ import { useNavigate, useParams } from "react-router";
 import { BackSvg } from "../../../components/Svgs";
 import Button from "../../../components/Button";
 import { useEffect, useState } from "react";
-import { getProducts, patchProductData } from "../../../utils/productsApi";
+import {
+  getProducts,
+  patchProductData,
+  patchProductMedia,
+} from "../../../utils/productsApi";
 import { useSelector } from "react-redux";
 
 export default function ProductPage() {
@@ -57,12 +61,11 @@ export default function ProductPage() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // const formData = new FormData();
+    const formData = new FormData();
 
-    // media.forEach((media) => formData.append("images", media));
+    media.forEach((media) => formData.append("images", media));
+
     // // formData.append("category", collection);
-    console.log(deleteImages, "gwandu", media);
-    return;
     const data = {
       title,
       description: editor?.getHTML(),
@@ -80,16 +83,22 @@ export default function ProductPage() {
       )
     );
 
-    if (filteredData.description == product.description)
+    if (filteredData.description == product?.description)
       delete filteredData.description;
-    if (filteredData.status == product.status) delete filteredData.status;
-    if (filteredData.category === product.category.title)
+    if (filteredData.status == product?.status) delete filteredData.status;
+    if (filteredData.category === product?.category?.title)
       delete filteredData.category;
 
     if (Object.keys(filteredData).length > 0) {
       patchProductData(product._id, filteredData);
     }
-    // window.location = `/dashboard/products/product/${data.title}`;
+    if (media.length > 0) {
+      deleteImages.length > 0
+        ? formData.append("orignal", false)
+        : formData.append("orignal", true);
+      patchProductMedia(product._id, formData);
+    }
+    window.location.reload();
   }
 
   useEffect(

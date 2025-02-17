@@ -102,7 +102,7 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/",
             element: (
-              <p className="bg-white p-5 m-3 text-center font-semibold max-w-[700px]">
+              <p className="bg-white p-5 m-3 text-center font-semibold">
                 No Data Yet
               </p>
             ),
@@ -169,15 +169,15 @@ const router = createBrowserRouter([
             element: <CreateDiscount />,
           },
 
-          //analytics
-          {
-            path: "/dashboard/analytics",
-            element: (
-              <p className="bg-white p-5 m-3 text-center font-semibold max-w-[700px]">
-                No Data Yet
-              </p>
-            ),
-          },
+          // //analytics
+          // {
+          //   path: "/dashboard/analytics",
+          //   element: (
+          //     <p className="bg-white p-5 m-3 text-center font-semibold">
+          //       No Data Yet
+          //     </p>
+          //   ),
+          // },
           // Settings
           {
             path: "/dashboard/settings",

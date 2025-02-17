@@ -17,6 +17,11 @@ router.get(
 );
 
 router.patch("/:id", productController.updateProduct);
+router.patch(
+  "/images/:id",
+  productController.uploadProductImages,
+  productController.updateImages
+);
 router.patch("/category/:id", productController.updateProductCategory);
 router.delete("/:id", productController.deleteProduct);
 
