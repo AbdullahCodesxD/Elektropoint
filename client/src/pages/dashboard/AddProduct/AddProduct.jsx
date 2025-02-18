@@ -34,6 +34,7 @@ export default function AddProduct() {
 
   const [productType, setProductType] = useState("");
   const [vendor, setVendor] = useState("");
+  const [inventory, setInventory] = useState("");
   const [collection, setCollection] = useState("");
   const [tags, setTags] = useState("");
   const [price, setPrice] = useState(0);
@@ -65,7 +66,15 @@ export default function AddProduct() {
     // formData.append("metaDescription", metaDescription);
     formData.append("productType", productType);
     formData.append("vendor", vendor);
-    console.log(media, "media");
+    formData.append("price", price);
+    formData.append("color", color);
+    formData.append("brand", brand);
+    formData.append("supplierNo", supplierNo);
+    formData.append("eldasNo", eldasNo);
+    formData.append("inventory", inventory);
+    formData.append("box", customizable);
+    formData.append("boxes", boxes);
+
     postProduct(formData);
   }
   return (
@@ -152,6 +161,8 @@ export default function AddProduct() {
           setStatus={setStatus}
           setVendor={setVendor}
           vendor={vendor}
+          inventory={inventory}
+          setInventory={setInventory}
           collection={collection}
           setCollection={setCollection}
           tags={tags}

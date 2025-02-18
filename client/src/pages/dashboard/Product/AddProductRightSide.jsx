@@ -17,7 +17,7 @@ export default function AddProductRightSide({
   currentProductType,
   price,
   setPrice,
-  currentPrice,
+  currentPrice = 0,
   color,
   setColor,
   currentColor,

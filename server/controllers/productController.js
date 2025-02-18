@@ -65,7 +65,15 @@ exports.createNewProduct = catchAsync(async function (req, res, next) {
     productType = "",
     vendor = "",
     price,
+    color = "",
+    brand = "",
+    supplierNo = "",
+    eldasNo = "",
+    box = false,
+    boxes,
   } = req.body;
+  if (box && (!boxes || boxes <= 0 || boxes > 9))
+    return next(new AppError("Please provide valid boxes", 400));
   if (!title || !description || (!category && !vendor))
     return next(
       new AppError(
@@ -109,6 +117,12 @@ exports.createNewProduct = catchAsync(async function (req, res, next) {
     vendor: vendor?.trim()?.toLowerCase(),
     price,
     media,
+    color: color?.trim()?.toLowerCase(),
+    brand: brand?.trim()?.toLowerCase(),
+    supplierNo: supplierNo?.trim()?.toLowerCase(),
+    eldasNo: eldasNo?.trim()?.toLowerCase(),
+    box,
+    boxes,
   });
 
   res.status(201).json({

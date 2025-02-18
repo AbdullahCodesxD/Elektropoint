@@ -50,7 +50,7 @@ export default function ProductPage() {
   const [vendor, setVendor] = useState("");
   const [collection, setCollection] = useState("");
   const [tags, setTags] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState("");
   const [color, setColor] = useState("");
   const [brand, setBrand] = useState("");
   const [supplierNo, setSupplierNo] = useState("");
