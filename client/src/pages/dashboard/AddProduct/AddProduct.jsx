@@ -13,6 +13,7 @@ import { BackSvg } from "../../../components/Svgs";
 import Button from "../../../components/Button";
 import { useState } from "react";
 import { postProduct } from "../../../utils/productsApi";
+import Customizable from "../Product/Customizable";
 
 export default function AddProduct() {
   const { product } = useParams();
@@ -30,13 +31,19 @@ export default function AddProduct() {
   const [media, setMedia] = useState([]);
 
   const [status, setStatus] = useState("active");
+
   const [productType, setProductType] = useState("");
   const [vendor, setVendor] = useState("");
   const [collection, setCollection] = useState("");
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState("");
+  const [price, setPrice] = useState(0);
+  const [color, setColor] = useState("");
+  const [brand, setBrand] = useState("");
+  const [supplierNo, setSupplierNo] = useState("");
+  const [eldasNo, setEldasNo] = useState("");
 
-  const [metaTitle, setMetaTitle] = useState("");
-  const [metaDescription, setMetaDescription] = useState("");
+  const [customizable, setCustomizable] = useState(false);
+  const [boxes, setBoxes] = useState(9);
 
   function goBack(e) {
     e.preventDefault();
@@ -54,8 +61,8 @@ export default function AddProduct() {
     formData.append("tags", tags);
     formData.append("status", status);
     formData.append("category", collection);
-    formData.append("metaTitle", metaTitle);
-    formData.append("metaDescription", metaDescription);
+    // formData.append("metaTitle", metaTitle);
+    // formData.append("metaDescription", metaDescription);
     formData.append("productType", productType);
     formData.append("vendor", vendor);
     console.log(media, "media");
@@ -114,12 +121,30 @@ export default function AddProduct() {
 
           {/* <ProductVariants /> */}
 
-          <SearchEngineListing
+          <div className="p-5 bg-white rounded-md shadow-md">
+            <div className="flex gap-2 items-start">
+              <label className="pl-0.5 text-base font-medium">
+                Customizable
+              </label>
+
+              <input
+                id="checkbox"
+                type="checkbox"
+                checked={customizable}
+                onChange={() => setCustomizable(!customizable)}
+                className="h-5 w-5 appearance-none border-2 border-main rounded-md cursor-pointer checked:appearance-auto checked:accent-main checked:bg-main"
+              />
+            </div>
+            {customizable && (
+              <Customizable noOfBoxes={boxes} setNoOfBoxes={setBoxes} />
+            )}
+          </div>
+          {/* <SearchEngineListing
             setMetaTitle={setMetaTitle}
             metaTitle={metaTitle}
             setMetaDescription={setMetaDescription}
             metaDescription={metaDescription}
-          />
+          /> */}
         </div>
 
         <AddProductRightSide
@@ -133,6 +158,16 @@ export default function AddProduct() {
           setTags={setTags}
           setProductType={setProductType}
           productType={productType}
+          price={price}
+          setPrice={setPrice}
+          color={color}
+          setColor={setColor}
+          brand={brand}
+          setBrand={setBrand}
+          supplierNo={supplierNo}
+          setSupplierNo={setSupplierNo}
+          eldasNo={eldasNo}
+          setEldasNo={setEldasNo}
         />
 
         <Button

@@ -11,6 +11,16 @@ export default function ProductOrganization({
   setTags,
   setProductType,
   productType,
+  price,
+  setPrice,
+  color,
+  setColor,
+  brand,
+  setBrand,
+  supplierNo,
+  setSupplierNo,
+  eldasNo,
+  setEldasNo,
 }) {
   const collections = useSelector((state) => state.collections)?.map(
     (collection) => {
@@ -101,6 +111,85 @@ export default function ProductOrganization({
           onChange={(e) => setTags(e.target.value)}
           value={tags}
           id="tags"
+          className="w-full px-3 py-2 outline-none border border-black rounded-md text-[15px]"
+        />
+      </div>
+
+      <div className="flex flex-col gap-1 mt-1.5">
+        <label htmlFor="price" className="text-[14px] -mb-1">
+          Price
+        </label>
+        <input
+          type="text"
+          name="price"
+          onChange={(e) => {
+            if (e.target.value >= 0) setPrice(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "e" || e.key === "-" || e.key === "+")
+              e.preventDefault();
+          }}
+          required
+          value={price}
+          id="price"
+          min="1"
+          inputMode="numeric"
+          className="w-full px-3 py-2 outline-none border border-black rounded-md text-[15px] appearance-none"
+        />
+      </div>
+
+      <div className="flex flex-col gap-1 mt-1.5">
+        <label htmlFor="color" className="text-[14px] -mb-1">
+          Color
+        </label>
+        <input
+          type="text"
+          name="color"
+          onChange={(e) => setColor(e.target.value)}
+          value={color}
+          id="color"
+          className="w-full px-3 py-2 outline-none border border-black rounded-md text-[15px]"
+        />
+      </div>
+
+      <div className="flex flex-col gap-1 mt-1.5">
+        <label htmlFor="brand" className="text-[14px] -mb-1">
+          Brand
+        </label>
+        <input
+          type="text"
+          name="brand"
+          onChange={(e) => setBrand(e.target.value)}
+          value={brand}
+          id="brand"
+          className="w-full px-3 py-2 outline-none border border-black rounded-md text-[15px]"
+        />
+      </div>
+
+      <div className="flex flex-col gap-1 mt-1.5">
+        <label htmlFor="supplierNo" className="text-[14px] -mb-1">
+          Supplier No
+        </label>
+        <input
+          type="text"
+          name="supplierNo"
+          onChange={(e) => setSupplierNo(e.target.value)}
+          value={supplierNo}
+          id="supplierNo"
+          className="w-full px-3 py-2 outline-none border border-black rounded-md text-[15px]"
+        />
+      </div>
+
+      <div className="flex flex-col gap-1 mt-1.5">
+        <label htmlFor="eldasNo" className="text-[14px] -mb-1">
+          Eldas No
+        </label>
+        <input
+          type="text"
+          name="eldasNo"
+          onChange={(e) => setEldasNo(e.target.value)}
+          value={eldasNo}
+          id="eldasNo"
           className="w-full px-3 py-2 outline-none border border-black rounded-md text-[15px]"
         />
       </div>

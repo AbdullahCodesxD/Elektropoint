@@ -16,7 +16,7 @@ export const getProducts = async function () {
 
 export const postProduct = async function (data) {
   const res = await postToApi("/products", data);
-  window.location = "/dashboard/products";
+  // window.location = "/dashboard/products";
 };
 
 export const patchProductData = async function (productId, data) {

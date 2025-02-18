@@ -12,8 +12,17 @@ export default function AddProductRightSide({
   setTags,
   setProductType,
   productType,
+  price,
+  setPrice,
+  color,
+  setColor,
+  brand,
+  setBrand,
+  supplierNo,
+  setSupplierNo,
+  eldasNo,
+  setEldasNo,
 }) {
-  // const [status, setStatus] = useState("active");
   return (
     <div className="h-fit">
       <div className="bg-white mb-3 p-3 pb-5 rounded-lg flex flex-col gap-1">
@@ -39,6 +48,16 @@ export default function AddProductRightSide({
         setTags={setTags}
         setProductType={setProductType}
         productType={productType}
+        price={price}
+        setPrice={setPrice}
+        color={color}
+        setColor={setColor}
+        brand={brand}
+        setBrand={setBrand}
+        supplierNo={supplierNo}
+        setSupplierNo={setSupplierNo}
+        eldasNo={eldasNo}
+        setEldasNo={setEldasNo}
       />
     </div>
   );

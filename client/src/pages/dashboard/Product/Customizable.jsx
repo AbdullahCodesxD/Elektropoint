@@ -14,6 +14,7 @@ export default function Customizable({ noOfBoxes, setNoOfBoxes }) {
                   setNoOfBoxes(Number(e.target.value));
                 }}
                 value={i + 1}
+                checked={noOfBoxes === i + 1}
                 name="noOfBoxes"
                 className="h-5 w-5 appearance-none bg-transparent relative z-[2] border-2 rounded-full cursor-pointer checked:appearance-auto"
                 type="radio"
