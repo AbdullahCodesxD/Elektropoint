@@ -15,6 +15,21 @@ export default function AddProductRightSide({
   setProductType,
   productType,
   currentProductType,
+  price,
+  setPrice,
+  currentPrice,
+  color,
+  setColor,
+  currentColor,
+  brand,
+  setBrand,
+  currentBrand,
+  supplierNo,
+  setSupplierNo,
+  currentSupplierNo,
+  eldasNo,
+  setEldasNo,
+  currentEldasNo,
 }) {
   return (
     <div className="h-fit">
@@ -44,6 +59,21 @@ export default function AddProductRightSide({
         setProductType={setProductType}
         productType={productType}
         currentProductType={currentProductType}
+        price={price}
+        setPrice={setPrice}
+        currentPrice={currentPrice}
+        color={color}
+        setColor={setColor}
+        currentColor={currentColor}
+        brand={brand}
+        setBrand={setBrand}
+        currentBrand={currentBrand}
+        supplierNo={supplierNo}
+        setSupplierNo={setSupplierNo}
+        currentSupplierNo={currentSupplierNo}
+        eldasNo={eldasNo}
+        setEldasNo={setEldasNo}
+        currentEldasNo={currentEldasNo}
       />
     </div>
   );

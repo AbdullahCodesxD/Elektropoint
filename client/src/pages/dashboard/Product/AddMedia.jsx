@@ -24,6 +24,8 @@ export default function AddMedia({
             ])
           );
       });
+
+      setCurrentImages((currentImages) => new Set(currentImages));
     } catch (error) {
       console.error("Error fetching image:", error);
     }
@@ -78,7 +80,7 @@ export default function AddMedia({
   }
   useEffect(
     function () {
-      if (!currentMedia || currentImages.length > 0) return;
+      if (currentImages.length > 0) return;
       fetchImage();
     },
     [currentMedia]
@@ -101,22 +103,13 @@ export default function AddMedia({
                 <img
                   className="h-[70px] aspect-square object-contain"
                   src={url}
-                  alt="Oho beat change"
+                  alt="Image"
                 />
                 <input
                   htmlFor={`productImage${i}`}
                   type="file"
                   className="hidden"
                 />
-
-                {/* <Button
-                  handler={(e) => {
-                    e.preventDefault();
-                  }}
-                  extraClasses="bg-blue rounded-full h-[25px] aspect-square flex items-center justify-center absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 "
-                >
-                  <CrossSvg height={10} width={10} color="white" />
-                </Button> */}
               </label>
             ))}
           </div>
