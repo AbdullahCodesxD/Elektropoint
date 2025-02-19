@@ -40,11 +40,11 @@ export default function CreateCollection() {
     if (images.length === 0) return alert("Please add at least one image");
     formData.append("title", title);
     formData.append("description", description);
+    console.log(vendors, selectedProducts);
     if (vendors.length === 1) {
       vendors?.map((vendor) => formData.append("conditionVendors", vendor));
       formData.append("conditionVendors", "");
-      console.log(formData.get("conditionVendors"));
-    } else {
+    } else if (vendors.length > 1) {
       vendors?.map((vendor) => formData.append("conditionVendors", vendor));
     }
     images.forEach((img) => formData.append("images", img));
@@ -105,13 +105,13 @@ export default function CreateCollection() {
             vendors={vendors}
             setVendors={setVendors}
           />
-          {!matchCondition && (
+          {/* {!matchCondition && (
             <CollectionProducts
               setSelectedProducts={setSelectedProducts}
               selectedProducts={selectedProducts}
               products={products}
             />
-          )}
+          )} */}
         </div>
 
         <div className="hidden md:block">

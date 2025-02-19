@@ -9,5 +9,5 @@ export const getStores = async function () {
 };
 
 export const postStore = async function (data) {
-  const res = await postToApi("/stores", data);
+  await postToApi("/stores", data);
 };

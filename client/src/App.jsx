@@ -139,10 +139,10 @@ const router = createBrowserRouter([
             path: "/dashboard/products/collections",
             element: <Collections />,
           },
-          {
-            path: "/dashboard/products/collections/collection/:collection",
-            element: <CollectionPage />,
-          },
+          // {
+          //   path: "/dashboard/products/collections/collection/:collection",
+          //   element: <CollectionPage />,
+          // },
           {
             path: "/dashboard/products/collections/new",
             element: <CreateCollection />,
@@ -189,10 +189,10 @@ const router = createBrowserRouter([
             path: "/dashboard/settings/general",
             element: <Settings />,
           },
-          {
-            path: "/dashboard/settings/general/new",
-            element: <NewStore />,
-          },
+          // {
+          //   path: "/dashboard/settings/general/new",
+          //   element: <NewStore />,
+          // },
           {
             path: "/dashboard/settings/users",
             element: <UsersAndPermissions />,

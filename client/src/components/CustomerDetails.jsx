@@ -43,7 +43,7 @@ export default function CustomerDetails() {
           {currentCustomer.latestOrder && (
             <CustomerDetailsOrder order={currentCustomer.latestOrder} />
           )}
-          <OrderDetailsTimeline />
+          {/* <OrderDetailsTimeline /> */}
         </div>
 
         <div className="flex flex-col gap-5">

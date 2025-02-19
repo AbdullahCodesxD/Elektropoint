@@ -118,7 +118,7 @@ export default function DashboardNavigation() {
           subLinks={{
             "General Settings": "/dashboard/settings/general",
             "Users and permissions": "/dashboard/settings/users",
-            "Shipping and delivery": "/dashboard/settings/shipping",
+            // "Shipping and delivery": "/dashboard/settings/shipping",
             // "Taxes and duties": "/dashboard/settings/taxes",
           }}
         >

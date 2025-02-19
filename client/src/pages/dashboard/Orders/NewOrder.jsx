@@ -21,13 +21,16 @@ export default function NewOrder() {
       (current) => current.email === customer
     )._id;
     const productId = products.find((current) => current.title === product)._id;
-    createOrder({
-      customer: customerId,
-      product: productId,
-      fullFilmentStatus: fulfilment,
-      paymentStatus: "paid",
-      deliveryMethod: "delivery",
-    });
+    createOrder(
+      {
+        customer: customerId,
+        product: productId,
+        fullFilmentStatus: fulfilment,
+        paymentStatus: "paid",
+        deliveryMethod: "delivery",
+      },
+      true
+    );
   }
 
   useEffect(() => {

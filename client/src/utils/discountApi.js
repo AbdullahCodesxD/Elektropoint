@@ -4,9 +4,12 @@ import { store } from "../store";
 
 const dispatch = store.dispatch;
 export const postDiscount = async function (data) {
-  const res = await postToApi("/discounts", data);
-
-  console.log(res, "--");
+  try {
+    await postToApi("/discounts", data);
+    window.location = "/dashboard/discount";
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const getDiscount = async function () {

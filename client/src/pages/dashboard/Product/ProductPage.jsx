@@ -96,6 +96,12 @@ export default function ProductPage() {
         ([_, value]) => value !== undefined && value !== null && value !== ""
       )
     );
+    if (customizable) {
+      data.box = true;
+      data.boxes = boxes;
+      filteredData.box = true;
+      filteredData.boxes = boxes;
+    }
 
     if (filteredData.description == product?.description)
       delete filteredData.description;
@@ -132,6 +138,9 @@ export default function ProductPage() {
   useEffect(() => {
     if (product) {
       setStatus(product.status);
+      setCustomizable(product.box || false);
+      setBoxes(product.boxes || 9);
+
       if (product?.category?.title) {
         setCollection(product.category.title);
       }

@@ -15,16 +15,35 @@ export const getProducts = async function () {
 };
 
 export const postProduct = async function (data) {
-  const res = await postToApi("/products", data);
-  // window.location = "/dashboard/products";
+  try {
+    await postToApi("/products", data);
+    window.location = "/dashboard/products";
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const patchProductData = async function (productId, data) {
-  await patchApi(`/products/${productId}`, data);
+  try {
+    await patchApi(`/products/${productId}`, data);
+    window.location.reload();
+  } catch (err) {
+    console.log(err);
+  }
 };
 export const patchProductMedia = async function (productId, data) {
-  await patchApi(`/products/images/${productId}`, data);
+  try {
+    await patchApi(`/products/images/${productId}`, data);
+    window.location.reload();
+  } catch (err) {
+    console.log(err);
+  }
 };
 export const patchProductCategory = async function (productId, data) {
-  const res = await patchApi(`/products/category/${productId}`, data);
+  try {
+    await patchApi(`/products/category/${productId}`, data);
+    window.location.reload();
+  } catch (err) {
+    console.log(err);
+  }
 };

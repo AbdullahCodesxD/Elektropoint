@@ -70,7 +70,6 @@ export default function ProductOrganization({
         <input
           type="text"
           name="inventory"
-          required
           onChange={(e) => {
             if (e.target.value >= 0) setInventory(e.target.value);
           }}

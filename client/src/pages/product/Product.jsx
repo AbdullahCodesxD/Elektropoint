@@ -13,7 +13,7 @@ import { getProduct, searchProducts } from "../../utils/searchApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentProduct } from "../../slices/searchSlice";
 import Loader from "../../components/Loader";
-import { goToInitialState } from "../../slices/customizeBoxSlice";
+import { goToInitialState, setNoOfBoxes } from "../../slices/customizeBoxSlice";
 
 const API = import.meta.env.VITE_API;
 export default function Product() {
@@ -46,6 +46,9 @@ export default function Product() {
   );
   if (isFetched && !currentProduct._id) window.location = "/";
   if (!currentProduct._id) return <Loader height={90} width={90} />;
+  if (currentProduct.box) {
+    dispatch(setNoOfBoxes(currentProduct.boxes || 9));
+  }
   return (
     <div>
       {/* <ProductsHeader>{currentProduct.collection}</ProductsHeader> */}

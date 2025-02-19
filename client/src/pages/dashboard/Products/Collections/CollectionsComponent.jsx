@@ -21,8 +21,8 @@ export default function CollectionsComponent({
   };
 
   return (
-    <Link
-      to={`/dashboard/products/collections/collection/${id}`}
+    <div
+      // to={`/dashboard/products/collections/collection/${id}`}
       className="p-3 min-w-[700px] grid grid-cols-3 items-center gap-3 border-t-2 border-dark/40"
     >
       <div onClick={handleCheckboxClick} className="flex items-center gap-2">
@@ -42,6 +42,6 @@ export default function CollectionsComponent({
       <p className="text-medium text-[14px] md:text-base capitalize ">
         {conditions}
       </p>
-    </Link>
+    </div>
   );
 }

@@ -8,13 +8,13 @@ export default function Settings() {
       <div className="max-w-screen-lg">
         <h3 className="font-semibold text-2xl">General Settings</h3>
 
-        <Button
+        {/* <Button
           type="primary"
           to="/dashboard/settings/general/new"
           extraClasses="max-w-[190px] block ml-auto py-1.5  font-[400] text-[15px]"
         >
           New Store
-        </Button>
+        </Button> */}
 
         <StoreDetails />
         {/* <StoreDefaults /> */}

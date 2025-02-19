@@ -43,7 +43,7 @@ export default function Button({
     productBtn:
       "font-medium px-5 text-[14px] py-2 flex items-center justify-center gap-3 border rounded-lg border-[#222]",
     productCustomization:
-      "w-full aspect-[3/2] border-[0.5px] border-main border-collapse flex items-center justify-center",
+      "w-full aspect-[3/2] border-[1px] border-main border-collapse flex items-center justify-center",
     productDesktop: "text-xl font-medium w-full p-2 border-b border-black",
     // Cart
     checkout:

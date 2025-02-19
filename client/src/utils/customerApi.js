@@ -11,9 +11,12 @@ export const getCustomer = async function (id) {
   dispatch(addCurrentCustomer(res.data));
 };
 
-export const createCustomer = async function (data) {
+export const createCustomer = async function (data, reload = false) {
   try {
     const res = await postToApi("/customer", data);
+    if (reload) {
+      window.location = "/dashboard/customers";
+    }
     return res;
   } catch (_) {
     console.log("err hai");

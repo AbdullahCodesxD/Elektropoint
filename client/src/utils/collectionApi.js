@@ -11,8 +11,12 @@ export const getCollections = async function () {
   dispatch(addCollections(res.data));
 };
 export const postCollection = async function (data) {
-  const res = await postToApi("/collection", data);
-  console.log(res.data);
+  try {
+    await postToApi("/collection", data);
+    window.location = "/dashboard/products/collections";
+  } catch (err) {
+    console.log(err);
+  }
 };
 export const getHomePageCollections = async function () {
   const res = await getFromApi("/collection/home");

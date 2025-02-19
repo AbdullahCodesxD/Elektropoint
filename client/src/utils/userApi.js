@@ -5,7 +5,12 @@ import Cookies from "js-cookie";
 const dispatch = store.dispatch;
 
 export const createUser = async function (data) {
-  const res = await postToApi("/users", data);
+  try {
+    await postToApi("/users", data);
+    window.location = "/dashboard/settings/users";
+  } catch (err) {
+    console.log(err);
+  }
 };
 export const login = async function (data) {
   try {

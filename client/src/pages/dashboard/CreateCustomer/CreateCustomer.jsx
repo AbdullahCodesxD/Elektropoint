@@ -12,7 +12,7 @@ export default function CreateCustomer() {
 
     if (!name || !email) return;
 
-    createCustomer({ name, email, address });
+    createCustomer({ name, email, address }, true);
     setName("");
     setEmail("");
     setAddress("");

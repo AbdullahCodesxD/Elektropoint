@@ -13,10 +13,15 @@ export const getOrder = async function (id) {
   dispatch(setCurrentOrder(res.data));
 };
 
-export const createOrder = async function (data) {
-  const res = await postToApi("/orders", data);
-
-  console.log(res.data);
+export const createOrder = async function (data, reload = false) {
+  try {
+    await postToApi("/orders", data);
+    if (reload) {
+      window.location = "/dashboard/orders";
+    }
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const deleteOrder = async function (id) {

@@ -20,7 +20,7 @@ export default function ProductCustomization({ border, product }) {
   const boxProducts = [...box.filter((p) => p._id), product];
   const [currentIndex, setCurrentIndex] = useState(0);
   const collections = useSelector((state) => state.collections);
-
+  console.log(box, "--");
   const clientCollection = useSelector((state) => state.clientCollection);
   const isFetched = clientCollection.isFetched;
   const collectionProducts = clientCollection.currentCollectionProducts;
@@ -114,7 +114,7 @@ export default function ProductCustomization({ border, product }) {
         } border-black`}
       >
         <h2 className="font-semibold text-[26px] mb-2">Customize your box</h2>
-        <div className="grid grid-cols-3  border-[0.5px] rounded-[10px] border-main">
+        <div className="grid grid-cols-3  rounded-[10px]">
           {box.map((current, i) => (
             <Button
               extraClasses={`overflow-hidden relative ${

@@ -66,11 +66,11 @@ export default function OrdersDetails() {
             noOfItems={currentOrder.noOfItems}
             price={currentOrder.price}
           />
-          <OrderDetailsTimeline />
+          {/* <OrderDetailsTimeline /> */}
         </div>
 
         <div className="flex flex-col gap-5">
-          <OrdersDetailsNotes />
+          {/* <OrdersDetailsNotes /> */}
           <OrdersDetailsCustomer
             orderNo={currentOrder.orderNo}
             customer={currentOrder.customer}

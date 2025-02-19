@@ -56,7 +56,6 @@ exports.uploadCollectionImages = upload.array("images", 3);
 // Create New Collection
 exports.createCollection = catchAsync(async function (req, res, next) {
   const { title, description, conditionVendors } = req.body;
-  console.log(req.body, "gg");
   if (!title || !description)
     return next(new AppError("Title and description are required", 400));
 

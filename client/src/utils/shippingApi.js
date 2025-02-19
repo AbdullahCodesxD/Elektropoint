@@ -4,8 +4,11 @@ import { getFromApi, postToApi } from "./api";
 const dispatch = store.dispatch;
 
 export const createShippingAmount = async function (data) {
-  const res = await postToApi("/shippingAmount", data);
-  console.log(res, "--=");
+  try {
+    await postToApi("/shippingAmount", data);
+  } catch (err) {
+    console.log(err);
+  }
 };
 export const getShippingAmounts = async function () {
   const res = await getFromApi("/shippingAmount");
