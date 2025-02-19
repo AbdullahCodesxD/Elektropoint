@@ -3,6 +3,11 @@ import CardDetails from "./CardDetails";
 
 export default function CardDetailsAndItems() {
   const cart = useSelector((state) => state.cart);
+  const discounts = useSelector((state) =>
+    state.discounts.userDiscounts?.filter(
+      (discount) => discount?.status === "active"
+    )
+  );
   const order = cart.cart.map(
     (item) => `${item.product.title} * ${item.quantity}`
   );
@@ -28,10 +33,29 @@ export default function CardDetailsAndItems() {
       <div className="py-3 border-t border-b border-black">
         <p>Total</p>
         <span>${cart.price?.toFixed(2)}</span>
-
-        {/* <span>$200.00</span> */}
       </div>
 
+      {discounts.length > 0 && (
+        <>
+          <div className="py-3 border-b border-black">
+            <p>Discount</p>
+            <span>
+              ${((discounts?.at(0).percentage / 100) * cart.price).toFixed(2)}
+            </span>
+          </div>
+
+          <div className="py-3 border-b border-black">
+            <p>Total after discount</p>
+            <span>
+              $
+              {(
+                cart.price -
+                (cart.price * discounts?.at(0).percentage) / 100
+              ).toFixed(2)}
+            </span>
+          </div>
+        </>
+      )}
       <CardDetails />
     </div>
   );

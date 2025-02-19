@@ -14,11 +14,11 @@ export default function DiscountComponent({ discount }) {
         />
         <p className="flex flex-col capitalize">
           {discount.name}
-          <span className="text-[10px]">
+          {/* <span className="text-[10px]">
             {`${discount.percentage || 0}% off on ${
               discount.collections.length
             } collections`}
-          </span>
+          </span> */}
         </p>
       </div>
       <p className="capitalize w-[75px] text-center bg-main h-fit my-auto mx-auto text-[14px] px-4 py-1 rounded-md">

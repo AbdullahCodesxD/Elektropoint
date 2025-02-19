@@ -6,10 +6,7 @@ const discountSchema = mongoose.Schema({
     required: [true, "Discount name is required"],
     unique: [true, "A discount with this name already exists"],
   },
-  collections: {
-    type: [mongoose.Schema.ObjectId],
-    ref: "Collection",
-  },
+
   percentage: {
     type: Number,
     required: [true, "Percentage is required"],

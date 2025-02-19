@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   discounts: [],
+  userDiscounts: [],
 };
 
 const discount = createSlice({
@@ -11,9 +12,12 @@ const discount = createSlice({
     setDiscounts: (state, action) => {
       state.discounts = [...action.payload];
     },
+    setUserDiscounts: (state, action) => {
+      state.userDiscounts = [...action.payload];
+    },
   },
 });
 
-export const { setDiscounts } = discount.actions;
+export const { setDiscounts, setUserDiscounts } = discount.actions;
 
 export default discount.reducer;

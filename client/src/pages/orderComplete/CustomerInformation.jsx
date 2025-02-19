@@ -4,6 +4,8 @@ import { AmericanExpress } from "../../components/Svgs";
 export default function CustomerInformation() {
   const checkout = useSelector((state) => state.checkout);
   const cart = useSelector((state) => state.cart);
+  const discounts = useSelector((state) => state.discounts.userDiscounts);
+  const discount = discounts[0]?.percentage;
 
   return (
     <div className="p-3">
@@ -56,9 +58,16 @@ export default function CustomerInformation() {
         <AmericanExpress width={55} height={35} />
         Ends with 6801
       </p> */}
-      <p className="font-bold text-[18px] text-black/60 mt-2">
-        ${cart.price.toFixed(2)}
-      </p>
+
+      {discount ? (
+        <p className="font-bold text-[18px] text-black/60 mt-2">
+          ${(cart.price - (cart.price * discount) / 100).toFixed(2)}
+        </p>
+      ) : (
+        <p className="font-bold text-[18px] text-black/60 mt-2">
+          ${cart.price.toFixed(2)}
+        </p>
+      )}
     </div>
   );
 }

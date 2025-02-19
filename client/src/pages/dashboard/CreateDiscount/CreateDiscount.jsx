@@ -5,32 +5,33 @@ import { getCollections } from "../../../utils/collectionApi";
 import { postDiscount } from "../../../utils/discountApi";
 
 export default function CreateDiscount() {
-  const currentCollections = useSelector((state) => state.collections);
+  // const currentCollections = useSelector((state) => state.collections);
 
   const [title, setTitle] = useState("");
   const [percent, setPercent] = useState("");
   const [status, setStatus] = useState("active");
   const [combine, setCombine] = useState(false);
-  const [collections, setCollections] = useState([]);
+  // const [collections, setCollections] = useState([]);
+
   function handleSubmit(e) {
     e.preventDefault();
     postDiscount({
       name: title,
-      collections,
+      // collections,
       percentage: percent,
       status,
       combination: combine,
     });
   }
 
-  useEffect(
-    function () {
-      if (currentCollections.length === 0) {
-        getCollections();
-      }
-    },
-    [currentCollections.length]
-  );
+  // useEffect(
+  //   function () {
+  //     if (currentCollections.length === 0) {
+  //       getCollections();
+  //     }
+  //   },
+  //   [currentCollections.length]
+  // );
   return (
     <form
       onSubmit={handleSubmit}
@@ -104,7 +105,7 @@ export default function CreateDiscount() {
             <option value="draft">Draft</option>
           </select>
         </div>
-        <div className="mb-1 flex flex-col gap-2 border-b pb-2 border-main">
+        {/* <div className="mb-1 flex flex-col gap-2 border-b pb-2 border-main">
           <label
             htmlFor="collections"
             className="mt-1 pl-0.5 -mb-2 text-base font-medium"
@@ -162,7 +163,7 @@ export default function CreateDiscount() {
               );
             })}
           </div>
-        </div>
+        </div> */}
 
         <div className="mb-1 mt-2 flex items-center flex-row-reverse justify-center w-fit gap-2">
           <label htmlFor="combine" className="text-base font-medium">

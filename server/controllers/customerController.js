@@ -66,11 +66,11 @@ exports.createCustomer = catchAsync(async function (req, res, next) {
   if (!name.trim() || !email.trim())
     return next(new AppError("Name and email are required", 400));
 
-  const checkIfCustomerExists = await Customer.find({
-    email: email.toLowerCase().trim(),
-  });
-  if (checkIfCustomerExists.length > 0)
-    return next(new AppError("A customer with this email already exists", 400));
+  // const checkIfCustomerExists = await Customer.find({
+  //   email: email.toLowerCase().trim(),
+  // });
+  // if (checkIfCustomerExists.length > 0)
+  //   return next(new AppError("A customer with this email already exists", 400));
 
   const newCustomer = await Customer.create({
     name: name.trim(),

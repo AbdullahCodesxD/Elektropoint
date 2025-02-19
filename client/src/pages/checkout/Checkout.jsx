@@ -8,14 +8,22 @@ import { createOrder } from "../../utils/ordersApi";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { setIsComplete } from "../../slices/orderSlice";
+import { discountUsed, getDiscountsForUser } from "../../utils/discountApi";
 
 export default function Checkout() {
   const cart = useSelector((state) => state.cart);
   const checkout = useSelector((state) => state.checkout);
+  const discounts = useSelector((state) =>
+    state.discounts.userDiscounts?.filter(
+      (discount) => discount?.status === "active"
+    )
+  );
   const isOrderComplete = useSelector((state) => state.orders.isComplete);
+  const discountId = discounts[0]?._id;
+  const discount = discounts[0]?.percentage;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   function handleSubmit(e) {
     e.preventDefault();
     const data = {
@@ -29,13 +37,19 @@ export default function Checkout() {
     createCustomer(data)
       .then((res) => {
         const id = res.data._id;
+        console.log(res);
         createOrder({
           customer: id,
           product: cart.cart.map((product) => product.product._id),
           noOfProducts: cart.noOfProducts,
-          price: cart.price,
+          price: discount
+            ? (cart.price - (cart.price * discount) / 100).toFixed(2)
+            : cart.price,
         })
           .then((res) => {
+            if (discountId) {
+              discountUsed(discountId);
+            }
             navigate(`/order-complete`);
             dispatch(setIsComplete(true));
           })
@@ -49,6 +63,9 @@ export default function Checkout() {
     }
     if (isOrderComplete) {
       navigate("/order-complete");
+    }
+    if (discounts.length === 0) {
+      getDiscountsForUser();
     }
   }, []);
   return (

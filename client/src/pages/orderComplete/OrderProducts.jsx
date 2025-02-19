@@ -8,6 +8,8 @@ export default function OrderProducts() {
         product.quantity
       } = $${(product.product.price.toFixed(2) * product.quantity).toFixed(2)})`
   );
+  const discounts = useSelector((state) => state.discounts.userDiscounts);
+  const discount = discounts[0]?.percentage;
   return (
     <div className="m-3 py-4 px-7 bg-[#eaeaea] h-fit rounded-md">
       <div className="my-3 pb-5 border-b border-black">
@@ -33,6 +35,14 @@ export default function OrderProducts() {
         <span className="text-lg">Subtotal</span>
         <span className="text-lg">${cart.price.toFixed(2)}</span>
       </p>
+      {discount && (
+        <p className="flex items-center justify-between mt-1">
+          <span className="text-lg">Discount</span>
+          <span className="text-lg">
+            ${((cart.price * discount) / 100).toFixed(2)}
+          </span>
+        </p>
+      )}
       <p className="flex items-center justify-between mt-1">
         <span className="text-lg">Shipping</span>
         <span className="text-lg">$0.00</span>
@@ -44,7 +54,12 @@ export default function OrderProducts() {
 
       <p className="flex items-center justify-between pt-3 mt-3 border-t border-black">
         <span className="text-2xl font-bold">Total</span>
-        <span className="text-2xl font-bold">${cart.price.toFixed(2)}</span>
+        <span className="text-2xl font-bold">
+          $
+          {discount
+            ? (cart.price - (cart.price * discount) / 100).toFixed(2)
+            : cart.price.toFixed(2)}
+        </span>
       </p>
     </div>
   );

@@ -4,10 +4,11 @@ const AppError = require("../utils/appError");
 const Discount = require("../models/discountModel");
 
 exports.getAllDiscounts = catchAsync(async function (req, res, next) {
-  const discounts = await Discount.find().populate({
-    path: "collections",
-    select: "title",
-  });
+  // const discounts = await Discount.find().populate({
+  //   path: "collections",
+  //   select: "title",
+  // });
+  const discounts = await Discount.find();
   res.status(200).json({
     message: "success",
     data: discounts,
@@ -45,7 +46,29 @@ exports.updateDiscount = catchAsync(async function (req, res, next) {
     data: updatedDiscount,
   });
 });
+exports.discountUsed = catchAsync(async function (req, res, next) {
+  const id = req.params.id;
+  if (!id) return next(new AppError("Valid discount id is required", 400));
+  const discount = await Discount.findOne({ _id: id });
+  if (!discount)
+    return next(new AppError("No discount found with this id", 404));
 
+  const updatedDiscount = await Discount.findOneAndUpdate(
+    { _id: id },
+    {
+      noOfTimesUsed: discount.noOfTimesUsed + 1,
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  res.status(200).json({
+    message: "success",
+    data: updatedDiscount,
+  });
+});
 exports.deleteDiscount = catchAsync(async function (req, res, next) {
   const id = req.params.id;
   if (!id) return next(new AppError("Valid discount id is required", 400));

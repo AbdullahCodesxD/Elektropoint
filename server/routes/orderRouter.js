@@ -12,9 +12,3 @@ router.patch("/:id", orderController.updateOrder);
 
 router.delete("/:id", orderController.deleteOrder);
 module.exports = router;
-// Order
-// 1- Customers Created ✅
-// 2- Linked with customer Profile ✅
-// 3- link with Product ✅
-// 4- Delete ✅
-// 5- Update ✅
