@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   orders: [],
   currentOrder: {},
+  isComplete: false,
 };
 const orderSlice = createSlice({
   name: "order",
@@ -25,6 +26,9 @@ const orderSlice = createSlice({
     removeCurrentOrder: (state, action) => {
       state.currentOrder = {};
     },
+    setIsComplete: (state, action) => {
+      state.isComplete = action.payload;
+    },
   },
 });
 
@@ -34,5 +38,6 @@ export const {
   removeOrder,
   setCurrentOrder,
   removeCurrentOrder,
+  setIsComplete,
 } = orderSlice.actions;
 export default orderSlice.reducer;

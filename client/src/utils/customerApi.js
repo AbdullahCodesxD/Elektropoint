@@ -12,5 +12,10 @@ export const getCustomer = async function (id) {
 };
 
 export const createCustomer = async function (data) {
-  const res = await postToApi("/customer", data);
+  try {
+    const res = await postToApi("/customer", data);
+    return res;
+  } catch (_) {
+    console.log("err hai");
+  }
 };

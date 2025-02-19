@@ -9,9 +9,14 @@ const customerSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, "Customer email is required"],
-    unique: [true, "A customer with this email already exists."],
+    // unique: [true, "A customer with this email already exists."],
   },
   address: String,
+  country: String,
+  city: String,
+  state: String,
+  postcode: String,
+  phone: String,
   comment: String,
   emailSubscription: {
     type: Boolean,

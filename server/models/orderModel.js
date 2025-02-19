@@ -32,8 +32,7 @@ const orderSchema = mongoose.Schema({
   },
   paymentStatus: {
     type: String,
-    default: "unpaid",
-    enum: ["unpaid", "paid"],
+    default: "paid",
   },
   price: {
     type: Number,
@@ -42,7 +41,6 @@ const orderSchema = mongoose.Schema({
   deliveryMethod: {
     type: String,
     default: "delivery",
-    enum: ["delivery", "pickup"],
   },
   date: {
     type: Date,

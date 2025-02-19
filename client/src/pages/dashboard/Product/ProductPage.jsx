@@ -55,6 +55,7 @@ export default function ProductPage() {
   const [brand, setBrand] = useState("");
   const [supplierNo, setSupplierNo] = useState("");
   const [eldasNo, setEldasNo] = useState("");
+  const [inventory, setInventory] = useState("");
 
   const [customizable, setCustomizable] = useState(false);
   const [boxes, setBoxes] = useState(9);
@@ -87,6 +88,7 @@ export default function ProductPage() {
       color,
       brand,
       supplierNo,
+      inventory,
       eldasNo,
     };
     const filteredData = Object.fromEntries(
@@ -229,6 +231,9 @@ export default function ProductPage() {
           setStatus={setStatus}
           setVendor={setVendor}
           vendor={vendor}
+          inventory={inventory}
+          setInventory={setInventory}
+          currentInventory={product?.inventory}
           currentVendor={product?.vendor}
           collection={collection}
           setCollection={setCollection}

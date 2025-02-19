@@ -5,6 +5,9 @@ import { useSelector } from "react-redux";
 export default function ProductOrganization({
   vendor,
   setVendor,
+  inventory,
+  setInventory,
+  currentInventory,
   currentVendor,
   collection,
   setCollection,
@@ -57,6 +60,35 @@ export default function ProductOrganization({
           id="type"
           placeholder={currentProductType}
           className="w-full px-3 py-2 outline-none border border-black rounded-md text-[15px]"
+        />
+      </div>
+
+      <div className="flex flex-col gap-1 mt-1.5">
+        <label htmlFor="inventory" className="text-[14px] -mb-1">
+          Inventory
+        </label>
+        <input
+          type="text"
+          name="inventory"
+          required
+          onChange={(e) => {
+            if (e.target.value >= 0) setInventory(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (
+              e.key === "e" ||
+              e.key === "-" ||
+              e.key === "+" ||
+              e.key === "."
+            )
+              e.preventDefault();
+          }}
+          value={inventory}
+          id="inventory"
+          min="1"
+          inputMode="numeric"
+          placeholder={currentInventory}
+          className="w-full px-3 py-2 outline-none border border-black rounded-md text-[15px] appearance-none"
         />
       </div>
 
@@ -131,7 +163,6 @@ export default function ProductOrganization({
             if (e.key === "e" || e.key === "-" || e.key === "+")
               e.preventDefault();
           }}
-          required
           value={price}
           placeholder={`$${currentPrice.toFixed(2)}`}
           id="price"

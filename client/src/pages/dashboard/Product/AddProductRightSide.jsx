@@ -6,6 +6,9 @@ export default function AddProductRightSide({
   setStatus,
   vendor,
   setVendor,
+  inventory,
+  setInventory,
+  currentInventory,
   currentVendor,
   collection,
   setCollection,
@@ -50,6 +53,9 @@ export default function AddProductRightSide({
       <ProductOrganization
         vendor={vendor}
         setVendor={setVendor}
+        inventory={inventory}
+        setInventory={setInventory}
+        currentInventory={currentInventory}
         currentVendor={currentVendor}
         collection={collection}
         setCollection={setCollection}

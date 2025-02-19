@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateCheckout } from "../../slices/checkoutSlice";
 
 export default function CheckoutForm() {
   const [formData, setFormData] = useState({
@@ -12,20 +14,25 @@ export default function CheckoutForm() {
     phone: "",
     email: "",
   });
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    dispatch(updateCheckout({ key: name, value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-    // You can also add additional logic here, such as sending the data to a server
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Form Data Submitted:", formData);
+  //   // You can also add additional logic here, such as sending the data to a server
+  // };
 
   return (
-    <form className="px-5 pb-3" onSubmit={handleSubmit}>
+    <div
+      className="px-5 pb-3"
+      // onSubmit={handleSubmit}
+    >
       <h2 className="text-[28px] font-medium mb-3 pt-2.5 border-t-2 border-black">
         Shipping Address
       </h2>
@@ -138,6 +145,6 @@ export default function CheckoutForm() {
           required
         />
       </div>
-    </form>
+    </div>
   );
 }

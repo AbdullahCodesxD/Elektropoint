@@ -51,7 +51,17 @@ exports.getCustomer = catchAsync(async function (req, res, next) {
 });
 
 exports.createCustomer = catchAsync(async function (req, res, next) {
-  const { name, email, comment, address } = req.body;
+  const {
+    name,
+    email,
+    comment,
+    address,
+    country,
+    city,
+    state,
+    postcode,
+    phone,
+  } = req.body;
 
   if (!name.trim() || !email.trim())
     return next(new AppError("Name and email are required", 400));
@@ -67,6 +77,11 @@ exports.createCustomer = catchAsync(async function (req, res, next) {
     email: email.toLowerCase().trim(),
     comment,
     address: address?.toLowerCase()?.trim(),
+    country: country?.toLowerCase()?.trim(),
+    city: city?.toLowerCase()?.trim(),
+    state: state?.toLowerCase()?.trim(),
+    postcode: postcode?.toLowerCase()?.trim(),
+    phone: phone?.toLowerCase()?.trim(),
   });
 
   res.status(201).json({

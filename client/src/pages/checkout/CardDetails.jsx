@@ -5,7 +5,7 @@ export default function CardDetails() {
     <div className="py-3">
       <p className="text-[14px] mt-1">Pay secure using your card</p>
 
-      <form>
+      <div>
         <label htmlFor="cardNumber" className="mt-2 block">
           Card Number
         </label>
@@ -52,11 +52,7 @@ export default function CardDetails() {
             />
           </div>
         </div>
-
-        <Button to="/order-complete" type="primary">
-          Place Order
-        </Button>
-      </form>
+      </div>
     </div>
   );
 }

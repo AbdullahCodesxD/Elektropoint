@@ -12,6 +12,7 @@ import clientCollectionSlice from "./slices/clientCollectionSlice";
 import homePageCollectionsSlice from "./slices/homePageCollectionsSlice";
 import customizeBoxSlice from "./slices/customizeBoxSlice";
 import cartSlice from "./slices/cartSlices";
+import checkoutSlice from "./slices/checkoutSlice";
 
 export const store = configureStore({
   reducer: {
@@ -28,5 +29,6 @@ export const store = configureStore({
     homePageCollections: homePageCollectionsSlice,
     customBox: customizeBoxSlice,
     cart: cartSlice,
+    checkout: checkoutSlice,
   },
 });

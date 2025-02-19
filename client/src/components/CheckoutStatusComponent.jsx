@@ -1,6 +1,9 @@
 import Button from "./Button";
 
-export default function CheckoutStatusComponent({ currentPage = "checkout" }) {
+export default function CheckoutStatusComponent({
+  currentPage = "checkout",
+  disable,
+}) {
   return (
     <div className="p-3 my-5 md:flex items-center md:max-w-[900px] md:mx-auto">
       <div className="md:w-full">
@@ -23,21 +26,36 @@ export default function CheckoutStatusComponent({ currentPage = "checkout" }) {
       </div>
 
       <div className="md:w-full">
-        <Button
-          to={`${currentPage === "checkout" ? "#" : "/order-complete"}`}
-          type="checkoutStatus"
-        >
-          <span
-            className={`h-[55px] aspect-square rounded-full flex items-center justify-center ${
-              currentPage === "checkout"
-                ? "bg-[#cBcBcB] text-[#a5a5a5]"
-                : "bg-main text-white"
-            } text-[26px]`}
+        {disable ? (
+          <Button type="checkoutStatus" extraClasses="cursor-not-allowed">
+            <span
+              className={`h-[55px] aspect-square rounded-full flex items-center justify-center ${
+                currentPage === "checkout"
+                  ? "bg-[#cBcBcB] text-[#a5a5a5]"
+                  : "bg-main text-white"
+              } text-[26px]`}
+            >
+              3
+            </span>
+            Order Complete
+          </Button>
+        ) : (
+          <Button
+            to={`${currentPage === "checkout" ? "#" : "/order-complete"}`}
+            type="checkoutStatus"
           >
-            3
-          </span>
-          Order Complete
-        </Button>
+            <span
+              className={`h-[55px] aspect-square rounded-full flex items-center justify-center ${
+                currentPage === "checkout"
+                  ? "bg-[#cBcBcB] text-[#a5a5a5]"
+                  : "bg-main text-white"
+              } text-[26px]`}
+            >
+              3
+            </span>
+            Order Complete
+          </Button>
+        )}
       </div>
     </div>
   );
