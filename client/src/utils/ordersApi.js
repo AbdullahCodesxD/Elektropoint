@@ -28,3 +28,12 @@ export const deleteOrder = async function (id) {
     console.log(err);
   }
 };
+export const fulFillOrder = async function (id) {
+  try {
+    await postToApi(`/orders/fullfill/${id}`);
+
+    window.location.reload();
+  } catch (err) {
+    console.log(err);
+  }
+};

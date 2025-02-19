@@ -16,6 +16,7 @@ const storeRouter = require("./routes/storeRouter");
 const shippingRouter = require("./routes/shippingAmountRouter");
 const userRouter = require("./routes/userRouter");
 const taxesRouter = require("./routes/taxesRouter");
+const adminDashboardHome = require("./routes/adminDashboardHome");
 dotenv.config({
   path: "./config.env",
 });
@@ -34,6 +35,7 @@ app.use("/api/v1/stores", storeRouter);
 app.use("/api/v1/shippingAmount", shippingRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/taxes", taxesRouter);
+app.use("/api/v1/adminDashboard", adminDashboardHome);
 app.use(express.static("uploads"));
 app.use(errorController);
 module.exports = app;

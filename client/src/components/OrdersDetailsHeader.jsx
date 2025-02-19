@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import Button from "./Button";
 import { BackSvg } from "./Svgs";
-import { deleteOrder } from "../utils/ordersApi";
+import { deleteOrder, fulFillOrder } from "../utils/ordersApi";
 
 export default function OrdersDetailsHeader({
   fullFilmentStatus,
@@ -46,15 +46,28 @@ export default function OrdersDetailsHeader({
               minute: "numeric",
             }).format(new Date(date))}
         </p>
-        <Button
-          type="primary"
-          handler={() => {
-            deleteOrder(id);
-          }}
-          extraClasses="max-w-fit px-4 py-1 text-dark/70 font-medium"
-        >
-          Cancel Order
-        </Button>
+        <div className="flex items-center gap-2 flex-wrap">
+          {fullFilmentStatus === "unfullfilled" && (
+            <Button
+              type="primary"
+              handler={() => {
+                fulFillOrder(id);
+              }}
+              extraClasses="max-w-fit px-4 py-1 text-dark/70 font-medium"
+            >
+              Fulfill Order
+            </Button>
+          )}
+          <Button
+            type="primary"
+            handler={() => {
+              deleteOrder(id);
+            }}
+            extraClasses="max-w-fit px-4 py-1 text-dark/70 font-medium"
+          >
+            Cancel Order
+          </Button>
+        </div>
       </div>
     </div>
   );

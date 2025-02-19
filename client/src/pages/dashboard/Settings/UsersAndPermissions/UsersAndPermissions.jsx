@@ -23,8 +23,8 @@ export default function UsersAndPermissions() {
         </p>
         {users.length > 0 && (
           <div className="bg-white p-4 rounded-xl w-full mb-4">
-            {users.map((user) => {
-              return <StoreOwner key={user._id} data={user} />;
+            {users.map((user, i) => {
+              return <StoreOwner border={i > 0} key={user._id} data={user} />;
             })}
           </div>
         )}

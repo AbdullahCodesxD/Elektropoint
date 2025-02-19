@@ -79,7 +79,20 @@ exports.createOrder = catchAsync(async function (req, res, next) {
     data: order,
   });
 });
-
+exports.fullfillOrder = catchAsync(async function (req, res, next) {
+  const id = req.params.id;
+  const order = await Order.findOne({ _id: id });
+  if (!order) return next(new AppError("No order found with this id", 404));
+  order.fullFilmentStatus = "fullfilled";
+  const updatedOrder = await order.save({
+    new: true,
+    runValidators: true,
+  });
+  res.status(200).json({
+    message: "success",
+    data: updatedOrder,
+  });
+});
 exports.updateOrder = catchAsync(async function (req, res, next) {
   const id = req.params.id;
   if (!req.body) return next(new AppError("Order data is required", 400));

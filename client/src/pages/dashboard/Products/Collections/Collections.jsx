@@ -67,6 +67,7 @@ export default function Collections() {
               toggleSelected={() => toggleSelected(i)}
               key={collection._id}
               title={collection.title}
+              id={collection._id}
               noOfProducts={collection.noOfProducts}
               conditions={
                 collection?.conditionVendors?.length > 0

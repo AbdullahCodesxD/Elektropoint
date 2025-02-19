@@ -7,6 +7,7 @@ router.get("/", orderController.getAllOrders);
 router.get("/:id", orderController.getOrder);
 
 router.post("/", orderController.createOrder);
+router.post("/fullfill/:id", orderController.fullfillOrder);
 
 router.patch("/:id", orderController.updateOrder);
 

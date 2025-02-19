@@ -38,6 +38,8 @@ import NewStore from "./pages/dashboard/Settings/NewStore/NewStore";
 import UsersAndPermissionsNew from "./pages/dashboard/Settings/UsersAndPermissionsNew/UsersAndPermissionsNew";
 import SearchResults from "./pages/searchResults/SearchResults";
 import Login from "./pages/login/Login";
+import CollectionPage from "./pages/dashboard/Products/Collections/Collection/CollectionPage";
+import AdminHome from "./pages/dashboard/Home/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -101,11 +103,7 @@ const router = createBrowserRouter([
           // Orders
           {
             path: "/dashboard/",
-            element: (
-              <p className="bg-white p-5 m-3 text-center font-semibold">
-                No Data Yet
-              </p>
-            ),
+            element: <AdminHome />,
           },
           {
             path: "/dashboard/orders",
@@ -140,6 +138,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/products/collections",
             element: <Collections />,
+          },
+          {
+            path: "/dashboard/products/collections/collection/:collection",
+            element: <CollectionPage />,
           },
           {
             path: "/dashboard/products/collections/new",

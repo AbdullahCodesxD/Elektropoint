@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function CollectionsComponent({
   title,
@@ -6,6 +7,7 @@ export default function CollectionsComponent({
   conditions,
   isSelected,
   toggleSelected,
+  id,
 }) {
   const [isChecked, setIsChecked] = useState(isSelected);
 
@@ -19,7 +21,10 @@ export default function CollectionsComponent({
   };
 
   return (
-    <div className="p-3 min-w-[700px] grid grid-cols-3 items-center gap-3 border-t-2 border-dark/40">
+    <Link
+      to={`/dashboard/products/collections/collection/${id}`}
+      className="p-3 min-w-[700px] grid grid-cols-3 items-center gap-3 border-t-2 border-dark/40"
+    >
       <div onClick={handleCheckboxClick} className="flex items-center gap-2">
         <input
           onChange={(e) => setIsChecked((prev) => e.target.checked)}
@@ -37,6 +42,6 @@ export default function CollectionsComponent({
       <p className="text-medium text-[14px] md:text-base capitalize ">
         {conditions}
       </p>
-    </div>
+    </Link>
   );
 }
