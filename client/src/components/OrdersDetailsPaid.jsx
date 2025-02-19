@@ -6,17 +6,22 @@ export default function OrdersDetailsPaid({
   deliveryMethod,
   noOfItems,
   price = 0,
+  shipping = 0,
 }) {
   const arrOfDetails = [
-    ["Subtotal", `${noOfItems} ${noOfItems > 1 ? "items" : "item"}`, "$0.00"],
+    [
+      "Subtotal",
+      `${noOfItems} ${noOfItems > 1 ? "items" : "item"}`,
+      `$${price?.toFixed(2)}`,
+    ],
     [
       "Shipping",
       // "Doorstep Pickup (5 Kg : 1 tem 0.5 kg : Package 1.5  ",
       `${deliveryMethod}`,
-      "$0.00",
+      `$${shipping.toFixed(2)}`,
     ],
-    ["Total", `$${price.toFixed(2).padEnd(2, 0)}`],
-    ["Paid", "$0.00"],
+    ["Total", `$${(price + shipping).toFixed(2).padEnd(2, 0)}`],
+    ["Paid", `$${(price + shipping).toFixed(2).padEnd(2, 0)}`],
   ];
   return (
     <div className="bg-white p-3 rounded-lg">

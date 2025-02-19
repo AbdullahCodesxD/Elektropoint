@@ -6,23 +6,12 @@ const API = import.meta.env.VITE_API;
 export default function OrdersDetailsOrder({
   fullFilmentStatus,
   productName,
-  productDescription,
   price,
   deliveryMethod,
   src,
 }) {
   return (
-    <div className="bg-white p-3 rounded-md">
-      <Button type="orderDetailsOrder" extraClasses="capitalize">
-        <UnfulfilledSvg height={17} />
-        {fullFilmentStatus}
-      </Button>
-
-      <div className="mt-6">
-        <p className="text-[15px] text-dark/70">Delivery methods</p>
-        <p className="text-[15px] text-dark/70 capitalize">{deliveryMethod}</p>
-      </div>
-
+    <div className="">
       <div className="flex flex-col p-3 items-end md:flex-row md:items-center justify-between gap-5 mt-2 md:p-2 border-2 rounded-md border-dark/10">
         <div className="flex items-center justify-center gap-3">
           <img

@@ -1,4 +1,4 @@
-import { getFromApi, postToApi } from "./api";
+import { deleteApi, getFromApi, postToApi } from "./api";
 import { store } from "../store";
 import { addAllOrders, setCurrentOrder } from "../slices/orderSlice";
 const dispatch = store.dispatch;
@@ -17,4 +17,14 @@ export const createOrder = async function (data) {
   const res = await postToApi("/orders", data);
 
   console.log(res.data);
+};
+
+export const deleteOrder = async function (id) {
+  try {
+    const res = await deleteApi(`/orders/${id}`);
+
+    window.location = "/dashboard/orders";
+  } catch (err) {
+    console.log(err);
+  }
 };

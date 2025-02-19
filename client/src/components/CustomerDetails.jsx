@@ -25,6 +25,7 @@ export default function CustomerDetails() {
         name={currentCustomer.name}
         date={currentCustomer.createdAt}
         address={currentCustomer.address}
+        id={currentCustomer._id}
       />
 
       <div

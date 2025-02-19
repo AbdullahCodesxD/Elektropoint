@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router";
 import Button from "./Button";
 import { BackSvg } from "./Svgs";
+import { deleteOrder } from "../utils/ordersApi";
 
 export default function OrdersDetailsHeader({
   fullFilmentStatus,
   paymentStatus,
   orderNo,
   date,
+  id,
 }) {
   const navigate = useNavigate();
 
@@ -46,6 +48,9 @@ export default function OrdersDetailsHeader({
         </p>
         <Button
           type="primary"
+          handler={() => {
+            deleteOrder(id);
+          }}
           extraClasses="max-w-fit px-4 py-1 text-dark/70 font-medium"
         >
           Cancel Order
