@@ -2,12 +2,19 @@ import { useEffect, useState } from "react";
 import CollectionsComponent from "./CollectionsComponent";
 import CollectionsComponentHeader from "./CollectionsComponentHeader";
 import CollectionsHeader from "./CollectionsHeader";
-import { getCollections } from "../../../../utils/collectionApi";
+import {
+  deleteCollections,
+  getCollections,
+} from "../../../../utils/collectionApi";
 import { useSelector } from "react-redux";
 
 export default function Collections() {
   const collections = useSelector((state) => state.collections);
   const [selected, setSelected] = useState([]);
+  const isAnySelected = selected.some((item) => item.selected);
+  const collectionsSelected = selected
+    .map((product, i) => product.selected && collections[i])
+    .filter((product) => product._id);
   const noOfCollections = collections.length;
 
   useEffect(() => {
@@ -48,13 +55,24 @@ export default function Collections() {
       )
     );
   }
-
+  function handleDelete(e) {
+    e.preventDefault();
+    const answer = window.confirm("Are you sure you want to delete?");
+    if (answer) {
+      // deleteProducts(productSelected);
+      deleteCollections(collectionsSelected);
+      console.log(collectionsSelected, answer);
+    }
+  }
   return (
     <div className="pb-[150px] md:pb-7 p-7 rounded-lg bg-[#EBEBEB]">
       <h3 className="font-semibold text-2xl">Collections</h3>
 
       <div className="bg-white mt-3 rounded-lg overflow-hidden">
-        <CollectionsHeader />
+        <CollectionsHeader
+          handleDelete={handleDelete}
+          isAnySelected={isAnySelected}
+        />
         <div className="overflow-x-auto order">
           <CollectionsComponentHeader
             selected={selected}

@@ -2,7 +2,12 @@ import { useNavigate } from "react-router";
 import Button from "../../../components/Button";
 import { SearchSvg, SortSvg } from "../../../components/Svgs";
 
-export default function ProductsHeader({ filter, setFilter }) {
+export default function ProductsHeader({
+  filter,
+  setFilter,
+  isAnySelected,
+  handleDelete,
+}) {
   const navigate = useNavigate();
 
   function goToCreateProduct() {
@@ -37,15 +42,21 @@ export default function ProductsHeader({ filter, setFilter }) {
           +
         </Button>
       </div>
-      {/* 
+
       <div className="mr-2 flex gap-2">
-        <Button extraClasses="bg-main" type="orderHeader">
+        {/* <Button extraClasses="bg-main" type="orderHeader">
           <SearchSvg color="white" height={20} />
-        </Button>
-        <Button extraClasses="bg-main" type="orderHeader">
-          <SortSvg color="white" height={20} />
-        </Button>
-      </div> */}
+        </Button> */}
+        {isAnySelected && (
+          <Button
+            handler={handleDelete}
+            extraClasses="bg-main"
+            type="orderHeader"
+          >
+            Delete
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

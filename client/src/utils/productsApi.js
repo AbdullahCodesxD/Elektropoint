@@ -1,6 +1,6 @@
 import { addProducts, setVendors } from "../slices/productsSlice";
 import { store } from "../store";
-import { getFromApi, patchApi, postToApi } from "./api";
+import { deleteApi, getFromApi, patchApi, postToApi } from "./api";
 const dispatch = store.dispatch;
 
 export const getVendors = async function () {
@@ -43,6 +43,21 @@ export const patchProductCategory = async function (productId, data) {
   try {
     await patchApi(`/products/category/${productId}`, data);
     window.location.reload();
+  } catch (err) {
+    console.log(err);
+  }
+};
+export const deleteProducts = async function (products) {
+  try {
+    Promise.all(
+      products.map(async (product) => {
+        return await deleteApi(`/products/${product._id}`);
+      })
+    )
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((err) => err);
   } catch (err) {
     console.log(err);
   }
