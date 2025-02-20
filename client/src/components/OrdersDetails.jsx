@@ -71,10 +71,20 @@ export default function OrdersDetails() {
 
         <div className="flex flex-col gap-5">
           {/* <OrdersDetailsNotes /> */}
-          <OrdersDetailsCustomer
-            orderNo={currentOrder.orderNo}
-            customer={currentOrder.customer}
-          />
+
+          {!currentOrder.customer && (
+            <div className="bg-white py-3 px-5 rounded-lg">
+              <h3 className="font-semibold text-lg">
+                No Details about customer
+              </h3>
+            </div>
+          )}
+          {currentOrder.customer && (
+            <OrdersDetailsCustomer
+              orderNo={currentOrder.orderNo}
+              customer={currentOrder.customer}
+            />
+          )}
         </div>
       </div>
     </div>

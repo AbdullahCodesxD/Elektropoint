@@ -15,7 +15,7 @@ export default function OrderComplete() {
       navigate("/checkout");
     } else {
       setTimeout(function () {
-        navigate("/");
+        window.location = "/";
       }, 5000);
     }
   });

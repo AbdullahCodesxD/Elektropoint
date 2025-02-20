@@ -58,8 +58,8 @@ export default function OrdersComponent({
       <p className="text-[15px]">{method}</p> */}
 
       <p className="text-[15px]">{new Date(date).toDateString()}</p>
-      <p className="text-[15px]">{customer.name}</p>
-      <p className="text-[15px]">${String(price.toFixed(2))}</p>
+      <p className="text-[15px]">{customer?.name}</p>
+      <p className="text-[15px]">${String(price?.toFixed(2))}</p>
       <p className="text-[15px]">{fullFilmentStatus}</p>
       <p className="text-[15px]">{noOfItems}</p>
     </Link>

@@ -6,8 +6,8 @@ export default function OrdersDetailsCustomer({ customer = {}, orderNo }) {
     <div className="bg-white py-3 px-5 rounded-lg">
       <h3 className="font-semibold text-lg">Customer</h3>
 
-      <p className="tetx-[14px] text-black/80 mt-1">{customer.name}</p>
-      {orderNo && <p className="tetx-[14px] text-black/80 mt-1">#{orderNo}</p>}
+      <p className="text-[14px] text-black/80 mt-1">{customer.name}</p>
+      {orderNo && <p className="text-[14px] text-black/80 mt-1">#{orderNo}</p>}
       <h3 className="font-semibold mt-3 text-lg flex items-center justify-between gap-1">
         <span>Contact Information</span>
 
@@ -37,10 +37,10 @@ export default function OrdersDetailsCustomer({ customer = {}, orderNo }) {
         </Button> */}
       </h3>
 
-      <p className="tetx-[14px] text-black/80 mt-1 capitalize">
+      <p className="text-[14px] text-black/80 mt-1 capitalize">
         {customer.address}
       </p>
-      {/* <p className="tetx-[14px] text-black/80">Banglow no #555</p> */}
+      {/* <p className="text-[14px] text-black/80">Banglow no #555</p> */}
     </div>
   );
 }
