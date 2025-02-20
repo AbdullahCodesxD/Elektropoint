@@ -1,7 +1,7 @@
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Button from "../../../../../components/Button";
 import { BackSvg } from "../../../../../components/Svgs";
 import TextEditor from "../../../../../components/TextEditor";
@@ -14,28 +14,43 @@ import { getProducts } from "../../../../../utils/productsApi";
 import { useSelector } from "react-redux";
 
 export default function CollectionPage() {
-  const products = useSelector((state) => state.products.products);
-  const [selectedProducts, setSelectedProducts] = useState([]);
+  // const products = useSelector((state) => state.products.products);
+  // const [selectedProducts, setSelectedProducts] = useState([]);
+  const { collection: collectionId } = useParams();
+  const collections = useSelector((state) => state.collections);
+  const collection = collections.find(
+    (collection) => collection._id === collectionId
+  );
   const [matchCondition, setMatchCondition] = useState(false);
 
   const [title, setTitle] = useState("");
   const [images, setImages] = useState([]);
+  const [currentImage, setCurrentImage] = useState([]);
   const [vendors, setVendors] = useState([]);
-
+  const currentTitle = collection?.title || "New Collection";
+  const currentDescription = collection?.description;
   const navigate = useNavigate();
   const editor = useEditor({
-    extensions: [StarterKit, Underline],
+    // extensions: [StarterKit, Underline],
+    extensions: [
+      StarterKit.configure({
+        heading: {
+          levels: [1, 2, 3, 4, 5, 6],
+        },
+      }),
+      Underline,
+    ],
+    content: currentDescription || "",
   });
-
   function goBack() {
     navigate(-1);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    return;
-    const formData = new FormData();
 
+    const formData = new FormData();
+    return;
     const description = editor?.getHTML() || "";
     if (images.length === 0) return alert("Please add at least one image");
     formData.append("title", title);
@@ -43,8 +58,7 @@ export default function CollectionPage() {
     if (vendors.length === 1) {
       vendors?.map((vendor) => formData.append("conditionVendors", vendor));
       formData.append("conditionVendors", "");
-      console.log(formData.get("conditionVendors"));
-    } else {
+    } else if (vendors.length > 1) {
       vendors?.map((vendor) => formData.append("conditionVendors", vendor));
     }
     images.forEach((img) => formData.append("images", img));
@@ -54,6 +68,18 @@ export default function CollectionPage() {
   useEffect(function () {
     getProducts();
   }, []);
+  useEffect(() => {
+    if (editor && currentDescription) {
+      editor.commands.setContent(currentDescription);
+    }
+    if (collection?.conditionVendors.length > 0) {
+      setVendors(collection.conditionVendors);
+      setMatchCondition(true);
+    }
+    if (collection?.media) {
+      setCurrentImage([...collection.media]);
+    }
+  }, [editor, currentDescription, collection?.conditionVendors]);
   return (
     <div className="bg-[#eaeaea] rounded-lg p-5 relative">
       <div className="flex items-center gap-3 mb-3">
@@ -83,6 +109,7 @@ export default function CollectionPage() {
               id="title"
               type="text"
               value={title}
+              placeholder={currentTitle}
               onChange={(e) => setTitle(e.target.value)}
               className="w-full px-3 py-2.5 rounded-lg outline-none border border-dark/60"
             />
@@ -97,7 +124,11 @@ export default function CollectionPage() {
             </div>
           </div>
           <div className="md:hidden">
-            <CollectionAddImages images={images} setImages={setImages} />
+            <CollectionAddImages
+              currentMedia={currentImage}
+              images={images}
+              setImages={setImages}
+            />
           </div>
           <CollectionConditions
             matchCondition={matchCondition}
@@ -105,13 +136,13 @@ export default function CollectionPage() {
             vendors={vendors}
             setVendors={setVendors}
           />
-          {!matchCondition && (
+          {/* {!matchCondition && (
             <CollectionProducts
               setSelectedProducts={setSelectedProducts}
               selectedProducts={selectedProducts}
               products={products}
             />
-          )}
+          )} */}
         </div>
 
         <div className="hidden md:block">
@@ -122,7 +153,7 @@ export default function CollectionPage() {
           type="primary"
           extraClasses="max-w-fit px-5 text-[14px] ml-auto md:fixed bottom-5 right-5 transition-all hover:opacity-70"
         >
-          Update Collection
+          Create Collection
         </Button>
       </form>
     </div>

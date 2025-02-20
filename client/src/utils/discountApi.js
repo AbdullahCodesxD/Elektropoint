@@ -1,5 +1,5 @@
 import { setDiscounts, setUserDiscounts } from "../slices/discountSlice";
-import { getFromApi, patchApi, postToApi } from "./api";
+import { deleteApi, getFromApi, patchApi, postToApi } from "./api";
 import { store } from "../store";
 
 const dispatch = store.dispatch;
@@ -25,4 +25,17 @@ export const getDiscountsForUser = async function () {
 };
 export const discountUsed = async function (id) {
   await patchApi(`/discounts/discount/${id}`);
+};
+export const deleteDiscount = async function (discounts) {
+  try {
+    Promise.all(
+      discounts.map(async (discount) => {
+        await deleteApi(`/discounts/${discount._id}`);
+      })
+    ).then((res) => {
+      window.location.reload();
+    });
+  } catch (err) {
+    console.error(err);
+  }
 };

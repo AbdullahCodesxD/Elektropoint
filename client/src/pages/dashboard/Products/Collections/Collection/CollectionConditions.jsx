@@ -47,7 +47,7 @@ export default function CollectionConditions({
             name="match-condition"
             id="no-condition"
             onChange={handleMatchConditionChange}
-            defaultChecked
+            defaultChecked={matchCondition == false}
           />
           <label className="cursor-pointer text-dark/80" htmlFor="no-condition">
             {" "}
@@ -62,6 +62,7 @@ export default function CollectionConditions({
             name="match-condition"
             id="need-condition"
             onChange={handleMatchConditionChange}
+            defaultChecked={matchCondition === true}
           />
           <label
             className="cursor-pointer text-dark/80"

@@ -1,5 +1,20 @@
-export default function DiscountComponent({ discount }) {
-  console.log(discount);
+import { useEffect, useState } from "react";
+
+export default function DiscountComponent({
+  discount,
+  isSelected,
+  toggleSelected,
+}) {
+  const [isChecked, setIsChecked] = useState(isSelected);
+
+  useEffect(() => {
+    setIsChecked(isSelected);
+  }, [isSelected]);
+  const handleCheckboxClick = (e) => {
+    e.stopPropagation();
+    toggleSelected();
+  };
+
   return (
     <div
       className="px-5 py-2 bg-white grid gap-4 min-w-[1100px] border-t border-dark/70  "
@@ -7,9 +22,14 @@ export default function DiscountComponent({ discount }) {
         gridTemplateColumns: "300px repeat(3,1fr)",
       }}
     >
-      <div className="flex items-center gap-3">
+      <div
+        onClick={handleCheckboxClick} // Prevents navigation on parent div click
+        className="flex gap-3 items-center"
+      >
         <input
+          onChange={(e) => setIsChecked((prev) => e.target.checked)}
           type="checkbox"
+          checked={isChecked}
           className="appearance-none h-[20px] aspect-square roudned-md border-2 border-main checked:appearance-auto cursor-pointer "
         />
         <p className="flex flex-col capitalize">
